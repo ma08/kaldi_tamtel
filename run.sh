@@ -45,7 +45,7 @@ train_lm=false
 
 home_folder=$HOME
 
-stage=8
+stage=9
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -146,16 +146,20 @@ if [ $stage -le 8 ]; then
     data/train_10kshort_nodup data/lang_nosp exp/mono
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 9 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   steps/align_si.sh --nj $nj --cmd "$train_cmd" \
     data/train data/lang_nosp exp/mono exp/mono_ali
+  echo "------------ steps/align_si.sh finished------------"
+  date
   steps/train_deltas.sh --cmd "$train_cmd" \
     2500 30000 data/train data/lang_nosp exp/mono_ali exp/tri1
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 10 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
