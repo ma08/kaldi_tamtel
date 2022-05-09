@@ -45,7 +45,7 @@ train_lm=false
 
 home_folder=$HOME
 
-stage=2
+stage=3
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -86,7 +86,6 @@ if [ $stage -le 2 ]; then
   local/prepare_dict.sh
   echo "----------------------- Stage $stage end: prepare dict ---------------------------";
 fi
-exit 1
 #stage=3
 
 if [ $stage -le 3 ]; then
@@ -95,6 +94,8 @@ if [ $stage -le 3 ]; then
     "<unk>" data/local/lang_nosp data/lang_nosp
   echo "----------------------- Stage $stage end: prepare lang ---------------------------";
 fi
+
+exit 1
 
 if [ $stage -le 4 ]; then
   echo "----------------------- Stage $stage begin: lang model ---------------------------";
