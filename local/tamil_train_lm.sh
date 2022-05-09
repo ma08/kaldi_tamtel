@@ -13,7 +13,7 @@
 
 
 set -e
-stage=0
+stage=2
 
 echo "$0 $@"  # Print the command line for logging
 . utils/parse_options.sh || exit 1;

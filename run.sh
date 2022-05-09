@@ -22,6 +22,8 @@ LANGUAGE=en_IN.utf8
 LANG=en_IN.utf8
 
 #https://stackoverflow.com/a/67333425/3465519
+#https://stackoverflow.com/a/60268632/3465519
+#https://stackoverflow.com/a/58523012/3465519
 
 
 . ./cmd.sh
