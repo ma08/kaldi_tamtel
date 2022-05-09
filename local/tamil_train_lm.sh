@@ -97,15 +97,25 @@ if [ $stage -le 1 ]; then
   if [ -n "${min_counts}" ]; then
     lm_name+="_`echo ${min_counts} | tr -s "[:blank:]" "_" | tr "=" "-"`"
   fi
+  echo "lm_name $lm_name"
   unpruned_lm_dir=${lm_dir}/${lm_name}.pocolm
+  echo "unpruned_lm_dir: $unpruned_lm_dir"
+  echo "train_lm.py starting "
+  date
   train_lm.py  --wordlist=${wordlist} --num-splits=10 --warm-start-ratio=20  \
                --limit-unk-history=true \
                --fold-dev-into=ted ${bypass_metaparam_optim_opt} \
                --min-counts="${min_counts}" \
                ${dir}/data/text ${order} ${lm_dir}/work ${unpruned_lm_dir}
+  date
+  echo "train_lm.py ended "
 
+  echo "get_data_prob.py starting "
+  date
   get_data_prob.py ${dir}/data/real_dev_set.txt ${unpruned_lm_dir} 2>&1 | grep -F '[perplexity'
   #[perplexity = 157.87] over 18290.0 words
+  date
+  echo "get_data_prob.py ended "
 fi
 
 if [ $stage -le 2 ]; then
