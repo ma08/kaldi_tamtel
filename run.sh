@@ -103,7 +103,7 @@ if [ $stage -le 4 ]; then
   # download the pre-built LMs from openslr.org instead of building them
   # locally.
   if $train_lm; then
-    local/ted_train_lm.sh
+    local/tamil_train_lm.sh
   else
     echo "train_lm is false. not training LM."
   fi
