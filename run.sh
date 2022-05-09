@@ -35,15 +35,16 @@ train_lm=false
 
 . utils/parse_options.sh # accept options
 
-
+# stage=1
 # Data preparation
-if [ $stage -le 0 ]; then
-  echo "Stage $stage begin: downloading data";
-  local/download_data.sh
-  echo "Stage $stage end: downloading data";
-fi
+# if [ $stage -le 0 ]; then
+#   echo "Stage $stage begin: downloading data";
+#   local/download_data.sh
+#   echo "Stage $stage end: downloading data";
+# fi
 
 
+stage=1
 if [ $stage -le 1 ]; then
   echo "----------------------- Stage $stage begin: prepare data ---------------------------";
   local/prepare_data.sh
@@ -51,9 +52,9 @@ if [ $stage -le 1 ]; then
   # lets us use more jobs for decoding etc.
   # [we chose 3 minutes because that gives us 38 speakers for the dev data, which is
   #  more than our normal 30 jobs.]
-  for dset in dev test train; do
-    utils/data/modify_speaker_info.sh --seconds-per-spk-max 180 data/${dset}.orig data/${dset}
-  done
+  # for dset in dev test train; do
+  #   utils/data/modify_speaker_info.sh --seconds-per-spk-max 180 data/${dset}.orig data/${dset}
+  # done
   echo "----------------------- Stage $stage end: prepare data ---------------------------";
 fi
 
