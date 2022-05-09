@@ -45,7 +45,7 @@ train_lm=false
 
 home_folder=$HOME
 
-stage=7
+stage=8
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -138,7 +138,6 @@ if [ $stage -le 7 ]; then
   utils/data/remove_dup_utts.sh 10 data/train_10kshort data/train_10kshort_nodup
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 # Train
 if [ $stage -le 8 ]; then
@@ -147,6 +146,7 @@ if [ $stage -le 8 ]; then
     data/train_10kshort_nodup data/lang_nosp exp/mono
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 9 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
