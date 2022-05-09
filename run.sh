@@ -45,7 +45,7 @@ train_lm=false
 
 home_folder=$HOME
 
-stage=9
+stage=10
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -159,22 +159,24 @@ if [ $stage -le 9 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 10 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   utils/mkgraph.sh data/lang_nosp exp/tri1 exp/tri1/graph_nosp
 
   # The slowest part about this decoding is the scoring, which we can't really
   # control as the bottleneck is the NIST tools.
-  for dset in dev test; do
-    steps/decode.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
-      exp/tri1/graph_nosp data/${dset} exp/tri1/decode_nosp_${dset}
-    steps/lmrescore_const_arpa.sh  --cmd "$decode_cmd" data/lang_nosp data/lang_nosp_rescore \
-       data/${dset} exp/tri1/decode_nosp_${dset} exp/tri1/decode_nosp_${dset}_rescore
-  done
+  # for dset in dev test; do
+  #   steps/decode.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
+  #     exp/tri1/graph_nosp data/${dset} exp/tri1/decode_nosp_${dset}
+  #   steps/lmrescore_const_arpa.sh  --cmd "$decode_cmd" data/lang_nosp data/lang_nosp_rescore \
+  #      data/${dset} exp/tri1/decode_nosp_${dset} exp/tri1/decode_nosp_${dset}_rescore
+  # done
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 11 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
