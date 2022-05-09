@@ -17,6 +17,12 @@
 #
 # Apache 2.0
 #
+LANG=C
+LANGUAGE=en_IN.utf8
+LANG=en_IN.utf8
+
+#https://stackoverflow.com/a/67333425/3465519
+
 
 . ./cmd.sh
 . ./path.sh
