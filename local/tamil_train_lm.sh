@@ -13,7 +13,7 @@
 
 
 set -e
-stage=2
+stage=3
 
 echo "$0 $@"  # Print the command line for logging
 . utils/parse_options.sh || exit 1;
@@ -150,7 +150,6 @@ if [ $stage -le 2 ]; then
   date
   echo "$0: format_arpa_lm.py ended"
 fi
-exit 1
 
 if [ $stage -le 3 ]; then
   echo "$0: pruning the LM (to smaller size)"
