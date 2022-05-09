@@ -43,8 +43,27 @@ train_lm=false
 #   echo "Stage $stage end: downloading data";
 # fi
 
+home_folder=$HOME
 
-stage=3
+stage=2
+if [ $stage -le 0 ]; then
+  input_dataset=combined_transcription
+  #input_dataset=mozillacv_tamil/transcription
+  #input_dataset=microsoft_tamil/transcription
+  #input_dataset=openslr_tamil/transcription
+  #input_dataset=asriitm_tamil/transcription
+  echo "----------------------- Stage $stage Load data from $input_dataset begin---------------------------";
+  mkdir -p data
+  for set in test dev train; do
+    rm -rf data/$set.orig
+    cp -r db/$input_dataset/$set data/$set.orig
+    sed -i "s/~/${home_folder//\//\\/}/g" data/$set.orig/wav.scp
+    utils/fix_data_dir.sh data/$set.orig
+  done
+  echo "----------------------- Stage $stage end---------------------------";
+  stage=1
+fi
+
 #stage=1
 if [ $stage -le 1 ]; then
   echo "----------------------- Stage $stage begin: prepare data ---------------------------";
@@ -57,6 +76,7 @@ if [ $stage -le 1 ]; then
   #   utils/data/modify_speaker_info.sh --seconds-per-spk-max 180 data/${dset}.orig data/${dset}
   # done
   echo "----------------------- Stage $stage end: prepare data ---------------------------";
+  stage=2
 fi
 
 
@@ -66,6 +86,7 @@ if [ $stage -le 2 ]; then
   local/prepare_dict.sh
   echo "----------------------- Stage $stage end: prepare dict ---------------------------";
 fi
+exit 1
 #stage=3
 
 if [ $stage -le 3 ]; then
@@ -74,7 +95,6 @@ if [ $stage -le 3 ]; then
     "<unk>" data/local/lang_nosp data/lang_nosp
   echo "----------------------- Stage $stage end: prepare lang ---------------------------";
 fi
-exit 1
 
 if [ $stage -le 4 ]; then
   echo "----------------------- Stage $stage begin: lang model ---------------------------";
@@ -101,12 +121,15 @@ fi
 if [ $stage -le 6 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
   for set in test dev train; do
+    [[ ! -d data/$set ]] && cp -r data/$set.orig/ data/$set
+    sed -i "s/~/${home_folder//\//\\/}/g" data/$set/wav.scp
     dir=data/$set
     steps/make_mfcc.sh --nj 30 --cmd "$train_cmd" $dir
     steps/compute_cmvn_stats.sh $dir
   done
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 # Now we have 452 hours of training data.
 # Well create a subset with 10k short segments to make flat-start training easier:
