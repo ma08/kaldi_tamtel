@@ -1,0 +1,28 @@
+nohup: ignoring input
+----------------------- Stage 10 begin---------------------------
+Mon May  9 20:10:49 UTC 2022
+tree-info exp/tri1/tree 
+tree-info exp/tri1/tree 
+fstpushspecial 
+fstdeterminizestar --use-log=true 
+fsttablecompose data/lang_nosp/L_disambig.fst data/lang_nosp/G.fst 
+fstminimizeencoded 
+fstisstochastic data/lang_nosp/tmp/LG.fst 
+-0.0197863 -0.0204712
+[info]: LG not stochastic.
+fstcomposecontext --context-size=3 --central-position=1 --read-disambig-syms=data/lang_nosp/phones/disambig.int --write-disambig-syms=data/lang_nosp/tmp/disambig_ilabels_3_1.int data/lang_nosp/tmp/ilabels_3_1.24583 data/lang_nosp/tmp/LG.fst 
+fstisstochastic data/lang_nosp/tmp/CLG_3_1.fst 
+0 -0.0204712
+[info]: CLG not stochastic.
+make-h-transducer --disambig-syms-out=exp/tri1/graph_nosp/disambig_tid.int --transition-scale=1.0 data/lang_nosp/tmp/ilabels_3_1 exp/tri1/tree exp/tri1/final.mdl 
+fsttablecompose exp/tri1/graph_nosp/Ha.fst data/lang_nosp/tmp/CLG_3_1.fst 
+fstdeterminizestar --use-log=true 
+fstminimizeencoded 
+fstrmepslocal 
+fstrmsymbols exp/tri1/graph_nosp/disambig_tid.int 
+fstisstochastic exp/tri1/graph_nosp/HCLGa.fst 
+0.000488016 -0.0593726
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true exp/tri1/final.mdl exp/tri1/graph_nosp/HCLGa.fst 
+Mon May  9 20:25:17 UTC 2022
+----------------------- Stage 10 end---------------------------
