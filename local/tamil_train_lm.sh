@@ -120,10 +120,11 @@ fi
 
 wordlist=${dir}/data/wordlist
 
-lm_name="`basename ${wordlist}`_${order}"
-if [ -n "${min_counts}" ]; then
-  lm_name+="_`echo ${min_counts} | tr -s "[:blank:]" "_" | tr "=" "-"`"
-fi
+# lm_name="`basename ${wordlist}`_${order}"
+# if [ -n "${min_counts}" ]; then
+#   lm_name+="_`echo ${min_counts} | tr -s "[:blank:]" "_" | tr "=" "-"`"
+# fi
+lm_name=wordlist_4_train-2_ted-1.pocolm
 
 unpruned_lm_dir=${lm_dir}/${lm_name}.pocolm
 echo "unpruned_lm_dir: $unpruned_lm_dir"
