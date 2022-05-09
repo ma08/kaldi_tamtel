@@ -118,11 +118,23 @@ if [ $stage -le 1 ]; then
   echo "get_data_prob.py ended "
 fi
 
+wordlist=${dir}/data/wordlist
+
+lm_name="`basename ${wordlist}`_${order}"
+if [ -n "${min_counts}" ]; then
+  lm_name+="_`echo ${min_counts} | tr -s "[:blank:]" "_" | tr "=" "-"`"
+fi
+
+unpruned_lm_dir=${lm_dir}/${lm_name}.pocolm
+echo "unpruned_lm_dir: $unpruned_lm_dir"
 if [ $stage -le 2 ]; then
   echo "$0: pruning the LM (to larger size)"
+  date
   # Using 10 million n-grams for a big LM for rescoring purposes.
   size=10000000
   prune_lm_dir.py --target-num-ngrams=$size --initial-threshold=0.02 ${unpruned_lm_dir} ${dir}/data/lm_${order}_prune_big
+  date
+  echo "$0: pruning the LM (to larger size) ended"
 
   get_data_prob.py ${dir}/data/real_dev_set.txt ${dir}/data/lm_${order}_prune_big 2>&1 | grep -F '[perplexity'
 
@@ -131,8 +143,13 @@ if [ $stage -le 2 ]; then
 
 
   mkdir -p ${dir}/data/arpa
+  echo "$0: format_arpa_lm.py started"
+  date
   format_arpa_lm.py ${dir}/data/lm_${order}_prune_big | gzip -c > ${dir}/data/arpa/${order}gram_big.arpa.gz
+  date
+  echo "$0: format_arpa_lm.py ended"
 fi
+exit 1
 
 if [ $stage -le 3 ]; then
   echo "$0: pruning the LM (to smaller size)"
