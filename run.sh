@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=4
+stage=5
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -119,14 +119,18 @@ if [ $stage -le 4 ]; then
   echo "----------------------- Stage $stage end: lang model ---------------------------";
   # later on we'll change this script so you have the option to
 fi
-exit 1
 
 if [ $stage -le 5 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   local/format_lms.sh
+  echo "------- first format complete, second starting"
+  date
   local/format_lms.sh
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 # Feature extraction
 if [ $stage -le 6 ]; then
