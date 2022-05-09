@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=11
+stage=12
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -203,19 +203,19 @@ if [ $stage -le 11 ]; then
     4000 50000 data/train data/lang_nosp exp/tri1_ali exp/tri2
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 12 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
   utils/mkgraph.sh data/lang_nosp exp/tri2 exp/tri2/graph_nosp
-  for dset in dev test; do
-    steps/decode.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
-      exp/tri2/graph_nosp data/${dset} exp/tri2/decode_nosp_${dset}
-    steps/lmrescore_const_arpa.sh  --cmd "$decode_cmd" data/lang_nosp data/lang_nosp_rescore \
-       data/${dset} exp/tri2/decode_nosp_${dset} exp/tri2/decode_nosp_${dset}_rescore
-  done
+  # for dset in dev test; do
+  #   steps/decode.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
+  #     exp/tri2/graph_nosp data/${dset} exp/tri2/decode_nosp_${dset}
+  #   steps/lmrescore_const_arpa.sh  --cmd "$decode_cmd" data/lang_nosp data/lang_nosp_rescore \
+  #      data/${dset} exp/tri2/decode_nosp_${dset} exp/tri2/decode_nosp_${dset}_rescore
+  # done
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 13 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
