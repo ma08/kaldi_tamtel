@@ -44,7 +44,8 @@ train_lm=false
 # fi
 
 
-stage=1
+stage=3
+#stage=1
 if [ $stage -le 1 ]; then
   echo "----------------------- Stage $stage begin: prepare data ---------------------------";
   local/prepare_data.sh
@@ -59,14 +60,13 @@ if [ $stage -le 1 ]; then
 fi
 
 
-stage=2
+#stage=2
 if [ $stage -le 2 ]; then
   echo "----------------------- Stage $stage begin: prepare dict ---------------------------";
   local/prepare_dict.sh
   echo "----------------------- Stage $stage end: prepare dict ---------------------------";
 fi
 #stage=3
-exit 1
 
 if [ $stage -le 3 ]; then
   echo "----------------------- Stage $stage begin: prepare lang ---------------------------";
@@ -74,6 +74,7 @@ if [ $stage -le 3 ]; then
     "<unk>" data/local/lang_nosp data/lang_nosp
   echo "----------------------- Stage $stage end: prepare lang ---------------------------";
 fi
+exit 1
 
 if [ $stage -le 4 ]; then
   echo "----------------------- Stage $stage begin: lang model ---------------------------";
