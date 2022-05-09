@@ -45,7 +45,7 @@ train_lm=false
 
 home_folder=$HOME
 
-stage=6
+stage=7
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -129,7 +129,6 @@ if [ $stage -le 6 ]; then
   done
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 # Now we have 452 hours of training data.
 # Well create a subset with 10k short segments to make flat-start training easier:
@@ -139,6 +138,7 @@ if [ $stage -le 7 ]; then
   utils/data/remove_dup_utts.sh 10 data/train_10kshort data/train_10kshort_nodup
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 # Train
 if [ $stage -le 8 ]; then
