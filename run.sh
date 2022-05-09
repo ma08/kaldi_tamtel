@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=5
+stage=10
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -130,7 +130,6 @@ if [ $stage -le 5 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 # Feature extraction
 if [ $stage -le 6 ]; then
