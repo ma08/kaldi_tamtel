@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=10
+stage=11
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -190,17 +190,20 @@ if [ $stage -le 10 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 11 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   steps/align_si.sh --nj $nj --cmd "$train_cmd" \
     data/train data/lang_nosp exp/tri1 exp/tri1_ali
 
+  echo "----------------------- Stage $stage mid align_si complete, train_lda starting---------------------------";
+  date
   steps/train_lda_mllt.sh --cmd "$train_cmd" \
     4000 50000 data/train data/lang_nosp exp/tri1_ali exp/tri2
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 12 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
