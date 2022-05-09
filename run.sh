@@ -31,7 +31,7 @@ decode_nj=8   # note: should not be >38 which is the number of speakers in the d
                # after applying --seconds-per-spk-max 180.  We decode with 4 threads, so
                # this will be too many jobs if you're using run.pl.
 train_rnnlm=false
-train_lm=false
+train_lm=true
 
 . utils/parse_options.sh # accept options
 
@@ -45,7 +45,7 @@ train_lm=false
 
 home_folder=$HOME
 
-stage=10
+stage=4
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -98,17 +98,18 @@ fi
 
 if [ $stage -le 4 ]; then
   echo "----------------------- Stage $stage begin: lang model ---------------------------";
+  date
   # later on we'll change this script so you have the option to
   # download the pre-built LMs from openslr.org instead of building them
   # locally.
   if $train_lm; then
-    local/ted_train_lm.sh
+    local/tamil_train_lm.sh
   else
-    local/ted_download_lm.sh
-  fi
+  date
   echo "----------------------- Stage $stage end: lang model ---------------------------";
   # later on we'll change this script so you have the option to
 fi
+exit 1
 
 if [ $stage -le 5 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
