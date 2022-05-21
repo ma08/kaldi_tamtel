@@ -245,10 +245,10 @@ if [ $stage -le 14 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 15 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   steps/align_si.sh --nj $nj --cmd "$train_cmd" \
     data/train data/lang exp/tri2 exp/tri2_ali
 
@@ -257,14 +257,16 @@ if [ $stage -le 15 ]; then
 
   utils/mkgraph.sh data/lang exp/tri3 exp/tri3/graph
 
-  for dset in dev test; do
-    steps/decode_fmllr.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
-      exp/tri3/graph data/${dset} exp/tri3/decode_${dset}
-    steps/lmrescore_const_arpa.sh --cmd "$decode_cmd" data/lang data/lang_rescore \
-       data/${dset} exp/tri3/decode_${dset} exp/tri3/decode_${dset}_rescore
-  done
+  # for dset in dev test; do
+  #   steps/decode_fmllr.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
+  #     exp/tri3/graph data/${dset} exp/tri3/decode_${dset}
+  #   steps/lmrescore_const_arpa.sh --cmd "$decode_cmd" data/lang data/lang_rescore \
+  #      data/${dset} exp/tri3/decode_${dset} exp/tri3/decode_${dset}_rescore
+  # done
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 16 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
