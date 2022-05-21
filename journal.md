@@ -531,7 +531,6 @@ index 4cdbd4d..18c8410 100644
 
 
 
- nohup run.sh > logs/stage10.log 2>&1 &
 
  ## Stage 13
 
@@ -551,4 +550,27 @@ https://stackoverflow.com/a/46203242/3465519
  ```
  sk5057@speech-rec-vm:~/kaldi/egs/tamil_telugu_proj/s5_r3/db$ cp -R data data_after_stage13
  ```
- maintaining db/data versioning manually
+
+
+## Stage 14
+```
+ nohup ./run.sh > logs/stage14.log 2>&1 &
+ tail -f logs/stage14.log
+```
+
+ forgot to comment decoding part, above folder came in handy for backup
+
+```
+ sk5057@speech-rec-vm:~/kaldi/egs/tamil_telugu_proj/s5_r3/db$ du -s data --block-size=G
+15G	data
+
+sk5057@speech-rec-vm:~/kaldi/egs/tamil_telugu_proj/s5_r3$ du -s db --block-size=G
+124G	db
+
+```
+
+## Stage 15
+```
+ nohup ./run.sh > logs/stage15.log 2>&1 &
+ tail -f logs/stage15.log
+```
