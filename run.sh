@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=15
+stage=16
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -266,27 +266,32 @@ if [ $stage -le 15 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 16 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   # this does some data-cleaning.  It actually degrades the GMM-level results
   # slightly, but the cleaned data should be useful when we add the neural net and chain
   # systems.  If not we'll remove this stage.
   local/run_cleanup_segmentation.sh
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 17 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   # This will only work if you have GPUs on your system (and note that it requires
   # you to have the queue set up the right way... see kaldi-asr.org/doc/queue.html)
   local/chain/run_tdnn.sh
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
 if [ $stage -le 18 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   # You can either train your own rnnlm or download a pre-trained one
   if $train_rnnlm; then
     local/rnnlm/tuning/run_lstm_tdnn_a.sh
@@ -294,11 +299,13 @@ if [ $stage -le 18 ]; then
   else
     local/ted_download_rnnlm.sh
   fi
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
 if [ $stage -le 19 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   # Here we rescore the lattices generated at stage 17
   rnnlm_dir=exp/rnnlm_lstm_tdnn_a_averaged
   lang_dir=data/lang_chain
@@ -317,6 +324,7 @@ if [ $stage -le 19 ]; then
       $data_dir $decoding_dir \
       $output_dir
   done
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
