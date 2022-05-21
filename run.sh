@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=13
+stage=14
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -225,7 +225,6 @@ if [ $stage -le 13 ]; then
     exp/tri2/pron_bigram_counts_nowb.txt data/local/dict
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 14 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
@@ -244,6 +243,7 @@ if [ $stage -le 14 ]; then
   done
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 15 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
