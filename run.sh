@@ -228,6 +228,7 @@ fi
 
 if [ $stage -le 14 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   utils/prepare_lang.sh data/local/dict "<unk>" data/local/lang data/lang
   cp -rT data/lang data/lang_rescore
   cp data/lang_nosp/G.fst data/lang/
@@ -235,12 +236,13 @@ if [ $stage -le 14 ]; then
 
   utils/mkgraph.sh data/lang exp/tri2 exp/tri2/graph
 
-  for dset in dev test; do
-    steps/decode.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
-      exp/tri2/graph data/${dset} exp/tri2/decode_${dset}
-    steps/lmrescore_const_arpa.sh --cmd "$decode_cmd" data/lang data/lang_rescore \
-       data/${dset} exp/tri2/decode_${dset} exp/tri2/decode_${dset}_rescore
-  done
+  # for dset in dev test; do
+  #   steps/decode.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
+  #     exp/tri2/graph data/${dset} exp/tri2/decode_${dset}
+  #   steps/lmrescore_const_arpa.sh --cmd "$decode_cmd" data/lang data/lang_rescore \
+  #      data/${dset} exp/tri2/decode_${dset} exp/tri2/decode_${dset}_rescore
+  # done
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 exit 1
