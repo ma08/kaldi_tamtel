@@ -1,0 +1,497 @@
+nohup: ignoring input
+----------------------- Stage 16 begin---------------------------
+Sat May 21 16:11:39 UTC 2022
+steps/cleanup/clean_and_segment_data.sh: Building biased-language-model decoding graphs...
+steps/cleanup/make_biased_lm_graphs.sh --nj 100 --cmd run.pl data/train data/lang exp/tri3_cleaned_work exp/tri3_cleaned_work/graphs
+sym2int.pl: replacing கடத்துவாங்க with 1
+sym2int.pl: replacing கர்பத்தையும் with 1
+sym2int.pl: replacing சேர்ந்தாரு with 1
+sym2int.pl: replacing ஜீரோவுக்கும் with 1
+sym2int.pl: replacing பறவாயில்லையா with 1
+sym2int.pl: replacing கார்த்திக்கா with 1
+sym2int.pl: replacing மறுக்கிறதா with 1
+sym2int.pl: replacing கேட்டுச்சு with 1
+sym2int.pl: replacing யோசிக்கும்போதே with 1
+sym2int.pl: replacing கமலக்கண்ணன் with 1
+sym2int.pl: replacing திருமலையில் with 1
+sym2int.pl: replacing ஜவாஹிருல்லா with 1
+sym2int.pl: replacing இந்தியன்ஸும் with 1
+sym2int.pl: replacing விற்கோ with 1
+sym2int.pl: replacing கரும்பலகை with 1
+sym2int.pl: replacing சின்னநாற்காலிகள் with 1
+sym2int.pl: replacing பேனாக்கள் with 1
+sym2int.pl: replacing கவுண்ட்டரில் with 1
+sym2int.pl: replacing உயர்வுடன் with 1
+sym2int.pl: replacing ஏமாந்திருந்தால் with 1
+sym2int.pl: not warning for OOVs any more times
+** Replaced 2352 instances of OOVs with 1
+sort: write failed: 'standard output': Broken pipe
+sort: write error
+steps/cleanup/make_biased_lm_graphs.sh: creating utterance-group-specific decoding graphs with biased LMs
+steps/cleanup/clean_and_segment_data.sh: Decoding with biased language models...
+steps/cleanup/decode_segmentation.sh --beam 15.0 --nj 100 --cmd run.pl --mem 4G --transform-dir exp/tri3 --skip-scoring true --allow-partial false exp/tri3_cleaned_work/graphs data/train exp/tri3_cleaned_work/lats
+** split_data.sh: warning, #lines is (utt2spk,feats.scp) is (150169,145961); you can 
+**  use utils/fix_data_dir.sh data/train to fix this.
+steps/cleanup/decode_segmentation.sh: expected 145961 graphs in exp/tri3_cleaned_work/graphs/HCLG.fsts.scp, got 150169
+steps/cleanup/decode_segmentation.sh: feature type is lda
+Using fMLLR transforms from exp/tri3
+steps/cleanup/decode_segmentation.sh: num-jobs for transforms mismatches, so copying them.
+copy-feats ark:- ark,scp:exp/tri3_cleaned_work/lats/trans.ark,exp/tri3_cleaned_work/lats/trans.scp 
+LOG (copy-feats[5.5.1009~1-e4940]:main():copy-feats.cc:143) Copied 65724 feature matrices.
+steps/diagnostic/analyze_lats.sh --cmd run.pl data/lang exp/tri3_cleaned_work/lats
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 68.0376688622% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned_work/lats/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,1,2) and mean=2.4
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned_work/lats/log/analyze_lattice_depth_stats.log
+steps/cleanup/clean_and_segment_data.sh: Doing oracle alignment of lattices...
+** split_data.sh: warning, #lines is (utt2spk,feats.scp) is (150169,145961); you can 
+**  use utils/fix_data_dir.sh data/train to fix this.
+lattice_oracle_align.sh: overall oracle %WER is: 4.12%
+steps/cleanup/lattice_oracle_align.sh: oracle ctm is in exp/tri3_cleaned_work/lattice_oracle/ctm
+align-text '--special-symbol=***' ark:exp/tri3_cleaned_work/lattice_oracle/text ark:exp/tri3_cleaned_work/lattice_oracle/oracle_hyp.txt ark,t:- 
+LOG (align-text[5.5.1009~1-e4940]:main():align-text.cc:135) Done 145958 sentences, failed for 0
+utils/scoring/wer_per_utt_details.pl: Note: handling as utf-8 text
+steps/cleanup/lattice_oracle_align.sh: human-readable alignments are in exp/tri3_cleaned_work/lattice_oracle/analysis/per_utt_details.txt
+steps/cleanup/lattice_oracle_align.sh: per-utterance details sorted from worst to best utts are in exp/tri3_cleaned_work/lattice_oracle/all_info.sorted.txt
+steps/cleanup/lattice_oracle_align.sh: format is: utt-id num-errs ref-length decoded-output (tab) reference
+utils/scoring/wer_per_spk_details.pl: Note: handling as utf-8 text
+utils/scoring/wer_per_spk_details.pl: Note: handling as utf-8 text
+steps/cleanup/lattice_oracle_align.sh: per-speaker details are in exp/tri3_cleaned_work/lattice_oracle/analysis/per_spk_details.txt
+utils/scoring/wer_ops_details.pl: Note: handling as utf-8 text
+Use of uninitialized value $_ in concatenation (.) or string at utils/scoring/wer_ops_details.pl line 114, <STDIN> line 583832.
+utils/scoring/wer_ops_details.pl: Warning: skipping entry "", either an  empty phrase or incompatible format
+Use of uninitialized value $_ in concatenation (.) or string at utils/scoring/wer_ops_details.pl line 114, <STDIN> line 583832.
+utils/scoring/wer_ops_details.pl: Warning: skipping entry "", either an  empty phrase or incompatible format
+steps/cleanup/lattice_oracle_align.sh: per-word statistics [corr,sub,ins,del] are in exp/tri3_cleaned_work/lattice_oracle/analysis/ops_details.txt
+steps/cleanup/lattice_oracle_align.sh: obtaining ctm edits
+steps/cleanup/lattice_oracle_align.sh: ctm with edits information appended is in exp/tri3_cleaned_work/lattice_oracle/ctm_edits
+steps/cleanup/clean_and_segment_data.sh: using default values of non-scored words...
+steps/cleanup/clean_and_segment_data.sh: modifying ctm-edits file to allow repetitions [for dysfluencies] and 
+   ... to fix reference mismatches involving non-scored words. 
+   ... See exp/tri3_cleaned_work/log/modify_ctm_edits.log for details and stats, including
+ a list of commonly-repeated words.
+steps/cleanup/clean_and_segment_data.sh: applying 'taint' markers to ctm-edits file to mark silences and
+  ... non-scored words that are next to errors.
+... Stats, including global cor/ins/del/sub stats, are in exp/tri3_cleaned_work/log/taint_ctm_edits.log.
+steps/cleanup/clean_and_segment_data.sh: creating segmentation from ctm-edits file.
+steps/cleanup/clean_and_segment_data.sh: contents of exp/tri3_cleaned_work/log/segment_ctm_edits.log are:
+# steps/cleanup/internal/segment_ctm_edits.py --oov-symbol-file=data/lang/oov.txt --ctm-edits-out=exp/tri3_cleaned_work/ctm_edits.segmented --word-stats-out=exp/tri3_cleaned_work/word_stats.txt exp/tri3_cleaned_work/non_scored_words.txt exp/tri3_cleaned_work/ctm_edits.tainted exp/tri3_cleaned_work/text exp/tri3_cleaned_work/segments 
+# Started at Sat May 21 22:22:31 UTC 2022
+#
+Number of utterances is 145958, of which 2.56% had no segments after all processing; total length of data in original utterances (in seconds) was 762625
+At stage  0 [segment cores], num-segments is 155828, total length 97.20% of original total 
+At stage  1 [add tainted lines], num-segments is 155828, total length 97.57% of original total [+0.37%]
+At stage  2 [split segments], num-segments is 156127, total length 97.57% of original total [-0.00%]
+At stage  3 [truncate boundaries], num-segments is 156127, total length 91.95% of original total [-5.62%]
+At stage  4 [relax boundary truncation], num-segments is 156127, total length 91.95% of original total [+0.00%]
+At stage  5 [unk-padding], num-segments is 156127, total length 92.09% of original total [+0.14%]
+At stage  6 [remove new segments under --min-new-segment-length, num-segments is 150735, total length 91.66% of original total [-0.44%]
+At stage  7 [remove segments under --min-segment-length, num-segments is 150132, total length 91.62% of original total [-0.03%]
+At stage  8 [truncate segment-starts for --max-junk-proportion, num-segments is 150132, total length 91.38% of original total [-0.24%]
+At stage  9 [truncate segment-ends for --max-junk-proportion, num-segments is 150132, total length 91.21% of original total [-0.17%]
+At stage 10 [remove segments without scored,non-OOV words], num-segments is 150129, total length 91.21% of original total [-0.00%]
+At stage 11 [remove segments with junk exceeding --max-junk-proportion], num-segments is 148069, total length 90.64% of original total [-0.57%]
+At stage 12 [merge overlapping or touching segments], num-segments is 147302, total length 90.63% of original total [-0.01%]
+segment_ctm_edits.py: please see the file exp/tri3_cleaned_work/word_stats.txt for word-level statistics saying how frequently each word was excluded for a segment; format is <word> <proportion-of-time-excluded> <total-count>.  Particularly problematic words appear near the top of the file.
+segment_ctm_edits.py: detailed utterance-level debug information is in exp/tri3_cleaned_work/ctm_edits.segmented
+# Accounting: time=24 threads=1
+# Ended (code 0) at Sat May 21 22:22:55 UTC 2022, elapsed time 24 seconds
+For word-level statistics on p(not-being-in-a-segment), with 'worst' words at the top,
+see exp/tri3_cleaned_work/word_stats.txt
+For detailed utterance-level debugging information, see exp/tri3_cleaned_work/ctm_edits.segmented
+steps/cleanup/clean_and_segment_data.sh: working out required segment padding to account for feature-generation edge effects.
+utils/data/get_utt2dur.sh: working out data/train/utt2dur from data/train/segments
+utils/data/get_utt2dur.sh: computed data/train/utt2dur
+steps/cleanup/clean_and_segment_data.sh: we'll pad segments with 0.020 seconds at segment ends to correct for feature-generation end effects
+steps/cleanup/clean_and_segment_data.sh: based on the segments and text file in exp/tri3_cleaned_work/segments and exp/tri3_cleaned_work/text, creating new data-dir in data/train_cleaned
+utils/data/subsegment_data_dir.sh: note: frame shift is 0.01 [affects feats.scp]
+utils/data/get_utt2num_frames.sh: data/train/utt2num_frames already present!
+utils/data/subsegment_data_dir.sh: subsegmented data from data/train to data/train_cleaned
+utils/fix_data_dir.sh: filtered data/train_cleaned/wav.scp from 109782 to 104091 lines based on filter /tmp/kaldi.FSOe/recordings.
+utils/fix_data_dir.sh: filtered data/train_cleaned/reco2file_and_channel from 109782 to 104091 lines based on filter /tmp/kaldi.FSOe/recordings.
+fix_data_dir.sh: kept all 147302 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned/.backup
+steps/cleanup/clean_and_segment_data.sh: recomputing CMVN stats for the new data
+steps/compute_cmvn_stats.sh data/train_cleaned data/train_cleaned/log data/train_cleaned/data
+Succeeded creating CMVN stats for train_cleaned
+steps/cleanup/clean_and_segment_data.sh: cleaning up intermediate files
+steps/cleanup/clean_and_segment_data.sh: done.
+steps/align_fmllr.sh --nj 100 --cmd run.pl data/train_cleaned data/lang exp/tri3 exp/tri3_ali_cleaned
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in data/train_cleaned using exp/tri3/final.alimdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri3_ali_cleaned
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 68.4507482143% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri3_ali_cleaned/log/analyze_alignments.log
+53230 warnings in exp/tri3_ali_cleaned/log/fmllr.*.log
+1 warnings in exp/tri3_ali_cleaned/log/analyze_alignments.log
+2749 warnings in exp/tri3_ali_cleaned/log/align_pass1.*.log
+1167 warnings in exp/tri3_ali_cleaned/log/align_pass2.*.log
+steps/train_sat.sh --cmd run.pl 5000 100000 data/train_cleaned data/lang exp/tri3_ali_cleaned exp/tri3_cleaned
+steps/train_sat.sh: feature type is lda
+steps/train_sat.sh: Using transforms from exp/tri3_ali_cleaned
+steps/train_sat.sh: Accumulating tree stats
+steps/train_sat.sh: Getting questions for tree clustering.
+steps/train_sat.sh: Building the tree
+steps/train_sat.sh: Initializing the model
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 5 with no stats; corresponding phone list: 23 24 25 26 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 6 with no stats; corresponding phone list: 27 28 29 30 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 10 with no stats; corresponding phone list: 43 44 45 46 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 15 with no stats; corresponding phone list: 63 64 65 66 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 20 with no stats; corresponding phone list: 83 84 85 86 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 22 with no stats; corresponding phone list: 91 92 93 94 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 30 with no stats; corresponding phone list: 123 124 125 126 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 53 with no stats; corresponding phone list: 215 216 217 218 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 55 with no stats; corresponding phone list: 223 224 225 226 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 103 with no stats; corresponding phone list: 415 416 417 418 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 107 with no stats; corresponding phone list: 431 432 433 434 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 117 with no stats; corresponding phone list: 471 472 473 474 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 128 with no stats; corresponding phone list: 515 516 517 518 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 148 with no stats; corresponding phone list: 595 596 597 598 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 171 with no stats; corresponding phone list: 687 688 689 690 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 173 with no stats; corresponding phone list: 695 696 697 698 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 193 with no stats; corresponding phone list: 775 776 777 778 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 199 with no stats; corresponding phone list: 799 800 801 802 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 210 with no stats; corresponding phone list: 843 844 845 846 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 216 with no stats; corresponding phone list: 867 868 869 870 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 222 with no stats; corresponding phone list: 891 892 893 894 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 223 with no stats; corresponding phone list: 895 896 897 898 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 240 with no stats; corresponding phone list: 963 964 965 966 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 245 with no stats; corresponding phone list: 983 984 985 986 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 266 with no stats; corresponding phone list: 1067 1068 1069 1070 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 271 with no stats; corresponding phone list: 1087 1088 1089 1090 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 272 with no stats; corresponding phone list: 1091 1092 1093 1094 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 278 with no stats; corresponding phone list: 1115 1116 1117 1118 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 300 with no stats; corresponding phone list: 1203 1204 1205 1206 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 331 with no stats; corresponding phone list: 1327 1328 1329 1330 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 344 with no stats; corresponding phone list: 1379 1380 1381 1382 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 345 with no stats; corresponding phone list: 1383 1384 1385 1386 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 357 with no stats; corresponding phone list: 1431 1432 1433 1434 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 361 with no stats; corresponding phone list: 1447 1448 1449 1450 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 367 with no stats; corresponding phone list: 1471 1472 1473 1474 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 374 with no stats; corresponding phone list: 1499 1500 1501 1502 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 395 with no stats; corresponding phone list: 1583 1584 1585 1586 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 409 with no stats; corresponding phone list: 1639 1640 1641 1642 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 410 with no stats; corresponding phone list: 1643 1644 1645 1646 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 440 with no stats; corresponding phone list: 1763 1764 1765 1766 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 460 with no stats; corresponding phone list: 1843 1844 1845 1846 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 461 with no stats; corresponding phone list: 1847 1848 1849 1850 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 462 with no stats; corresponding phone list: 1851 1852 1853 1854 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 463 with no stats; corresponding phone list: 1855 1856 1857 1858 
+This is a bad warning.
+steps/train_sat.sh: Converting alignments from exp/tri3_ali_cleaned to use current tree
+steps/train_sat.sh: Compiling graphs of transcripts
+Pass 1
+Pass 2
+Estimating fMLLR transforms
+Pass 3
+Pass 4
+Estimating fMLLR transforms
+Pass 5
+Pass 6
+Estimating fMLLR transforms
+Pass 7
+Pass 8
+Pass 9
+Pass 10
+Aligning data
+Pass 11
+Pass 12
+Estimating fMLLR transforms
+Pass 13
+Pass 14
+Pass 15
+Pass 16
+Pass 17
+Pass 18
+Pass 19
+Pass 20
+Aligning data
+Pass 21
+Pass 22
+Pass 23
+Pass 24
+Pass 25
+Pass 26
+Pass 27
+Pass 28
+Pass 29
+Pass 30
+Aligning data
+Pass 31
+Pass 32
+Pass 33
+Pass 34
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri3_cleaned
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 68.0796887413% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri3_cleaned/log/analyze_alignments.log
+157 warnings in exp/tri3_cleaned/log/init_model.log
+87 warnings in exp/tri3_cleaned/log/est_alimdl.log
+3 warnings in exp/tri3_cleaned/log/build_tree.log
+211740 warnings in exp/tri3_cleaned/log/fmllr.*.*.log
+704 warnings in exp/tri3_cleaned/log/acc.*.*.log
+3874 warnings in exp/tri3_cleaned/log/align.*.*.log
+1 warnings in exp/tri3_cleaned/log/analyze_alignments.log
+44 warnings in exp/tri3_cleaned/log/questions.log
+2981 warnings in exp/tri3_cleaned/log/update.*.log
+steps/train_sat.sh: Likelihood evolution:
+-49.7227 -49.3865 -49.3283 -49.1765 -48.4812 -47.7441 -47.1786 -46.781 -46.4643 -45.9512 -45.7402 -45.3988 -45.2474 -45.1393 -45.0429 -44.9527 -44.8676 -44.7884 -44.716 -44.5542 -44.4665 -44.4119 -44.3633 -44.3169 -44.272 -44.2289 -44.188 -44.149 -44.1114 -44.0266 -43.9736 -43.9456 -43.9265 -43.913 
+exp/tri3_cleaned: nj=100 align prob=-45.55 over 191.97h [retry=0.5%, fail=0.0%] states=3780 gauss=100113 fmllr-impr=0.88 over 158.66h tree-impr=4.77
+steps/train_sat.sh: done training SAT system in exp/tri3_cleaned
+tree-info exp/tri3_cleaned/tree 
+tree-info exp/tri3_cleaned/tree 
+make-h-transducer --disambig-syms-out=exp/tri3_cleaned/graph/disambig_tid.int --transition-scale=1.0 data/lang/tmp/ilabels_3_1 exp/tri3_cleaned/tree exp/tri3_cleaned/final.mdl 
+fstrmsymbols exp/tri3_cleaned/graph/disambig_tid.int 
+fstdeterminizestar --use-log=true 
+fsttablecompose exp/tri3_cleaned/graph/Ha.fst data/lang/tmp/CLG_3_1.fst 
+fstrmepslocal 
+fstminimizeencoded 
+fstisstochastic exp/tri3_cleaned/graph/HCLGa.fst 
+0.000488052 -0.118727
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true exp/tri3_cleaned/final.mdl exp/tri3_cleaned/graph/HCLGa.fst 
+steps/decode_fmllr.sh --nj 16 --num-threads 4 --cmd run.pl --num-threads 4 exp/tri3_cleaned/graph data/dev exp/tri3_cleaned/decode_dev
+** split_data.sh: warning, #lines is (utt2spk,feats.scp) is (14856,14814); you can 
+**  use utils/fix_data_dir.sh data/dev to fix this.
+steps/decode.sh --scoring-opts  --num-threads 4 --skip-scoring false --acwt 0.083333 --nj 16 --cmd run.pl --beam 10.0 --model exp/tri3_cleaned/final.alimdl --max-active 2000 exp/tri3_cleaned/graph data/dev exp/tri3_cleaned/decode_dev.si
+decode.sh: feature type is lda
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri3_cleaned/graph exp/tri3_cleaned/decode_dev.si
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 71.9359848741% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned/decode_dev.si/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,8,68) and mean=28.6
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned/decode_dev.si/log/analyze_lattice_depth_stats.log
+exp/tri3_cleaned/decode_dev.si/wer_10
+%WER 52.55 [ 57295 / 109031, 8545 ins, 6172 del, 42578 sub ] [PARTIAL]
+%SER 89.29 [ 13227 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_11
+%WER 51.65 [ 56314 / 109031, 7662 ins, 7040 del, 41612 sub ] [PARTIAL]
+%SER 89.21 [ 13216 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_12
+%WER 51.09 [ 55706 / 109031, 6934 ins, 8015 del, 40757 sub ] [PARTIAL]
+%SER 89.07 [ 13195 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_13
+%WER 50.72 [ 55300 / 109031, 6339 ins, 9037 del, 39924 sub ] [PARTIAL]
+%SER 89.08 [ 13197 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_14
+%WER 50.58 [ 55148 / 109031, 5893 ins, 10041 del, 39214 sub ] [PARTIAL]
+%SER 89.13 [ 13204 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_15
+%WER 50.64 [ 55215 / 109031, 5503 ins, 11129 del, 38583 sub ] [PARTIAL]
+%SER 89.31 [ 13231 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_16
+%WER 50.76 [ 55339 / 109031, 5170 ins, 11985 del, 38184 sub ] [PARTIAL]
+%SER 89.52 [ 13261 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_17
+%WER 50.88 [ 55470 / 109031, 4891 ins, 12704 del, 37875 sub ] [PARTIAL]
+%SER 89.64 [ 13280 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_7
+%WER 57.05 [ 62203 / 109031, 12056 ins, 4255 del, 45892 sub ] [PARTIAL]
+%SER 90.37 [ 13388 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_8
+%WER 55.28 [ 60275 / 109031, 10806 ins, 4741 del, 44728 sub ] [PARTIAL]
+%SER 89.91 [ 13320 / 14814 ]
+exp/tri3_cleaned/decode_dev.si/wer_9
+%WER 53.72 [ 58570 / 109031, 9598 ins, 5395 del, 43577 sub ] [PARTIAL]
+%SER 89.71 [ 13290 / 14814 ]
+steps/decode_fmllr.sh: feature type is lda
+steps/decode_fmllr.sh: getting first-pass fMLLR transforms.
+steps/decode_fmllr.sh: doing main lattice generation phase
+steps/decode_fmllr.sh: estimating fMLLR transforms a second time.
+steps/decode_fmllr.sh: doing a final pass of acoustic rescoring.
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri3_cleaned/graph exp/tri3_cleaned/decode_dev
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 75.1991359525% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned/decode_dev/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,5,46) and mean=19.5
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned/decode_dev/log/analyze_lattice_depth_stats.log
+exp/tri3_cleaned/decode_dev/wer_10
+%WER 38.76 [ 42256 / 109031, 7490 ins, 3233 del, 31533 sub ] [PARTIAL]
+%SER 82.62 [ 12240 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_11
+%WER 38.25 [ 41707 / 109031, 6893 ins, 3552 del, 31262 sub ] [PARTIAL]
+%SER 82.43 [ 12211 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_12
+%WER 37.98 [ 41414 / 109031, 6452 ins, 3904 del, 31058 sub ] [PARTIAL]
+%SER 82.33 [ 12196 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_13
+%WER 37.95 [ 41379 / 109031, 6117 ins, 4267 del, 30995 sub ] [PARTIAL]
+%SER 82.42 [ 12209 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_14
+%WER 38.02 [ 41459 / 109031, 5809 ins, 4630 del, 31020 sub ] [PARTIAL]
+%SER 82.61 [ 12238 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_15
+%WER 38.18 [ 41626 / 109031, 5512 ins, 4980 del, 31134 sub ] [PARTIAL]
+%SER 82.81 [ 12268 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_16
+%WER 38.49 [ 41965 / 109031, 5313 ins, 5336 del, 31316 sub ] [PARTIAL]
+%SER 83.11 [ 12312 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_17
+%WER 38.81 [ 42314 / 109031, 5180 ins, 5636 del, 31498 sub ] [PARTIAL]
+%SER 83.41 [ 12356 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_7
+%WER 42.13 [ 45936 / 109031, 10089 ins, 2476 del, 33371 sub ] [PARTIAL]
+%SER 84.21 [ 12475 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_8
+%WER 40.61 [ 44279 / 109031, 9048 ins, 2690 del, 32541 sub ] [PARTIAL]
+%SER 83.33 [ 12344 / 14814 ]
+exp/tri3_cleaned/decode_dev/wer_9
+%WER 39.50 [ 43066 / 109031, 8174 ins, 2962 del, 31930 sub ] [PARTIAL]
+%SER 82.80 [ 12266 / 14814 ]
+steps/lmrescore_const_arpa.sh --cmd run.pl data/lang data/lang_rescore data/dev exp/tri3_cleaned/decode_dev exp/tri3_cleaned/decode_dev_rescore
+exp/tri3_cleaned/decode_dev_rescore/wer_10
+%WER 36.66 [ 39972 / 109031, 7327 ins, 3095 del, 29550 sub ] [PARTIAL]
+%SER 79.36 [ 11757 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_11
+%WER 36.23 [ 39506 / 109031, 6843 ins, 3398 del, 29265 sub ] [PARTIAL]
+%SER 79.15 [ 11726 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_12
+%WER 36.01 [ 39257 / 109031, 6465 ins, 3681 del, 29111 sub ] [PARTIAL]
+%SER 79.08 [ 11715 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_13
+%WER 35.92 [ 39163 / 109031, 6114 ins, 3999 del, 29050 sub ] [PARTIAL]
+%SER 79.15 [ 11726 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_14
+%WER 36.03 [ 39286 / 109031, 5869 ins, 4317 del, 29100 sub ] [PARTIAL]
+%SER 79.36 [ 11757 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_15
+%WER 36.14 [ 39405 / 109031, 5638 ins, 4613 del, 29154 sub ] [PARTIAL]
+%SER 79.55 [ 11784 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_16
+%WER 36.34 [ 39625 / 109031, 5462 ins, 4945 del, 29218 sub ] [PARTIAL]
+%SER 79.74 [ 11813 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_17
+%WER 36.52 [ 39814 / 109031, 5298 ins, 5191 del, 29325 sub ] [PARTIAL]
+%SER 80.00 [ 11851 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_7
+%WER 39.77 [ 43364 / 109031, 9706 ins, 2436 del, 31222 sub ] [PARTIAL]
+%SER 81.43 [ 12063 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_8
+%WER 38.37 [ 41831 / 109031, 8710 ins, 2642 del, 30479 sub ] [PARTIAL]
+%SER 80.59 [ 11938 / 14814 ]
+exp/tri3_cleaned/decode_dev_rescore/wer_9
+%WER 37.35 [ 40725 / 109031, 7941 ins, 2834 del, 29950 sub ] [PARTIAL]
+%SER 79.84 [ 11828 / 14814 ]
+steps/decode_fmllr.sh --nj 16 --num-threads 4 --cmd run.pl --num-threads 4 exp/tri3_cleaned/graph data/test exp/tri3_cleaned/decode_test
+** split_data.sh: warning, #lines is (utt2spk,feats.scp) is (17572,17530); you can 
+**  use utils/fix_data_dir.sh data/test to fix this.
+steps/decode.sh --scoring-opts  --num-threads 4 --skip-scoring false --acwt 0.083333 --nj 16 --cmd run.pl --beam 10.0 --model exp/tri3_cleaned/final.alimdl --max-active 2000 exp/tri3_cleaned/graph data/test exp/tri3_cleaned/decode_test.si
+decode.sh: feature type is lda
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri3_cleaned/graph exp/tri3_cleaned/decode_test.si
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 72.0250998289% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned/decode_test.si/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,8,75) and mean=30.3
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned/decode_test.si/log/analyze_lattice_depth_stats.log
+exp/tri3_cleaned/decode_test.si/wer_10
+%WER 53.23 [ 67094 / 126045, 10307 ins, 7651 del, 49136 sub ] [PARTIAL]
+%SER 90.54 [ 15872 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_11
+%WER 52.41 [ 66058 / 126045, 9303 ins, 8690 del, 48065 sub ] [PARTIAL]
+%SER 90.50 [ 15864 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_12
+%WER 51.79 [ 65275 / 126045, 8487 ins, 9874 del, 46914 sub ] [PARTIAL]
+%SER 90.37 [ 15842 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_13
+%WER 51.44 [ 64834 / 126045, 7750 ins, 11186 del, 45898 sub ] [PARTIAL]
+%SER 90.37 [ 15841 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_14
+%WER 51.28 [ 64642 / 126045, 7151 ins, 12477 del, 45014 sub ] [PARTIAL]
+%SER 90.42 [ 15851 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_15
+%WER 51.32 [ 64682 / 126045, 6716 ins, 13699 del, 44267 sub ] [PARTIAL]
+%SER 90.55 [ 15873 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_16
+%WER 51.40 [ 64787 / 126045, 6336 ins, 14766 del, 43685 sub ] [PARTIAL]
+%SER 90.72 [ 15904 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_17
+%WER 51.50 [ 64914 / 126045, 5990 ins, 15584 del, 43340 sub ] [PARTIAL]
+%SER 90.92 [ 15939 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_7
+%WER 57.70 [ 72730 / 126045, 14596 ins, 5117 del, 53017 sub ] [PARTIAL]
+%SER 91.61 [ 16060 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_8
+%WER 55.88 [ 70429 / 126045, 12972 ins, 5800 del, 51657 sub ] [PARTIAL]
+%SER 91.17 [ 15982 / 17530 ]
+exp/tri3_cleaned/decode_test.si/wer_9
+%WER 54.36 [ 68512 / 126045, 11548 ins, 6644 del, 50320 sub ] [PARTIAL]
+%SER 90.74 [ 15907 / 17530 ]
+steps/decode_fmllr.sh: feature type is lda
+steps/decode_fmllr.sh: getting first-pass fMLLR transforms.
+steps/decode_fmllr.sh: doing main lattice generation phase
+steps/decode_fmllr.sh: estimating fMLLR transforms a second time.
+steps/decode_fmllr.sh: doing a final pass of acoustic rescoring.
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri3_cleaned/graph exp/tri3_cleaned/decode_test
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 70.7325422182% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned/decode_test/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,5,43) and mean=18.1
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri3_cleaned/decode_test/log/analyze_lattice_depth_stats.log
+exp/tri3_cleaned/decode_test/wer_10
+%WER 42.47 [ 53529 / 126045, 10249 ins, 3640 del, 39640 sub ] [PARTIAL]
+%SER 85.68 [ 15019 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_11
+%WER 41.90 [ 52816 / 126045, 9559 ins, 3896 del, 39361 sub ] [PARTIAL]
+%SER 85.44 [ 14977 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_12
+%WER 41.57 [ 52398 / 126045, 8993 ins, 4231 del, 39174 sub ] [PARTIAL]
+%SER 85.43 [ 14976 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_13
+%WER 41.34 [ 52113 / 126045, 8517 ins, 4559 del, 39037 sub ] [PARTIAL]
+%SER 85.40 [ 14970 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_14
+%WER 41.29 [ 52039 / 126045, 8114 ins, 4924 del, 39001 sub ] [PARTIAL]
+%SER 85.44 [ 14978 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_15
+%WER 41.36 [ 52135 / 126045, 7757 ins, 5336 del, 39042 sub ] [PARTIAL]
+%SER 85.54 [ 14996 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_16
+%WER 41.45 [ 52241 / 126045, 7461 ins, 5698 del, 39082 sub ] [PARTIAL]
+%SER 85.70 [ 15023 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_17
+%WER 41.63 [ 52478 / 126045, 7241 ins, 6026 del, 39211 sub ] [PARTIAL]
+%SER 85.82 [ 15044 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_7
+%WER 45.97 [ 57946 / 126045, 13499 ins, 2797 del, 41650 sub ] [PARTIAL]
+%SER 87.19 [ 15284 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_8
+%WER 44.44 [ 56020 / 126045, 12209 ins, 3012 del, 40799 sub ] [PARTIAL]
+%SER 86.49 [ 15162 / 17530 ]
+exp/tri3_cleaned/decode_test/wer_9
+%WER 43.25 [ 54511 / 126045, 11098 ins, 3321 del, 40092 sub ] [PARTIAL]
+%SER 85.92 [ 15061 / 17530 ]
+steps/lmrescore_const_arpa.sh --cmd run.pl data/lang data/lang_rescore data/test exp/tri3_cleaned/decode_test exp/tri3_cleaned/decode_test_rescore
+exp/tri3_cleaned/decode_test_rescore/wer_10
+%WER 40.18 [ 50646 / 126045, 10079 ins, 3430 del, 37137 sub ] [PARTIAL]
+%SER 82.58 [ 14476 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_11
+%WER 39.67 [ 49996 / 126045, 9471 ins, 3678 del, 36847 sub ] [PARTIAL]
+%SER 82.34 [ 14434 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_12
+%WER 39.31 [ 49543 / 126045, 8965 ins, 3975 del, 36603 sub ] [PARTIAL]
+%SER 82.17 [ 14404 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_13
+%WER 39.15 [ 49344 / 126045, 8557 ins, 4279 del, 36508 sub ] [PARTIAL]
+%SER 82.07 [ 14387 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_14
+%WER 39.04 [ 49202 / 126045, 8183 ins, 4594 del, 36425 sub ] [PARTIAL]
+%SER 82.10 [ 14392 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_15
+%WER 38.97 [ 49126 / 126045, 7829 ins, 4935 del, 36362 sub ] [PARTIAL]
+%SER 82.10 [ 14393 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_16
+%WER 39.02 [ 49180 / 126045, 7543 ins, 5285 del, 36352 sub ] [PARTIAL]
+%SER 82.24 [ 14417 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_17
+%WER 39.16 [ 49359 / 126045, 7357 ins, 5542 del, 36460 sub ] [PARTIAL]
+%SER 82.37 [ 14440 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_7
+%WER 43.45 [ 54761 / 126045, 12989 ins, 2713 del, 39059 sub ] [PARTIAL]
+%SER 84.38 [ 14791 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_8
+%WER 42.09 [ 53053 / 126045, 11869 ins, 2925 del, 38259 sub ] [PARTIAL]
+%SER 83.63 [ 14660 / 17530 ]
+exp/tri3_cleaned/decode_test_rescore/wer_9
+%WER 41.01 [ 51686 / 126045, 10886 ins, 3146 del, 37654 sub ] [PARTIAL]
+%SER 83.03 [ 14556 / 17530 ]
+Sun May 22 12:09:20 UTC 2022
+----------------------- Stage 16 end---------------------------
