@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=16
+stage=17
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -277,7 +277,6 @@ if [ $stage -le 16 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 17 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
@@ -288,6 +287,7 @@ if [ $stage -le 17 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 18 ]; then
   echo "----------------------- Stage $stage begin---------------------------";

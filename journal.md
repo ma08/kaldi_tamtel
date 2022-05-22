@@ -570,7 +570,63 @@ sk5057@speech-rec-vm:~/kaldi/egs/tamil_telugu_proj/s5_r3$ du -s db --block-size=
 ```
 
 ## Stage 15
+forgot to change stage number when running. Did that mess up with some folders/data?
+
+
 ```
  nohup ./run.sh > logs/stage15.log 2>&1 &
  tail -f logs/stage15.log
 ```
+
+```
+sk5057@speech-rec-vm:~/kaldi/egs/tamil_telugu_proj/s5_r3$ cp -R exp/ exp_after_stage15
+```
+
+## Stage 15
+```
+ nohup ./run.sh > logs/stage16.log 2>&1 &
+ tail -f logs/stage16.log
+```
+
+## Stage 16 - Should this stage be skipped?
+
+
+## Stage 17
+ apt install nvidia-cuda-toolkit
+
+https://kaldi-asr.org/doc/cudamatrix.html
+ If you want to tell whether Kaldi has been configured to use CUDA, you can grep for CUDATKDIR in kaldi.mk; if the string appears, then it has been configured to use CUDA.
+
+ ```
+sk5057@speech-rec-vm:~/kaldi/src$ ./configure 
+Configuring KALDI to use MKL.
+Backing up kaldi.mk to kaldi.mk.bak ...
+Checking compiler c++ ...
+Checking OpenFst library in /home/sk5057/kaldi/tools/openfst-1.7.2 ...
+Checking cub library in /home/sk5057/kaldi/tools/cub-1.8.0 ...
+Performing OS specific configuration ...
+On Linux: Checking for linear algebra header files ...
+Configuring MKL library directory: Found /opt/intel/mkl/lib/intel64
+MKL libs MKL_LDLIBS = -L/opt/intel/mkl/lib/intel64 -Wl,-rpath=/opt/intel/mkl/lib/intel64 -l:libmkl_intel_lp64.so -l:libmkl_core.so -l:libmkl_sequential.so -ldl -lpthread -lm.
+MKL compile flags MKL_CXXFLAGS = -I/opt/intel/mkl/include.
+*** MKL self-reported version:
+Intel(R) Math Kernel Library Version 2020.0.0 Product Build 20191122 for Intel(R) 64 architecture applications
+Successfully configured for Linux with MKL libraries found in /opt/intel/mkl
+***configure failed: CUDA 9_1 does not support c++ (g++-7).
+                 You need g++ < 7.0. ***
+
+ ```
+root@speech-rec-vm:/usr/lib/nvidia-cuda-toolkit/bin# cd /usr/bin/
+root@speech-rec-vm:/usr/bin# mv g++ g++_backup7.5
+root@speech-rec-vm:/usr/bin# mv gcc gcc_backup7.5
+
+
+sudo ln -s /usr/bin/g++-6 g++
+sudo ln -s /usr/bin/gcc-6 gcc
+
+
+Editing VM instance "speech-rec-vm" failed. Error: Instances with guest accelerators do not support live migration. 
+
+https://cloud.google.com/compute/docs/instances/setting-instance-scheduling-options#updatingoption
+
+host maintenance -> temrinate
