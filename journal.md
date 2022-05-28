@@ -630,3 +630,37 @@ Editing VM instance "speech-rec-vm" failed. Error: Instances with guest accelera
 https://cloud.google.com/compute/docs/instances/setting-instance-scheduling-options#updatingoption
 
 host maintenance -> temrinate
+
+```
+ nohup ./run.sh > logs/stage17.log 2>&1 &
+ tail -f logs/stage17.log
+
+```
+
+```
+utils/validate_data_dir.sh: Error: in data/dev_hires, utterance-ids extracted from utt2spk and features
+utils/validate_data_dir.sh: differ, partial diff is:
+--- /tmp/kaldi.5WDS/utts	2022-05-22 14:46:07.588777681 +0000
++++ /tmp/kaldi.5WDS/utts.feats	2022-05-22 14:46:08.388777291 +0000
+@@ -14814,43 +14814 @@
+ mcvspeaker543-common_voice_ta_26771613
+-taf_00008_00174260673
+-taf_00008_00326741737
+...
+[Lengths are /tmp/kaldi.5WDS/utts=14856 versus /tmp/kaldi.5WDS/utts.feats=14814]
+```
+
+
+```
+sk5057@speech-rec-vm:~/kaldi/egs/wsj/s5/utils$ git diff .
+diff --git a/egs/wsj/s5/utils/copy_data_dir.sh b/egs/wsj/s5/utils/copy_data_dir.sh
+index 9fd420c42..02ff5ff06 100755
+--- a/egs/wsj/s5/utils/copy_data_dir.sh
++++ b/egs/wsj/s5/utils/copy_data_dir.sh
+@@ -142,4 +142,5 @@ done
+ [ ! -f $srcdir/feats.scp ] && validate_opts="$validate_opts --no-feats"
+ [ ! -f $srcdir/text ] && validate_opts="$validate_opts --no-text"
+ 
++utils/fix_data_dir.sh $destdir
+ utils/validate_data_dir.sh $validate_opts $destdir
+```
