@@ -1,0 +1,375 @@
+nohup: ignoring input
+----------------------- Stage 17 begin---------------------------
+Sat May 28 15:17:58 UTC 2022
+local/chain/run_tdnn.sh 
+local/nnet3/run_ivector_common.sh: preparing directory for low-resolution speed-perturbed data (for alignment)
+fix_data_dir.sh: kept all 147302 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned/.backup
+utils/data/perturb_data_dir_speed_3way.sh: making sure the utt2dur and the reco2dur files are present
+... in data/train_cleaned, because obtaining it after speed-perturbing
+... would be very slow, and you might need them.
+utils/data/get_utt2dur.sh: data/train_cleaned/utt2dur already exists with the expected length.  We won't recompute it.
+utils/data/get_reco2dur.sh: data/train_cleaned/reco2dur already exists with the expected length.  We won't recompute it.
+utils/data/perturb_data_dir_speed.sh: generated speed-perturbed version of data in data/train_cleaned, in data/train_cleaned_sp_speed0.9
+fix_data_dir.sh: kept all 147302 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp_speed0.9/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp_speed0.9
+utils/data/perturb_data_dir_speed.sh: generated speed-perturbed version of data in data/train_cleaned, in data/train_cleaned_sp_speed1.1
+fix_data_dir.sh: kept all 147302 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp_speed1.1/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp_speed1.1
+utils/data/combine_data.sh data/train_cleaned_sp data/train_cleaned data/train_cleaned_sp_speed0.9 data/train_cleaned_sp_speed1.1
+utils/data/combine_data.sh: combined utt2uniq
+utils/data/combine_data.sh: combined segments
+utils/data/combine_data.sh: combined utt2spk
+utils/data/combine_data.sh [info]: not combining utt2lang as it does not exist
+utils/data/combine_data.sh: combined utt2dur
+utils/data/combine_data.sh [info]: **not combining utt2num_frames as it does not exist everywhere**
+utils/data/combine_data.sh: combined reco2dur
+utils/data/combine_data.sh [info]: **not combining feats.scp as it does not exist everywhere**
+utils/data/combine_data.sh: combined text
+utils/data/combine_data.sh [info]: **not combining cmvn.scp as it does not exist everywhere**
+utils/data/combine_data.sh [info]: not combining vad.scp as it does not exist
+utils/data/combine_data.sh: combined reco2file_and_channel
+utils/data/combine_data.sh: combined wav.scp
+utils/data/combine_data.sh [info]: not combining spk2gender as it does not exist
+fix_data_dir.sh: kept all 441906 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp/.backup
+utils/data/perturb_data_dir_speed_3way.sh: generated 3-way speed-perturbed version of data in data/train_cleaned, in data/train_cleaned_sp
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp
+utils/copy_data_dir.sh: copied data from data/train_cleaned_sp to data/train_cleaned_sp_hires
+fix_data_dir.sh: kept all 441906 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp_hires
+utils/copy_data_dir.sh: copied data from data/dev to data/dev_hires
+utils/fix_data_dir.sh: filtered /tmp/kaldi.pvDH/speakers from 474 to 446 lines based on filter data/dev_hires/cmvn.scp.
+utils/fix_data_dir.sh: filtered data/dev_hires/spk2utt from 474 to 446 lines based on filter /tmp/kaldi.pvDH/speakers.
+fix_data_dir.sh: kept all 14814 utterances.
+utils/fix_data_dir.sh: filtered data/dev_hires/wav.scp from 12117 to 12075 lines based on filter /tmp/kaldi.pvDH/recordings.
+utils/fix_data_dir.sh: filtered data/dev_hires/reco2file_and_channel from 12117 to 12075 lines based on filter /tmp/kaldi.pvDH/recordings.
+fix_data_dir.sh: old files are kept in data/dev_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/dev_hires
+utils/copy_data_dir.sh: copied data from data/test to data/test_hires
+utils/fix_data_dir.sh: filtered /tmp/kaldi.iry7/speakers from 3645 to 3618 lines based on filter data/test_hires/cmvn.scp.
+utils/fix_data_dir.sh: filtered data/test_hires/spk2utt from 3645 to 3618 lines based on filter /tmp/kaldi.iry7/speakers.
+fix_data_dir.sh: kept all 17530 utterances.
+utils/fix_data_dir.sh: filtered data/test_hires/wav.scp from 14841 to 14799 lines based on filter /tmp/kaldi.iry7/recordings.
+utils/fix_data_dir.sh: filtered data/test_hires/reco2file_and_channel from 14841 to 14799 lines based on filter /tmp/kaldi.iry7/recordings.
+fix_data_dir.sh: old files are kept in data/test_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/test_hires
+local/nnet3/run_ivector_common.sh: making MFCC features for low-resolution speed-perturbed data
+steps/make_mfcc.sh --nj 15 --cmd run.pl data/train_cleaned_sp
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp
+steps/make_mfcc.sh [info]: segments file exists: using that.
+steps/make_mfcc.sh: Succeeded creating MFCC features for train_cleaned_sp
+steps/compute_cmvn_stats.sh data/train_cleaned_sp
+Succeeded creating CMVN stats for train_cleaned_sp
+local/nnet3/run_ivector_common.sh: fixing input data-dir to remove nonexistent features, in case some 
+.. speed-perturbed segments were too short.
+fix_data_dir.sh: kept all 441906 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp/.backup
+local/nnet3/run_ivector_common.sh: aligning with the perturbed low-resolution data
+steps/align_fmllr.sh --nj 15 --cmd run.pl data/train_cleaned_sp data/lang exp/tri3_cleaned exp/tri3_cleaned_ali_train_cleaned_sp
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in data/train_cleaned_sp using exp/tri3_cleaned/final.alimdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri3_cleaned_ali_train_cleaned_sp
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 67.4846181359% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri3_cleaned_ali_train_cleaned_sp/log/analyze_alignments.log
+7038 warnings in exp/tri3_cleaned_ali_train_cleaned_sp/log/align_pass1.*.log
+157291 warnings in exp/tri3_cleaned_ali_train_cleaned_sp/log/fmllr.*.log
+1 warnings in exp/tri3_cleaned_ali_train_cleaned_sp/log/analyze_alignments.log
+3439 warnings in exp/tri3_cleaned_ali_train_cleaned_sp/log/align_pass2.*.log
+local/nnet3/run_ivector_common.sh: creating high-resolution MFCC features
+utils/data/perturb_data_dir_volume.sh: added volume perturbation to the data in data/train_cleaned_sp_hires
+steps/make_mfcc.sh --nj 15 --mfcc-config conf/mfcc_hires.conf --cmd run.pl data/train_cleaned_sp_hires
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp_hires
+steps/make_mfcc.sh [info]: segments file exists: using that.
+steps/make_mfcc.sh: Succeeded creating MFCC features for train_cleaned_sp_hires
+steps/compute_cmvn_stats.sh data/train_cleaned_sp_hires
+Succeeded creating CMVN stats for train_cleaned_sp_hires
+fix_data_dir.sh: kept all 441906 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp_hires/.backup
+steps/make_mfcc.sh --nj 15 --mfcc-config conf/mfcc_hires.conf --cmd run.pl data/dev_hires
+steps/make_mfcc.sh: moving data/dev_hires/feats.scp to data/dev_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/dev_hires
+steps/make_mfcc.sh [info]: segments file exists: using that.
+steps/make_mfcc.sh: Succeeded creating MFCC features for dev_hires
+steps/compute_cmvn_stats.sh data/dev_hires
+Succeeded creating CMVN stats for dev_hires
+fix_data_dir.sh: kept all 14814 utterances.
+fix_data_dir.sh: old files are kept in data/dev_hires/.backup
+steps/make_mfcc.sh --nj 15 --mfcc-config conf/mfcc_hires.conf --cmd run.pl data/test_hires
+steps/make_mfcc.sh: moving data/test_hires/feats.scp to data/test_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/test_hires
+steps/make_mfcc.sh [info]: segments file exists: using that.
+steps/make_mfcc.sh: Succeeded creating MFCC features for test_hires
+steps/compute_cmvn_stats.sh data/test_hires
+Succeeded creating CMVN stats for test_hires
+fix_data_dir.sh: kept all 17530 utterances.
+fix_data_dir.sh: old files are kept in data/test_hires/.backup
+local/nnet3/run_ivector_common.sh: computing a subset of data to train the diagonal UBM.
+utils/data/subset_data_dir.sh: reducing #utt from 441906 to 110476
+local/nnet3/run_ivector_common.sh: computing a PCA transform from the hires data.
+steps/online/nnet2/get_pca_transform.sh --cmd run.pl --splice-opts --left-context=3 --right-context=3 --max-utts 10000 --subsample 2 exp/nnet3_cleaned_1d/diag_ubm/train_cleaned_sp_hires_subset exp/nnet3_cleaned_1d/pca_transform
+Done estimating PCA transform in exp/nnet3_cleaned_1d/pca_transform
+local/nnet3/run_ivector_common.sh: training the diagonal UBM.
+steps/online/nnet2/train_diag_ubm.sh --cmd run.pl --nj 30 --num-frames 700000 --num-threads 8 exp/nnet3_cleaned_1d/diag_ubm/train_cleaned_sp_hires_subset 512 exp/nnet3_cleaned_1d/pca_transform exp/nnet3_cleaned_1d/diag_ubm
+steps/online/nnet2/train_diag_ubm.sh: Directory exp/nnet3_cleaned_1d/diag_ubm already exists. Backing up diagonal UBM in exp/nnet3_cleaned_1d/diag_ubm/backup.8hN
+steps/online/nnet2/train_diag_ubm.sh: initializing model from E-M in memory, 
+steps/online/nnet2/train_diag_ubm.sh: starting from 256 Gaussians, reaching 512;
+steps/online/nnet2/train_diag_ubm.sh: for 20 iterations, using at most 700000 frames of data
+Getting Gaussian-selection info
+steps/online/nnet2/train_diag_ubm.sh: will train for 4 iterations, in parallel over
+steps/online/nnet2/train_diag_ubm.sh: 30 machines, parallelized with 'run.pl'
+steps/online/nnet2/train_diag_ubm.sh: Training pass 0
+steps/online/nnet2/train_diag_ubm.sh: Training pass 1
+steps/online/nnet2/train_diag_ubm.sh: Training pass 2
+steps/online/nnet2/train_diag_ubm.sh: Training pass 3
+local/nnet3/run_ivector_common.sh: training the iVector extractor
+steps/online/nnet2/train_ivector_extractor.sh --cmd run.pl --nj 15 --num-threads 4 --num-processes 2 --online-cmvn-iextractor true data/train_cleaned_sp_hires exp/nnet3_cleaned_1d/diag_ubm exp/nnet3_cleaned_1d/extractor
+steps/online/nnet2/train_ivector_extractor.sh: doing Gaussian selection and posterior computation
+Accumulating stats (pass 0)
+Summing accs (pass 0)
+Updating model (pass 0)
+Accumulating stats (pass 1)
+Summing accs (pass 1)
+Updating model (pass 1)
+Accumulating stats (pass 2)
+Summing accs (pass 2)
+Updating model (pass 2)
+Accumulating stats (pass 3)
+Summing accs (pass 3)
+Updating model (pass 3)
+Accumulating stats (pass 4)
+Summing accs (pass 4)
+Updating model (pass 4)
+Accumulating stats (pass 5)
+Summing accs (pass 5)
+Updating model (pass 5)
+Accumulating stats (pass 6)
+Summing accs (pass 6)
+Updating model (pass 6)
+Accumulating stats (pass 7)
+Summing accs (pass 7)
+Updating model (pass 7)
+Accumulating stats (pass 8)
+Summing accs (pass 8)
+Updating model (pass 8)
+Accumulating stats (pass 9)
+Summing accs (pass 9)
+Updating model (pass 9)
+utils/data/modify_speaker_info.sh: copied data from data/train_cleaned_sp_hires to exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires/train_cleaned_sp_hires_max2, number of speakers changed from 192894 to 315432
+utils/validate_data_dir.sh: Successfully validated data-directory exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires/train_cleaned_sp_hires_max2
+steps/online/nnet2/extract_ivectors_online.sh --cmd run.pl --nj 15 exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires/train_cleaned_sp_hires_max2 exp/nnet3_cleaned_1d/extractor exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires
+filter_scps.pl: warning: some input lines were output to multiple files [OK if splitting per utt] 
+filter_scps.pl: warning: some input lines were output to multiple files [OK if splitting per utt] 
+steps/online/nnet2/extract_ivectors_online.sh: extracting iVectors
+steps/online/nnet2/extract_ivectors_online.sh: combining iVectors across jobs
+steps/online/nnet2/extract_ivectors_online.sh: done extracting (online) iVectors to exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires using the extractor in exp/nnet3_cleaned_1d/extractor.
+steps/online/nnet2/extract_ivectors_online.sh --cmd run.pl --nj 15 data/dev_hires exp/nnet3_cleaned_1d/extractor exp/nnet3_cleaned_1d/ivectors_dev_hires
+steps/online/nnet2/extract_ivectors_online.sh: extracting iVectors
+steps/online/nnet2/extract_ivectors_online.sh: combining iVectors across jobs
+steps/online/nnet2/extract_ivectors_online.sh: done extracting (online) iVectors to exp/nnet3_cleaned_1d/ivectors_dev_hires using the extractor in exp/nnet3_cleaned_1d/extractor.
+steps/online/nnet2/extract_ivectors_online.sh --cmd run.pl --nj 15 data/test_hires exp/nnet3_cleaned_1d/extractor exp/nnet3_cleaned_1d/ivectors_test_hires
+steps/online/nnet2/extract_ivectors_online.sh: extracting iVectors
+steps/online/nnet2/extract_ivectors_online.sh: combining iVectors across jobs
+steps/online/nnet2/extract_ivectors_online.sh: done extracting (online) iVectors to exp/nnet3_cleaned_1d/ivectors_test_hires using the extractor in exp/nnet3_cleaned_1d/extractor.
+local/chain/run_tdnn.sh: creating lang directory with one state per phone.
+steps/align_fmllr_lats.sh --nj 100 --cmd run.pl data/train_cleaned_sp data/lang exp/tri3_cleaned exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats
+steps/align_fmllr_lats.sh: feature type is lda
+steps/align_fmllr_lats.sh: compiling training graphs
+steps/align_fmllr_lats.sh: aligning data in data/train_cleaned_sp using exp/tri3_cleaned/final.alimdl and speaker-independent features.
+steps/align_fmllr_lats.sh: computing fMLLR transforms
+steps/align_fmllr_lats.sh: generating lattices containing alternate pronunciations.
+steps/align_fmllr_lats.sh: done generating lattices from training transcripts.
+173 warnings in exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats/log/generate_lattices.*.log
+7167 warnings in exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats/log/align_pass1.*.log
+157290 warnings in exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats/log/fmllr.*.log
+steps/nnet3/chain/build_tree.sh --frame-subsampling-factor 3 --context-opts --context-width=2 --central-position=1 --cmd run.pl 4000 data/train_cleaned_sp data/lang_chain exp/tri3_cleaned_ali_train_cleaned_sp exp/chain_cleaned_1d/tree_bi
+steps/nnet3/chain/build_tree.sh: feature type is lda
+steps/nnet3/chain/build_tree.sh: Using transforms from exp/tri3_cleaned_ali_train_cleaned_sp
+steps/nnet3/chain/build_tree.sh: Initializing monophone model (for alignment conversion, in case topology changed)
+steps/nnet3/chain/build_tree.sh: Accumulating tree stats
+steps/nnet3/chain/build_tree.sh: Getting questions for tree clustering.
+steps/nnet3/chain/build_tree.sh: Building the tree
+steps/nnet3/chain/build_tree.sh: Initializing the model
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 5 with no stats; corresponding phone list: 23 24 25 26 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 6 with no stats; corresponding phone list: 27 28 29 30 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 10 with no stats; corresponding phone list: 43 44 45 46 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 15 with no stats; corresponding phone list: 63 64 65 66 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 20 with no stats; corresponding phone list: 83 84 85 86 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 22 with no stats; corresponding phone list: 91 92 93 94 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 30 with no stats; corresponding phone list: 123 124 125 126 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 53 with no stats; corresponding phone list: 215 216 217 218 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 55 with no stats; corresponding phone list: 223 224 225 226 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 103 with no stats; corresponding phone list: 415 416 417 418 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 107 with no stats; corresponding phone list: 431 432 433 434 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 117 with no stats; corresponding phone list: 471 472 473 474 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 128 with no stats; corresponding phone list: 515 516 517 518 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 148 with no stats; corresponding phone list: 595 596 597 598 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 171 with no stats; corresponding phone list: 687 688 689 690 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 173 with no stats; corresponding phone list: 695 696 697 698 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 193 with no stats; corresponding phone list: 775 776 777 778 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 199 with no stats; corresponding phone list: 799 800 801 802 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 210 with no stats; corresponding phone list: 843 844 845 846 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 216 with no stats; corresponding phone list: 867 868 869 870 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 222 with no stats; corresponding phone list: 891 892 893 894 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 223 with no stats; corresponding phone list: 895 896 897 898 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 240 with no stats; corresponding phone list: 963 964 965 966 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 245 with no stats; corresponding phone list: 983 984 985 986 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 266 with no stats; corresponding phone list: 1067 1068 1069 1070 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 271 with no stats; corresponding phone list: 1087 1088 1089 1090 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 272 with no stats; corresponding phone list: 1091 1092 1093 1094 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 278 with no stats; corresponding phone list: 1115 1116 1117 1118 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 300 with no stats; corresponding phone list: 1203 1204 1205 1206 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 331 with no stats; corresponding phone list: 1327 1328 1329 1330 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 344 with no stats; corresponding phone list: 1379 1380 1381 1382 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 345 with no stats; corresponding phone list: 1383 1384 1385 1386 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 357 with no stats; corresponding phone list: 1431 1432 1433 1434 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 361 with no stats; corresponding phone list: 1447 1448 1449 1450 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 367 with no stats; corresponding phone list: 1471 1472 1473 1474 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 374 with no stats; corresponding phone list: 1499 1500 1501 1502 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 395 with no stats; corresponding phone list: 1583 1584 1585 1586 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 409 with no stats; corresponding phone list: 1639 1640 1641 1642 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 410 with no stats; corresponding phone list: 1643 1644 1645 1646 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 440 with no stats; corresponding phone list: 1763 1764 1765 1766 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 460 with no stats; corresponding phone list: 1843 1844 1845 1846 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 461 with no stats; corresponding phone list: 1847 1848 1849 1850 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 462 with no stats; corresponding phone list: 1851 1852 1853 1854 
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 463 with no stats; corresponding phone list: 1855 1856 1857 1858 
+This is a bad warning.
+steps/nnet3/chain/build_tree.sh: Converting alignments from exp/tri3_cleaned_ali_train_cleaned_sp to use current tree
+steps/nnet3/chain/build_tree.sh: Done building tree
+local/chain/run_tdnn.sh: creating neural net configs using the xconfig parser
+tree-info exp/chain_cleaned_1d/tree_bi/tree 
+steps/nnet3/xconfig_to_configs.py --xconfig-file exp/chain_cleaned_1d/tdnn1d_sp/configs/network.xconfig --config-dir exp/chain_cleaned_1d/tdnn1d_sp/configs/
+nnet3-init exp/chain_cleaned_1d/tdnn1d_sp/configs//init.config exp/chain_cleaned_1d/tdnn1d_sp/configs//init.raw 
+LOG (nnet3-init[5.5.1009~1-e4940]:main():nnet3-init.cc:80) Initialized raw neural net and wrote it to exp/chain_cleaned_1d/tdnn1d_sp/configs//init.raw
+nnet3-info exp/chain_cleaned_1d/tdnn1d_sp/configs//init.raw 
+nnet3-init exp/chain_cleaned_1d/tdnn1d_sp/configs//ref.config exp/chain_cleaned_1d/tdnn1d_sp/configs//ref.raw 
+LOG (nnet3-init[5.5.1009~1-e4940]:main():nnet3-init.cc:80) Initialized raw neural net and wrote it to exp/chain_cleaned_1d/tdnn1d_sp/configs//ref.raw
+nnet3-info exp/chain_cleaned_1d/tdnn1d_sp/configs//ref.raw 
+nnet3-init exp/chain_cleaned_1d/tdnn1d_sp/configs//ref.config exp/chain_cleaned_1d/tdnn1d_sp/configs//ref.raw 
+LOG (nnet3-init[5.5.1009~1-e4940]:main():nnet3-init.cc:80) Initialized raw neural net and wrote it to exp/chain_cleaned_1d/tdnn1d_sp/configs//ref.raw
+nnet3-info exp/chain_cleaned_1d/tdnn1d_sp/configs//ref.raw 
+2022-05-29 02:54:15,998 [steps/nnet3/chain/train.py:35 - <module> - INFO ] Starting chain model trainer (train.py)
+2022-05-29 02:54:16,016 [steps/nnet3/chain/train.py:284 - train - INFO ] Arguments for the experiment
+{'alignment_subsampling_factor': 3,
+ 'apply_deriv_weights': False,
+ 'backstitch_training_interval': 1,
+ 'backstitch_training_scale': 0.0,
+ 'chain_opts': '',
+ 'chunk_left_context': 0,
+ 'chunk_left_context_initial': -1,
+ 'chunk_right_context': 0,
+ 'chunk_right_context_final': -1,
+ 'chunk_width': '150,110,100',
+ 'cleanup': True,
+ 'cmvn_opts': '--config=conf/online_cmvn.conf',
+ 'combine_sum_to_one_penalty': 0.0,
+ 'command': 'run.pl',
+ 'compute_per_dim_accuracy': False,
+ 'deriv_truncate_margin': None,
+ 'dir': 'exp/chain_cleaned_1d/tdnn1d_sp',
+ 'do_final_combination': True,
+ 'dropout_schedule': '0,0@0.20,0.5@0.50,0',
+ 'egs_command': None,
+ 'egs_dir': None,
+ 'egs_nj': 0,
+ 'egs_opts': '--frames-overlap-per-eg 0 --constrained false --online-cmvn true',
+ 'egs_stage': 0,
+ 'email': None,
+ 'exit_stage': None,
+ 'feat_dir': 'data/train_cleaned_sp_hires',
+ 'final_effective_lrate': 2.5e-05,
+ 'frame_subsampling_factor': 3,
+ 'frames_per_iter': 5000000,
+ 'initial_effective_lrate': 0.00025,
+ 'input_model': None,
+ 'l2_regularize': 0.0,
+ 'lat_dir': 'exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats',
+ 'leaky_hmm_coefficient': 0.1,
+ 'left_deriv_truncate': None,
+ 'left_tolerance': 5,
+ 'lm_opts': '--num-extra-lm-states=2000',
+ 'max_lda_jobs': 10,
+ 'max_models_combine': 20,
+ 'max_objective_evaluations': 30,
+ 'max_param_change': 2.0,
+ 'momentum': 0.0,
+ 'num_chunk_per_minibatch': '64',
+ 'num_epochs': 6.0,
+ 'num_jobs_final': 12,
+ 'num_jobs_initial': 3,
+ 'num_jobs_step': 1,
+ 'online_ivector_dir': 'exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires',
+ 'preserve_model_interval': 100,
+ 'presoftmax_prior_scale_power': -0.25,
+ 'proportional_shrink': 0.0,
+ 'rand_prune': 4.0,
+ 'remove_egs': True,
+ 'reporting_interval': 0.1,
+ 'right_tolerance': 5,
+ 'samples_per_iter': 400000,
+ 'shrink_saturation_threshold': 0.4,
+ 'shrink_value': 1.0,
+ 'shuffle_buffer_size': 5000,
+ 'srand': 0,
+ 'stage': -10,
+ 'train_opts': ['--optimization.memory-compression-level=2'],
+ 'tree_dir': 'exp/chain_cleaned_1d/tree_bi',
+ 'use_gpu': 'yes',
+ 'xent_regularize': 0.1}
+2022-05-29 02:54:38,563 [steps/nnet3/chain/train.py:341 - train - INFO ] Creating phone language-model
+2022-05-29 02:54:55,308 [steps/nnet3/chain/train.py:346 - train - INFO ] Creating denominator FST
+copy-transition-model exp/chain_cleaned_1d/tree_bi/final.mdl exp/chain_cleaned_1d/tdnn1d_sp/0.trans_mdl 
+LOG (copy-transition-model[5.5.1009~1-e4940]:main():copy-transition-model.cc:62) Copied transition model.
+2022-05-29 02:55:03,935 [steps/nnet3/chain/train.py:353 - train - INFO ] Initializing a basic network for estimating preconditioning matrix
+2022-05-29 02:55:03,976 [steps/nnet3/chain/train.py:382 - train - INFO ] Generating egs
+steps/nnet3/chain/get_egs.sh --frames-overlap-per-eg 0 --constrained false --online-cmvn true --cmd run.pl --cmvn-opts --config=conf/online_cmvn.conf --online-ivector-dir exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires --left-context 29 --right-context 29 --left-context-initial -1 --right-context-final -1 --left-tolerance 5 --right-tolerance 5 --frame-subsampling-factor 3 --alignment-subsampling-factor 3 --stage 0 --frames-per-iter 5000000 --frames-per-eg 150,110,100 --srand 0 data/train_cleaned_sp_hires exp/chain_cleaned_1d/tdnn1d_sp exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats exp/chain_cleaned_1d/tdnn1d_sp/egs
+steps/nnet3/chain/get_egs.sh: File data/train_cleaned_sp_hires/utt2uniq exists, so ensuring the hold-out set includes all perturbed versions of the same source utterance.
+steps/nnet3/chain/get_egs.sh: Holding out 300 utterances in validation set and 300 in training diagnostic set, out of total 441906.
+steps/nnet3/chain/get_egs.sh: creating egs.  To ensure they are not deleted later you can do:  touch exp/chain_cleaned_1d/tdnn1d_sp/egs/.nodelete
+steps/nnet3/chain/get_egs.sh: feature type is raw, with 'apply-cmvn-online'
+tree-info exp/chain_cleaned_1d/tdnn1d_sp/tree 
+feat-to-dim scp:exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires/ivector_online.scp - 
+steps/nnet3/chain/get_egs.sh: working out number of frames of training data
+steps/nnet3/chain/get_egs.sh: working out feature dim
+steps/nnet3/chain/get_egs.sh: creating 42 archives, each with 49909 egs, with
+steps/nnet3/chain/get_egs.sh:   150,110,100 labels per example, and (left,right) context = (29,29)
+steps/nnet3/chain/get_egs.sh: Getting validation and training subset examples in background.
+steps/nnet3/chain/get_egs.sh: Generating training examples on disk
+steps/nnet3/chain/get_egs.sh: Getting subsets of validation examples for diagnostics and combination.
+steps/nnet3/chain/get_egs.sh: recombining and shuffling order of archives on disk
+steps/nnet3/chain/get_egs.sh: Removing temporary archives, alignments and lattices
+steps/nnet3/chain/get_egs.sh: Finished preparing training examples
+2022-05-29 03:11:39,263 [steps/nnet3/chain/train.py:431 - train - INFO ] Copying the properties from exp/chain_cleaned_1d/tdnn1d_sp/egs to exp/chain_cleaned_1d/tdnn1d_sp
+2022-05-29 03:11:39,498 [steps/nnet3/chain/train.py:445 - train - INFO ] Computing the preconditioning matrix for input features
+2022-05-29 03:12:33,307 [steps/nnet3/chain/train.py:454 - train - INFO ] Preparing the initial acoustic model.
+2022-05-29 03:12:34,460 [steps/nnet3/chain/train.py:488 - train - INFO ] Training will run for 6.0 epochs = 100 iterations
+2022-05-29 03:12:34,492 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 0/99   Jobs: 3   Epoch: 0.00/6.0 (0.0% complete)   lr: 0.000750   
+Can't exec "nvidia-smi": No such file or directory at /home/sk5057/kaldi/egs/tamil_telugu_proj/s5_r3/utils//run.pl line 117.
+Can't exec "nvidia-smi": No such file or directory at /home/sk5057/kaldi/egs/tamil_telugu_proj/s5_r3/utils//run.pl line 117.
+Can't exec "nvidia-smi": No such file or directory at /home/sk5057/kaldi/egs/tamil_telugu_proj/s5_r3/utils//run.pl line 117.
+run.pl: Warning: failed to detect number of GPUs from nvidia-smi, using 1
+run.pl: Warning: failed to detect number of GPUs from nvidia-smi, using 1
+run.pl: Warning: failed to detect number of GPUs from nvidia-smi, using 1
+run.pl: job failed, log is in exp/chain_cleaned_1d/tdnn1d_sp/log/train.0.3.log
+run.pl: job failed, log is in exp/chain_cleaned_1d/tdnn1d_sp/log/train.0.1.log
+run.pl: job failed, log is in exp/chain_cleaned_1d/tdnn1d_sp/log/train.0.2.log
+2022-05-29 03:12:35,487 [steps/libs/common.py:207 - background_command_waiter - ERROR ] Command exited with status 1: run.pl --gpu 1 exp/chain_cleaned_1d/tdnn1d_sp/log/train.0.3.log                     nnet3-chain-train --use-gpu=yes                      --apply-deriv-weights=False                     --l2-regularize=0.0 --leaky-hmm-coefficient=0.1                       --xent-regularize=0.1                                          --print-interval=10 --momentum=0.0                     --max-param-change=1.414213562373095                     --backstitch-training-scale=0.0                     --backstitch-training-interval=1                     --l2-regularize-factor=0.3333333333333333 --optimization.memory-compression-level=2                      --srand=0                     "nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.0' - - |" exp/chain_cleaned_1d/tdnn1d_sp/den.fst                     "ark,bg:nnet3-chain-copy-egs                          --frame-shift=0                         ark:exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.3.ark ark:- |                         nnet3-chain-shuffle-egs --buffer-size=5000                         --srand=0 ark:- ark:- | nnet3-chain-merge-egs                         --minibatch-size=32 ark:- ark:- |"                     exp/chain_cleaned_1d/tdnn1d_sp/1.3.raw
+2022-05-29 03:12:35,487 [steps/libs/common.py:207 - background_command_waiter - ERROR ] Command exited with status 1: run.pl --gpu 1 exp/chain_cleaned_1d/tdnn1d_sp/log/train.0.1.log                     nnet3-chain-train --use-gpu=yes                      --apply-deriv-weights=False                     --l2-regularize=0.0 --leaky-hmm-coefficient=0.1                      --write-cache=exp/chain_cleaned_1d/tdnn1d_sp/cache.1  --xent-regularize=0.1                                          --print-interval=10 --momentum=0.0                     --max-param-change=1.414213562373095                     --backstitch-training-scale=0.0                     --backstitch-training-interval=1                     --l2-regularize-factor=0.3333333333333333 --optimization.memory-compression-level=2                      --srand=0                     "nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.0' - - |" exp/chain_cleaned_1d/tdnn1d_sp/den.fst                     "ark,bg:nnet3-chain-copy-egs                          --frame-shift=1                         ark:exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.1.ark ark:- |                         nnet3-chain-shuffle-egs --buffer-size=5000                         --srand=0 ark:- ark:- | nnet3-chain-merge-egs                         --minibatch-size=32 ark:- ark:- |"                     exp/chain_cleaned_1d/tdnn1d_sp/1.1.raw
+steps/nnet3/chain/train.py --stage -10 --cmd run.pl --feat.online-ivector-dir exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires --feat.cmvn-opts=--config=conf/online_cmvn.conf --chain.xent-regularize 0.1 --chain.leaky-hmm-coefficient 0.1 --chain.l2-regularize 0.0 --chain.apply-deriv-weights false --chain.lm-opts=--num-extra-lm-states=2000 --trainer.dropout-schedule 0,0@0.20,0.5@0.50,0 --trainer.add-option=--optimization.memory-compression-level=2 --egs.dir  --egs.opts --frames-overlap-per-eg 0 --constrained false --online-cmvn true --egs.chunk-width 150,110,100 --trainer.num-chunk-per-minibatch 64 --trainer.frames-per-iter 5000000 --trainer.num-epochs 6 --trainer.optimization.num-jobs-initial 3 --trainer.optimization.num-jobs-final 12 --trainer.optimization.initial-effective-lrate 0.00025 --trainer.optimization.final-effective-lrate 0.000025 --trainer.max-param-change 2.0 --cleanup.remove-egs true --feat-dir data/train_cleaned_sp_hires --tree-dir exp/chain_cleaned_1d/tree_bi --lat-dir exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats --dir exp/chain_cleaned_1d/tdnn1d_sp
+['steps/nnet3/chain/train.py', '--stage', '-10', '--cmd', 'run.pl', '--feat.online-ivector-dir', 'exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires', '--feat.cmvn-opts=--config=conf/online_cmvn.conf', '--chain.xent-regularize', '0.1', '--chain.leaky-hmm-coefficient', '0.1', '--chain.l2-regularize', '0.0', '--chain.apply-deriv-weights', 'false', '--chain.lm-opts=--num-extra-lm-states=2000', '--trainer.dropout-schedule', '0,0@0.20,0.5@0.50,0', '--trainer.add-option=--optimization.memory-compression-level=2', '--egs.dir', '', '--egs.opts', '--frames-overlap-per-eg 0 --constrained false --online-cmvn true', '--egs.chunk-width', '150,110,100', '--trainer.num-chunk-per-minibatch', '64', '--trainer.frames-per-iter', '5000000', '--trainer.num-epochs', '6', '--trainer.optimization.num-jobs-initial', '3', '--trainer.optimization.num-jobs-final', '12', '--trainer.optimization.initial-effective-lrate', '0.00025', '--trainer.optimization.final-effective-lrate', '0.000025', '--trainer.max-param-change', '2.0', '--cleanup.remove-egs', 'true', '--feat-dir', 'data/train_cleaned_sp_hires', '--tree-dir', 'exp/chain_cleaned_1d/tree_bi', '--lat-dir', 'exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats', '--dir', 'exp/chain_cleaned_1d/tdnn1d_sp']
+2022-05-29 03:12:35,488 [steps/libs/common.py:207 - background_command_waiter - ERROR ] Command exited with status 1: run.pl --gpu 1 exp/chain_cleaned_1d/tdnn1d_sp/log/train.0.2.log                     nnet3-chain-train --use-gpu=yes                      --apply-deriv-weights=False                     --l2-regularize=0.0 --leaky-hmm-coefficient=0.1                       --xent-regularize=0.1                                          --print-interval=10 --momentum=0.0                     --max-param-change=1.414213562373095                     --backstitch-training-scale=0.0                     --backstitch-training-interval=1                     --l2-regularize-factor=0.3333333333333333 --optimization.memory-compression-level=2                      --srand=0                     "nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.0' - - |" exp/chain_cleaned_1d/tdnn1d_sp/den.fst                     "ark,bg:nnet3-chain-copy-egs                          --frame-shift=2                         ark:exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.2.ark ark:- |                         nnet3-chain-shuffle-egs --buffer-size=5000                         --srand=0 ark:- ark:- | nnet3-chain-merge-egs                         --minibatch-size=32 ark:- ark:- |"                     exp/chain_cleaned_1d/tdnn1d_sp/1.2.raw
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/logging/__init__.py", line 1944, in shutdown
+    h.acquire()
+  File "/usr/lib/python3.6/logging/__init__.py", line 814, in acquire
+    self.lock.acquire()
+KeyboardInterrupt
