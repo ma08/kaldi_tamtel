@@ -199,6 +199,7 @@ if [ $stage -le 18 ]; then
     utils/create_split_dir.pl \
      /export/b0{5,6,7,8}/$USER/kaldi-data/egs/ami-$(date +'%m_%d_%H_%M')/s5/$dir/egs/storage $dir/egs/storage
   fi
+ date
 
  steps/nnet3/chain/train.py --stage $train_stage \
     --cmd "$decode_cmd" \
@@ -227,6 +228,7 @@ if [ $stage -le 18 ]; then
     --tree-dir $tree_dir \
     --lat-dir $lat_dir \
     --dir $dir
+ date
 fi
 
 
@@ -235,10 +237,13 @@ if [ $stage -le 19 ]; then
   # Note: it might appear that this data/lang_chain directory is mismatched, and it is as
   # far as the 'topo' is concerned, but this script doesn't read the 'topo' from
   # the lang directory.
+  date
   utils/mkgraph.sh --self-loop-scale 1.0 data/lang $dir $dir/graph
+  date
 fi
 
 if [ $stage -le 20 ]; then
+  date
   rm $dir/.error 2>/dev/null || true
   for dset in dev test; do
       (
@@ -251,6 +256,7 @@ if [ $stage -le 20 ]; then
         data/${dset}_hires ${dir}/decode_${dset} ${dir}/decode_${dset}_rescore || exit 1
     ) || touch $dir/.error &
   done
+  date
   wait
   if [ -f $dir/.error ]; then
     echo "$0: something went wrong in decoding"
