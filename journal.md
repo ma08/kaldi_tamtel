@@ -664,3 +664,36 @@ index 9fd420c42..02ff5ff06 100755
 +utils/fix_data_dir.sh $destdir
  utils/validate_data_dir.sh $validate_opts $destdir
 ```
+
+
+
+```
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintMemoryUsage():cu-allocator.cc:340) Memory usage: 755800576/811597824 bytes currently allocated/total-held; 537/15 blocks currently allocated/free; largest free/allocated block sizes are 52953088/14680064; time taken total/cudaMalloc is 0.012825/0.0315509, synchronized the GPU 0 times out of 99 frees; device memory info: free:28M, used:11413M, total:11441M, free/total:0.00246914maximum allocated: 773207552current allocated: 755800576
+ERROR (nnet3-chain-train[5.5.1009~1-e4940]:AllocateNewRegion():cu-allocator.cc:491) Failed to allocate a memory region of 41943040 bytes.  Possibly this is due to sharing the GPU.  Try switching the GPUs to exclusive mode (nvidia-smi -c 3) and using the option --use-gpu=wait to scripts like steps/nnet3/chain/train.py.  Memory info: free:28M, used:11413M, total:11441M, free/total:0.00246914 CUDA error: 'out of memory'
+
+[ Stack-Trace: ]
+```
+
+```
+root@speech-rec-vm:/home/sk5057_columbia_edu# sudo nvidia-smi -c 3
+Set compute mode to EXCLUSIVE_PROCESS for GPU 00000000:00:04.0.
+All done.
+```
+
+https://github.com/kaldi-asr/kaldi/issues/4374
+
+```
+sourya4@IWeighHar:~/pro/columbia/spring22/fund_sp_rec/speech_rec_repo/kaldi_tamtel_recipe$ git diff local/
+diff --git a/local/chain/tuning/run_tdnn_1d.sh b/local/chain/tuning/run_tdnn_1d.sh
+index 9152d52..35241b2 100755
+--- a/local/chain/tuning/run_tdnn_1d.sh
++++ b/local/chain/tuning/run_tdnn_1d.sh
+@@ -227,6 +227,7 @@ if [ $stage -le 18 ]; then
+     --feat-dir $train_data_dir \
+     --tree-dir $tree_dir \
+     --lat-dir $lat_dir \
++    --use-gpu="wait" \
+     --dir $dir
+  date
+ fi
+```

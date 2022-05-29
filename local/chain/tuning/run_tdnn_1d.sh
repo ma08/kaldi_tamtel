@@ -227,6 +227,7 @@ if [ $stage -le 18 ]; then
     --feat-dir $train_data_dir \
     --tree-dir $tree_dir \
     --lat-dir $lat_dir \
+    --use-gpu="wait" \
     --dir $dir
  date
 fi
