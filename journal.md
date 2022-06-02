@@ -697,3 +697,73 @@ index 9152d52..35241b2 100755
   date
  fi
 ```
+
+
+## Stage 18
+
+ nohup ./run.sh > logs/stage18.log 2>&1 &
+ tail -f logs/stage18.log
+
+
+
+```
+----------------------- Stage 18 begin---------------------------
+Thu Jun  2 17:36:31 UTC 2022
+rnnlm/ensure_counts_present.sh: generating counts file for data/rnnlm/text/dev.txt
+  File "<string>", line 14
+    print(f"{word} {count}")
+                          ^
+SyntaxError: invalid syntax
+
+```
+ ```
+sk5057@speech-rec-vm:~/kaldi/scripts/rnnlm$ git diff ensure_counts_present.sh
+diff --git a/scripts/rnnlm/ensure_counts_present.sh b/scripts/rnnlm/ensure_counts_present.sh
+index 3c13a15d5..0f5b5288d 100755
+--- a/scripts/rnnlm/ensure_counts_present.sh
++++ b/scripts/rnnlm/ensure_counts_present.sh
+@@ -18,7 +18,7 @@ for f in `ls $dir/*.txt`; do
+   counts_file=$(echo $f | sed s/.txt$/.counts/)
+   if [ ! -f $counts_file -o $counts_file -ot $f ]; then
+     echo "$0: generating counts file for $f" 1>&2
+-    cat $f | sed 's/ \+/ /g' | python -c '
++    cat $f | sed 's/ \+/ /g' | python3 -c '
+ import sys
+ counts = dict()
+ eos = "</s>"
+
+ ```
+
+
+```
+sk5057@speech-rec-vm:~/kaldi/egs/tamil_telugu_proj/s5_r3$  tail -f logs/stage18.log
+nohup: ignoring input
+----------------------- Stage 18 begin---------------------------
+Thu Jun  2 17:58:00 UTC 2022
+cut: write error: Broken pipe
+cat: write error: Broken pipe
+rnnlm/ensure_counts_present.sh: generating counts file for data/rnnlm/text/dev.txt
+rnnlm/ensure_counts_present.sh: generating counts file for data/rnnlm/text/ted.txt
+rnnlm/ensure_counts_present.sh: generating counts file for data/rnnlm/text/train.txt
+rnnlm/get_unigram_probs.py: Weight for data source 'train' not set
+Traceback (most recent call last):
+  File "rnnlm/choose_features.py", line 140, in <module>
+    assert len(unigram_probs) == len(wordlist)
+AssertionError
+
+```
+
+ ```
+diff --git a/local/rnnlm/tuning/tamil_run_lstm_tdnn_a.sh b/local/rnnlm/tuning/tamil_run_lstm_tdnn_a.sh
+index 9f2d02e..55776b2 100755
+--- a/local/rnnlm/tuning/tamil_run_lstm_tdnn_a.sh
++++ b/local/rnnlm/tuning/tamil_run_lstm_tdnn_a.sh
+@@ -64,6 +64,7 @@ if [ $stage -le 1 ]; then
+ 
+   cat > $dir/config/data_weights.txt <<EOF
+ ted   1   1.0
++train   0   0.0
+ EOF
+ 
+   rnnlm/get_unigram_probs.py --vocab-file=$dir/config/words.txt \
+ ```
