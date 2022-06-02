@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=17
+stage=18
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -287,14 +287,14 @@ if [ $stage -le 17 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 18 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
   date
   # You can either train your own rnnlm or download a pre-trained one
   if $train_rnnlm; then
-    local/rnnlm/tuning/run_lstm_tdnn_a.sh
+    # local/rnnlm/tuning/run_lstm_tdnn_a.sh
+    local/rnnlm/tuning/tamil_run_lstm_tdnn_a.sh
     local/rnnlm/average_rnnlm.sh
   else
     local/ted_download_rnnlm.sh
@@ -302,6 +302,7 @@ if [ $stage -le 18 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 19 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
