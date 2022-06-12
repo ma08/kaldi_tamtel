@@ -75,7 +75,7 @@ fi
 #stage=1
 if [ $stage -le 1 ]; then
   echo "----------------------- Stage $stage begin: prepare data ---------------------------";
-  local/prepare_data.sh
+  local/prepare_data_tamil.sh
   # Split speakers up into 3-minute chunks.  This doesn't hurt adaptation, and
   # lets us use more jobs for decoding etc.
   # [we chose 3 minutes because that gives us 38 speakers for the dev data, which is
@@ -91,7 +91,7 @@ fi
 #stage=2
 if [ $stage -le 2 ]; then
   echo "----------------------- Stage $stage begin: prepare dict ---------------------------";
-  local/prepare_dict.sh
+  local/prepare_dict_tamil.sh
   echo "----------------------- Stage $stage end: prepare dict ---------------------------";
 fi
 #stage=3
