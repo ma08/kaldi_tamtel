@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=3
+stage=4
 if [ $stage -le 0 ]; then
   input_dataset=telugu_combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -112,7 +112,6 @@ if [ $stage -le 3 ]; then
   date
   echo "----------------------- Stage $stage end: prepare lang ---------------------------";
 fi
-exit 1
 
 
 if [ $stage -le 4 ]; then
@@ -122,7 +121,7 @@ if [ $stage -le 4 ]; then
   # download the pre-built LMs from openslr.org instead of building them
   # locally.
   if $train_lm; then
-    local/tamil_train_lm.sh
+    local/telugu_train_lm.sh
   else
     echo "train_lm is false. not training LM."
   fi
@@ -130,6 +129,7 @@ if [ $stage -le 4 ]; then
   echo "----------------------- Stage $stage end: lang model ---------------------------";
   # later on we'll change this script so you have the option to
 fi
+exit 1
 
 if [ $stage -le 5 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
