@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=2
+stage=3
 if [ $stage -le 0 ]; then
   input_dataset=telugu_combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -102,7 +102,6 @@ if [ $stage -le 2 ]; then
   date
   echo "----------------------- Stage $stage end: prepare dict ---------------------------";
 fi
-exit 1
 #stage=3
 
 if [ $stage -le 3 ]; then
@@ -113,6 +112,7 @@ if [ $stage -le 3 ]; then
   date
   echo "----------------------- Stage $stage end: prepare lang ---------------------------";
 fi
+exit 1
 
 
 if [ $stage -le 4 ]; then
