@@ -61,7 +61,8 @@ if [ $stage -le 0 ]; then
   #input_dataset=openslr_tamil/transcription
   #input_dataset=asriitm_tamil/transcription
   echo "----------------------- Stage $stage Load data from $input_dataset begin---------------------------";
-  mkdir -p telugu_data
+  mkdir -p db/telugu_data
+  ln -s $(pwd)/db/telugu_data telugu_data
   for set in test dev train; do
     rm -rf telugu_data/$set.orig
     cp -r db/$input_dataset/$set telugu_data/$set.orig
