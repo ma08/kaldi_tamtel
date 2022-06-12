@@ -61,6 +61,7 @@ if [ $stage -le 0 ]; then
   #input_dataset=openslr_tamil/transcription
   #input_dataset=asriitm_tamil/transcription
   echo "----------------------- Stage $stage Load data from $input_dataset begin---------------------------";
+  date
   mkdir -p db/telugu_data
   ln -s $(pwd)/db/telugu_data telugu_data
   for set in test dev train; do
@@ -69,6 +70,7 @@ if [ $stage -le 0 ]; then
     sed -i "s/~/${home_folder//\//\\/}/g" telugu_data/$set.orig/wav.scp
     utils/fix_data_dir.sh telugu_data/$set.orig
   done
+  date
   echo "----------------------- Stage $stage end---------------------------";
   stage=1
 fi
@@ -77,6 +79,7 @@ exit 1
 #stage=1
 if [ $stage -le 1 ]; then
   echo "----------------------- Stage $stage begin: prepare data ---------------------------";
+  date
   local/prepare_data.sh
   # Split speakers up into 3-minute chunks.  This doesn't hurt adaptation, and
   # lets us use more jobs for decoding etc.
@@ -85,6 +88,7 @@ if [ $stage -le 1 ]; then
   # for dset in dev test train; do
   #   utils/data/modify_speaker_info.sh --seconds-per-spk-max 180 data/${dset}.orig data/${dset}
   # done
+  date
   echo "----------------------- Stage $stage end: prepare data ---------------------------";
   stage=2
 fi
@@ -93,15 +97,19 @@ fi
 #stage=2
 if [ $stage -le 2 ]; then
   echo "----------------------- Stage $stage begin: prepare dict ---------------------------";
+  date
   local/prepare_dict.sh
+  date
   echo "----------------------- Stage $stage end: prepare dict ---------------------------";
 fi
 #stage=3
 
 if [ $stage -le 3 ]; then
   echo "----------------------- Stage $stage begin: prepare lang ---------------------------";
+  date
   utils/prepare_lang.sh telugu_data/local/dict_nosp \
     "<unk>" telugu_data/local/lang_nosp telugu_data/lang_nosp
+  date
   echo "----------------------- Stage $stage end: prepare lang ---------------------------";
 fi
 
@@ -136,13 +144,17 @@ fi
 # Feature extraction
 if [ $stage -le 6 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   for set in test dev train; do
+    date
     [[ ! -d telugu_data/$set ]] && cp -r telugu_data/$set.orig/ telugu_data/$set
     sed -i "s/~/${home_folder//\//\\/}/g" telugu_data/$set/wav.scp
     dir=telugu_data/$set
     steps/make_mfcc.sh --nj 30 --cmd "$train_cmd" $dir
     steps/compute_cmvn_stats.sh $dir
+    date
   done
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
@@ -150,16 +162,20 @@ fi
 # Well create a subset with 10k short segments to make flat-start training easier:
 if [ $stage -le 7 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   utils/subset_data_dir.sh --shortest telugu_data/train 10000 telugu_data/train_10kshort
   utils/data/remove_dup_utts.sh 10 telugu_data/train_10kshort telugu_data/train_10kshort_nodup
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
 # Train
 if [ $stage -le 8 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   steps/train_mono.sh --nj 20 --cmd "$train_cmd" \
     telugu_data/train_10kshort_nodup telugu_data/lang_nosp telugu_exp/mono
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
@@ -199,15 +215,18 @@ if [ $stage -le 11 ]; then
   steps/align_si.sh --nj $nj --cmd "$train_cmd" \
     telugu_data/train telugu_data/lang_nosp telugu_exp/tri1 telugu_exp/tri1_ali
 
+  date
   echo "----------------------- Stage $stage mid align_si complete, train_lda starting---------------------------";
   date
   steps/train_lda_mllt.sh --cmd "$train_cmd" \
     4000 50000 telugu_data/train telugu_data/lang_nosp telugu_exp/tri1_ali telugu_exp/tri2
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
 if [ $stage -le 12 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   utils/mkgraph.sh telugu_data/lang_nosp telugu_exp/tri2 telugu_exp/tri2/graph_nosp
   # for dset in dev test; do
   #   steps/decode.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
@@ -215,16 +234,20 @@ if [ $stage -le 12 ]; then
   #   steps/lmrescore_const_arpa.sh  --cmd "$decode_cmd" data/lang_nosp data/lang_nosp_rescore \
   #      data/${dset} exp/tri2/decode_nosp_${dset} exp/tri2/decode_nosp_${dset}_rescore
   # done
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
 if [ $stage -le 13 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   steps/get_prons.sh --cmd "$train_cmd" telugu_data/train telugu_data/lang_nosp telugu_exp/tri2
+  date
   utils/dict_dir_add_pronprobs.sh --max-normalize true \
     telugu_data/local/dict_nosp telugu_exp/tri2/pron_counts_nowb.txt \
     telugu_exp/tri2/sil_counts_nowb.txt \
     telugu_exp/tri2/pron_bigram_counts_nowb.txt telugu_data/local/dict
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
@@ -232,10 +255,12 @@ if [ $stage -le 14 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
   date
   utils/prepare_lang.sh telugu_data/local/dict "<unk>" telugu_data/local/lang telugu_data/lang
+  date
   cp -rT telugu_data/lang telugu_data/lang_rescore
   cp telugu_data/lang_nosp/G.fst telugu_data/lang/
   cp telugu_data/lang_nosp_rescore/G.carpa telugu_data/lang_rescore/
 
+  date
   utils/mkgraph.sh telugu_data/lang telugu_exp/tri2 telugu_exp/tri2/graph
 
   # for dset in dev test; do
@@ -254,9 +279,11 @@ if [ $stage -le 15 ]; then
   steps/align_si.sh --nj $nj --cmd "$train_cmd" \
     telugu_data/train telugu_data/lang telugu_exp/tri2 telugu_exp/tri2_ali
 
+  date
   steps/train_sat.sh --cmd "$train_cmd" \
     5000 100000 telugu_data/train telugu_data/lang telugu_exp/tri2_ali telugu_exp/tri3
 
+  date
   utils/mkgraph.sh telugu_data/lang telugu_exp/tri3 telugu_exp/tri3/graph
 
   # for dset in dev test; do
