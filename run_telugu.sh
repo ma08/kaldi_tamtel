@@ -62,6 +62,7 @@ if [ $stage -le 0 ]; then
   #input_dataset=asriitm_tamil/transcription
   echo "----------------------- Stage $stage Load data from $input_dataset begin---------------------------";
   date
+  rm -rf db/telugu_data telugu_data
   mkdir -p db/telugu_data
   ln -s $(pwd)/db/telugu_data telugu_data
   for set in test dev train; do
