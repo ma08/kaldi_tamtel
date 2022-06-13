@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=5
+stage=6
 if [ $stage -le 0 ]; then
   input_dataset=telugu_combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -141,7 +141,6 @@ if [ $stage -le 5 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 # Feature extraction
 if [ $stage -le 6 ]; then
@@ -159,6 +158,7 @@ if [ $stage -le 6 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 # Now we have 452 hours of training data.
 # Well create a subset with 10k short segments to make flat-start training easier:
