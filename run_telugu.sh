@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=6
+stage=7
 if [ $stage -le 0 ]; then
   input_dataset=telugu_combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -158,7 +158,6 @@ if [ $stage -le 6 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 # Now we have 452 hours of training data.
 # Well create a subset with 10k short segments to make flat-start training easier:
@@ -166,10 +165,12 @@ if [ $stage -le 7 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
   date
   utils/subset_data_dir.sh --shortest telugu_data/train 10000 telugu_data/train_10kshort
+  date
   utils/data/remove_dup_utts.sh 10 telugu_data/train_10kshort telugu_data/train_10kshort_nodup
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 # Train
 if [ $stage -le 8 ]; then
