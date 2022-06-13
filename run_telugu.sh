@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=8
+stage=9
 if [ $stage -le 0 ]; then
   input_dataset=telugu_combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -180,13 +180,13 @@ if [ $stage -le 8 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 9 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
   date
   steps/align_si.sh --nj $nj --cmd "$train_cmd" \
     telugu_data/train telugu_data/lang_nosp telugu_exp/mono telugu_exp/mono_ali
+  date
   echo "------------ steps/align_si.sh finished------------"
   date
   steps/train_deltas.sh --cmd "$train_cmd" \
@@ -194,6 +194,7 @@ if [ $stage -le 9 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 10 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
