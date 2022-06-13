@@ -65,17 +65,17 @@ if [ $stage -le 0 ]; then
   # use a subset of the annotated training data as the dev set .
   # Note: the name 'dev' is treated specially by pocolm, it automatically
   # becomes the dev set.
-  head -n $num_dev_sentences < telugu_data/train/text | cut -d " " -f 2-  > ${dir}/data/text/dev.txt
+  head -n $num_dev_sentences < telugu_data/train.orig/text | cut -d " " -f 2-  > ${dir}/data/text/dev.txt
   # .. and the rest of the training data as an additional data source.
   # we can later fold the dev data into this.
-  tail -n +$[$num_dev_sentences+1] < telugu_data/train/text | cut -d " " -f 2- >  ${dir}/data/text/ted.txt
+  tail -n +$[$num_dev_sentences+1] < telugu_data/train.orig/text | cut -d " " -f 2- >  ${dir}/data/text/ted.txt
 
   # for reporting perplexities, we'll use the "real" dev set.
   # (a subset of the training data is used as ${dir}/data/text/ted.txt to work
   # out interpolation weights.
   # note, we can't put it in ${dir}/data/text/, because then pocolm would use
   # it as one of the data sources.
-  cut -d " " -f 2-  < telugu_data/dev/text  > ${dir}/data/real_dev_set.txt
+  cut -d " " -f 2-  < telugu_data/dev.orig/text  > ${dir}/data/real_dev_set.txt
 
   # get wordlist
   awk '{print $1}' db/telugu_combined_transcription/telugu.dic | sed 's:([0-9])::g' | sort | uniq > ${dir}/data/wordlist
