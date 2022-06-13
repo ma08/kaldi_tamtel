@@ -123,10 +123,10 @@ fi
 if [ $stage -le 5 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
   date
-  local/format_lms.sh
+  local/format_lms_tamil.sh
   echo "------- first format complete, second starting"
   date
-  local/format_lms.sh
+  local/format_lms_tamil.sh
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
