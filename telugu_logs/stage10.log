@@ -1,0 +1,21 @@
+nohup: ignoring input
+----------------------- Stage 10 begin---------------------------
+Mon Jun 13 21:32:35 UTC 2022
+tree-info telugu_exp/tri1/tree 
+tree-info telugu_exp/tri1/tree 
+fstcomposecontext --context-size=3 --central-position=1 --read-disambig-syms=telugu_data/lang_nosp/phones/disambig.int --write-disambig-syms=telugu_data/lang_nosp/tmp/disambig_ilabels_3_1.int telugu_data/lang_nosp/tmp/ilabels_3_1.2421 telugu_data/lang_nosp/tmp/LG.fst 
+fstisstochastic telugu_data/lang_nosp/tmp/CLG_3_1.fst 
+0 -0.0292836
+[info]: CLG not stochastic.
+make-h-transducer --disambig-syms-out=telugu_exp/tri1/graph_nosp/disambig_tid.int --transition-scale=1.0 telugu_data/lang_nosp/tmp/ilabels_3_1 telugu_exp/tri1/tree telugu_exp/tri1/final.mdl 
+fstrmsymbols telugu_exp/tri1/graph_nosp/disambig_tid.int 
+fstdeterminizestar --use-log=true 
+fstminimizeencoded 
+fstrmepslocal 
+fsttablecompose telugu_exp/tri1/graph_nosp/Ha.fst telugu_data/lang_nosp/tmp/CLG_3_1.fst 
+fstisstochastic telugu_exp/tri1/graph_nosp/HCLGa.fst 
+0.00048524 -0.0758035
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true telugu_exp/tri1/final.mdl telugu_exp/tri1/graph_nosp/HCLGa.fst 
+Mon Jun 13 22:16:59 UTC 2022
+----------------------- Stage 10 end---------------------------

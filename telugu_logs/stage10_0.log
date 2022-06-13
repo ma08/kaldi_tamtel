@@ -1,0 +1,40 @@
+nohup: ignoring input
+----------------------- Stage 10 begin---------------------------
+Mon Jun 13 20:33:10 UTC 2022
+tree-info telugu_exp/tri1/tree 
+tree-info telugu_exp/tri1/tree 
+fstpushspecial 
+fstminimizeencoded 
+fstdeterminizestar --use-log=true 
+fsttablecompose telugu_data/lang_nosp/L_disambig.fst telugu_data/lang_nosp/G.fst 
+fstisstochastic telugu_data/lang_nosp/tmp/LG.fst 
+-0.0283956 -0.0292836
+[info]: LG not stochastic.
+fstcomposecontext --context-size=3 --central-position=1 --read-disambig-syms=telugu_data/lang_nosp/phones/disambig.int --write-disambig-syms=telugu_data/lang_nosp/tmp/disambig_ilabels_3_1.int telugu_data/lang_nosp/tmp/ilabels_3_1.8161 telugu_data/lang_nosp/tmp/LG.fst 
+ERROR: FstHeader::Read: Bad FST header: standard input
+mv: cannot stat 'telugu_data/lang_nosp/tmp/ilabels_3_1.8161': No such file or directory
+fstisstochastic telugu_data/lang_nosp/tmp/CLG_3_1.fst 
+ERROR: FstHeader::Read: Bad FST header: telugu_data/lang_nosp/tmp/CLG_3_1.fst
+ERROR (fstisstochastic[5.5.1009~1-e4940]:ReadFstKaldiGeneric():kaldi-fst-io.cc:59) Reading FST: error reading FST header from telugu_data/lang_nosp/tmp/CLG_3_1.fst
+
+[ Stack-Trace: ]
+fstisstochastic(kaldi::MessageLogger::LogMessage() const+0xb61) [0x55788ac191b9]
+fstisstochastic(kaldi::MessageLogger::LogAndThrow::operator=(kaldi::MessageLogger const&)+0x21) [0x55788ab8c9b5]
+fstisstochastic(fst::ReadFstKaldiGeneric(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool)+0x1a9) [0x55788ab971a0]
+fstisstochastic(main+0x229) [0x55788ab8ba19]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f76d7979c87]
+fstisstochastic(_start+0x2a) [0x55788ab8b6ea]
+
+kaldi::KaldiFatalError[info]: CLG not stochastic.
+make-h-transducer --disambig-syms-out=telugu_exp/tri1/graph_nosp/disambig_tid.int --transition-scale=1.0 telugu_data/lang_nosp/tmp/ilabels_3_1 telugu_exp/tri1/tree telugu_exp/tri1/final.mdl 
+ERROR (make-h-transducer[5.5.1009~1-e4940]:Input():kaldi-io.cc:756) Error opening input stream telugu_data/lang_nosp/tmp/ilabels_3_1
+
+[ Stack-Trace: ]
+make-h-transducer(kaldi::MessageLogger::LogMessage() const+0xb61) [0x558778f0e515]
+make-h-transducer(kaldi::MessageLogger::LogAndThrow::operator=(kaldi::MessageLogger const&)+0x21) [0x558778e143b7]
+make-h-transducer(kaldi::Input::Input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool*)+0xba) [0x558778e9ac60]
+make-h-transducer(main+0x276) [0x558778e13b06]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f606b4f4c87]
+make-h-transducer(_start+0x2a) [0x558778e1378a]
+
+kaldi::KaldiFatalError
