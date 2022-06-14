@@ -25,9 +25,9 @@ nnet3_affix=_cleaned     # affix for exp/nnet3 directory to put iVector stuff in
 . utils/parse_options.sh
 
 
-data_dir=$1
-exp_dir=$2
-echo "$0: data_dir: $data_dir  exp_dir : $exp_dir"
+data_dir=telugu_data
+exp_dir=telugu_exp
+echo "$0: data_dir: $data_dir  exp_dir : $exp_dir nnet3_affix : ${nnet3_affix}"
 
 gmm_dir=$exp_dir/${gmm}
 ali_dir=$exp_dir/${gmm}_ali_${train_set}_sp

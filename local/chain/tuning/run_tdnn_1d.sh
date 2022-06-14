@@ -80,14 +80,26 @@ where "nvcc" is installed.
 EOF
 fi
 
-local/nnet3/run_ivector_common.sh $data_dir $exp_dir --stage $stage \
-                                  --nj $nj \
-                                  --train-set $train_set \
-                                  --gmm $gmm \
-                                  --online-cmvn-iextractor $online_cmvn \
-                                  --num-threads-ubm $num_threads_ubm \
-                                  --nnet3-affix "$nnet3_affix"
+if [[ "$data_dir" == "telugu_data" ]]; then
+  echo "$0: running on telugu_data."
+  local/nnet3/run_ivector_common_telugu.sh --stage $stage \
+                                    --nj $nj \
+                                    --train-set $train_set \
+                                    --gmm $gmm \
+                                    --online-cmvn-iextractor $online_cmvn \
+                                    --num-threads-ubm $num_threads_ubm \
+                                    --nnet3-affix "$nnet3_affix"
 
+else
+  echo "$0: running on data (tamil)"
+  local/nnet3/run_ivector_common_tamil.sh --stage $stage \
+                                    --nj $nj \
+                                    --train-set $train_set \
+                                    --gmm $gmm \
+                                    --online-cmvn-iextractor $online_cmvn \
+                                    --num-threads-ubm $num_threads_ubm \
+                                    --nnet3-affix "$nnet3_affix"
+fi
 
 gmm_dir=$exp_dir/$gmm
 ali_dir=$exp_dir/${gmm}_ali_${train_set}_sp
