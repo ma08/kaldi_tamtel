@@ -305,7 +305,7 @@ if [ $stage -le 16 ]; then
   # this does some data-cleaning.  It actually degrades the GMM-level results
   # slightly, but the cleaned data should be useful when we add the neural net and chain
   # systems.  If not we'll remove this stage.
-  local/run_cleanup_segmentation.sh
+  local/run_cleanup_segmentation_telugu.sh
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
