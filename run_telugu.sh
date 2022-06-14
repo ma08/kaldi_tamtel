@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=16
+stage=17
 if [ $stage -le 0 ]; then
   input_dataset=telugu_combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -309,17 +309,17 @@ if [ $stage -le 16 ]; then
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
-exit 1
 
 if [ $stage -le 17 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
   date
   # This will only work if you have GPUs on your system (and note that it requires
   # you to have the queue set up the right way... see kaldi-asr.org/doc/queue.html)
-  local/chain/run_tdnn.sh
+  local/chain/run_tdnn.sh telugu_data telugu_exp
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
+exit 1
 
 if [ $stage -le 18 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
