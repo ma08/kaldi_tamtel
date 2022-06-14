@@ -80,7 +80,7 @@ where "nvcc" is installed.
 EOF
 fi
 
-local/nnet3/run_ivector_common.sh --stage $stage \
+local/nnet3/run_ivector_common.sh $data_dir $exp_dir --stage $stage \
                                   --nj $nj \
                                   --train-set $train_set \
                                   --gmm $gmm \
