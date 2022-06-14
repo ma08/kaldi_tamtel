@@ -33,13 +33,16 @@ set -e -o pipefail
 
 # First the options that are passed through to run_ivector_common.sh
 # (some of which are also used in this script directly).
-stage=18
+stage=0
 
 nj=15
 decode_nj=15
 xent_regularize=0.1
 dropout_schedule='0,0@0.20,0.5@0.50,0'
 
+data_dir=$1
+exp_dir=$2
+echo "$0: data_dir: $data_dir  exp_dir : $exp_dir"
 train_set=train_cleaned
 gmm=tri3_cleaned  # the gmm for the target data
 num_threads_ubm=8
@@ -86,14 +89,14 @@ local/nnet3/run_ivector_common.sh --stage $stage \
                                   --nnet3-affix "$nnet3_affix"
 
 
-gmm_dir=exp/$gmm
-ali_dir=exp/${gmm}_ali_${train_set}_sp
-tree_dir=exp/chain${nnet3_affix}/tree_bi${tree_affix}
-lat_dir=exp/chain${nnet3_affix}/${gmm}_${train_set}_sp_lats
-dir=exp/chain${nnet3_affix}/tdnn${tdnn_affix}_sp
-train_data_dir=data/${train_set}_sp_hires
-lores_train_data_dir=data/${train_set}_sp
-train_ivector_dir=exp/nnet3${nnet3_affix}/ivectors_${train_set}_sp_hires
+gmm_dir=$exp_dir/$gmm
+ali_dir=$exp_dir/${gmm}_ali_${train_set}_sp
+tree_dir=$exp_dir/chain${nnet3_affix}/tree_bi${tree_affix}
+lat_dir=$exp_dir/chain${nnet3_affix}/${gmm}_${train_set}_sp_lats
+dir=$exp_dir/chain${nnet3_affix}/tdnn${tdnn_affix}_sp
+train_data_dir=$data_dir/${train_set}_sp_hires
+lores_train_data_dir=$data_dir/${train_set}_sp
+train_ivector_dir=$exp_dir/nnet3${nnet3_affix}/ivectors_${train_set}_sp_hires
 
 
 for f in $gmm_dir/final.mdl $train_data_dir/feats.scp $train_ivector_dir/ivector_online.scp \
@@ -106,21 +109,21 @@ if [ $stage -le 14 ]; then
   # Create a version of the lang/ directory that has one state per phone in the
   # topo file. [note, it really has two states.. the first one is only repeated
   # once, the second one has zero or more repeats.]
-  if [ -d data/lang_chain ]; then
-    if [ data/lang_chain/L.fst -nt data/lang/L.fst ]; then
-      echo "$0: data/lang_chain already exists, not overwriting it; continuing"
+  if [ -d $data_dir/lang_chain ]; then
+    if [ $data_dir/lang_chain/L.fst -nt $data_dir/lang/L.fst ]; then
+      echo "$0: $data_dir/lang_chain already exists, not overwriting it; continuing"
     else
-      echo "$0: data/lang_chain already exists and seems to be older than data/lang..."
+      echo "$0: $data_dir/lang_chain already exists and seems to be older than $data_dir/lang..."
       echo " ... not sure what to do.  Exiting."
       exit 1;
     fi
   else
-    cp -r data/lang data/lang_chain
-    silphonelist=$(cat data/lang_chain/phones/silence.csl) || exit 1;
-    nonsilphonelist=$(cat data/lang_chain/phones/nonsilence.csl) || exit 1;
+    cp -r $data_dir/lang $data_dir/lang_chain
+    silphonelist=$(cat $data_dir/lang_chain/phones/silence.csl) || exit 1;
+    nonsilphonelist=$(cat $data_dir/lang_chain/phones/nonsilence.csl) || exit 1;
     # Use our special topology... note that later on may have to tune this
     # topology.
-    steps/nnet3/chain/gen_topo.py $nonsilphonelist $silphonelist >data/lang_chain/topo
+    steps/nnet3/chain/gen_topo.py $nonsilphonelist $silphonelist >$data_dir/lang_chain/topo
   fi
 fi
 
@@ -128,7 +131,7 @@ if [ $stage -le 15 ]; then
   # Get the alignments as lattices (gives the chain training more freedom).
   # use the same num-jobs as the alignments
   steps/align_fmllr_lats.sh --nj 100 --cmd "$train_cmd" ${lores_train_data_dir} \
-    data/lang $gmm_dir $lat_dir
+    $data_dir/lang $gmm_dir $lat_dir
   rm $lat_dir/fsts.*.gz # save space
 fi
 
@@ -142,7 +145,7 @@ if [ $stage -le 16 ]; then
   fi
   steps/nnet3/chain/build_tree.sh --frame-subsampling-factor 3 \
       --context-opts "--context-width=2 --central-position=1" \
-      --cmd "$train_cmd" 4000 ${lores_train_data_dir} data/lang_chain $ali_dir $tree_dir
+      --cmd "$train_cmd" 4000 ${lores_train_data_dir} $data_dir/lang_chain $ali_dir $tree_dir
 fi
 
 if [ $stage -le 17 ]; then
@@ -239,7 +242,7 @@ if [ $stage -le 19 ]; then
   # far as the 'topo' is concerned, but this script doesn't read the 'topo' from
   # the lang directory.
   date
-  utils/mkgraph.sh --self-loop-scale 1.0 data/lang $dir $dir/graph
+  utils/mkgraph.sh --self-loop-scale 1.0 $data_dir/lang $dir $dir/graph
   date
 fi
 
@@ -250,11 +253,11 @@ if [ $stage -le 20 ]; then
       (
       steps/nnet3/decode.sh --num-threads 4 --nj $decode_nj --cmd "$decode_cmd" \
           --acwt 1.0 --post-decode-acwt 10.0 \
-          --online-ivector-dir exp/nnet3${nnet3_affix}/ivectors_${dset}_hires \
+          --online-ivector-dir $exp_dir/nnet3${nnet3_affix}/ivectors_${dset}_hires \
           --scoring-opts "--min-lmwt 5 " \
-         $dir/graph data/${dset}_hires $dir/decode_${dset} || exit 1;
-      steps/lmrescore_const_arpa.sh --cmd "$decode_cmd" data/lang data/lang_rescore \
-        data/${dset}_hires ${dir}/decode_${dset} ${dir}/decode_${dset}_rescore || exit 1
+         $dir/graph $data_dir/${dset}_hires $dir/decode_${dset} || exit 1;
+      steps/lmrescore_const_arpa.sh --cmd "$decode_cmd" $data_dir/lang $data_dir/lang_rescore \
+        $data_dir/${dset}_hires ${dir}/decode_${dset} ${dir}/decode_${dset}_rescore || exit 1
     ) || touch $dir/.error &
   done
   date
