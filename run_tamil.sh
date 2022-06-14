@@ -283,7 +283,7 @@ if [ $stage -le 17 ]; then
   date
   # This will only work if you have GPUs on your system (and note that it requires
   # you to have the queue set up the right way... see kaldi-asr.org/doc/queue.html)
-  local/chain/run_tdnn.sh
+  local/chain/run_tdnn.sh data exp
   date
   echo "----------------------- Stage $stage end---------------------------";
 fi
