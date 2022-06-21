@@ -1,0 +1,3 @@
+- moved old db and data directories to backup
+- ensured db and data are empty wherever required
+- created new dic using indicnlp
