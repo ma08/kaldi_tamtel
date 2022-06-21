@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=18
+stage=0
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -61,6 +61,7 @@ if [ $stage -le 0 ]; then
   #input_dataset=openslr_tamil/transcription
   #input_dataset=asriitm_tamil/transcription
   echo "----------------------- Stage $stage Load data from $input_dataset begin---------------------------";
+  date
   mkdir -p data
   for set in test dev train; do
     rm -rf data/$set.orig
@@ -68,13 +69,16 @@ if [ $stage -le 0 ]; then
     sed -i "s/~/${home_folder//\//\\/}/g" data/$set.orig/wav.scp
     utils/fix_data_dir.sh data/$set.orig
   done
+  date
   echo "----------------------- Stage $stage end---------------------------";
   stage=1
 fi
+exit 1
 
 #stage=1
 if [ $stage -le 1 ]; then
   echo "----------------------- Stage $stage begin: prepare data ---------------------------";
+  date
   local/prepare_data_tamil.sh
   # Split speakers up into 3-minute chunks.  This doesn't hurt adaptation, and
   # lets us use more jobs for decoding etc.
@@ -83,6 +87,7 @@ if [ $stage -le 1 ]; then
   # for dset in dev test train; do
   #   utils/data/modify_speaker_info.sh --seconds-per-spk-max 180 data/${dset}.orig data/${dset}
   # done
+  date
   echo "----------------------- Stage $stage end: prepare data ---------------------------";
   stage=2
 fi
@@ -98,8 +103,10 @@ fi
 
 if [ $stage -le 3 ]; then
   echo "----------------------- Stage $stage begin: prepare lang ---------------------------";
+  date
   utils/prepare_lang.sh data/local/dict_nosp \
     "<unk>" data/local/lang_nosp data/lang_nosp
+  date
   echo "----------------------- Stage $stage end: prepare lang ---------------------------";
 fi
 
@@ -148,16 +155,20 @@ fi
 # Well create a subset with 10k short segments to make flat-start training easier:
 if [ $stage -le 7 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   utils/subset_data_dir.sh --shortest data/train 10000 data/train_10kshort
   utils/data/remove_dup_utts.sh 10 data/train_10kshort data/train_10kshort_nodup
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
 # Train
 if [ $stage -le 8 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   steps/train_mono.sh --nj 20 --cmd "$train_cmd" \
     data/train_10kshort_nodup data/lang_nosp exp/mono
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
