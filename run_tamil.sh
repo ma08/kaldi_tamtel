@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=0
+stage=11
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -73,7 +73,6 @@ if [ $stage -le 0 ]; then
   echo "----------------------- Stage $stage end---------------------------";
   stage=1
 fi
-exit 1
 
 #stage=1
 if [ $stage -le 1 ]; then
@@ -141,6 +140,7 @@ fi
 # Feature extraction
 if [ $stage -le 6 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   for set in test dev train; do
     [[ ! -d data/$set ]] && cp -r data/$set.orig/ data/$set
     sed -i "s/~/${home_folder//\//\\/}/g" data/$set/wav.scp
@@ -148,6 +148,7 @@ if [ $stage -le 6 ]; then
     steps/make_mfcc.sh --nj 30 --cmd "$train_cmd" $dir
     steps/compute_cmvn_stats.sh $dir
   done
+  date
   echo "----------------------- Stage $stage end---------------------------";
 fi
 
@@ -212,11 +213,14 @@ if [ $stage -le 11 ]; then
   date
   steps/train_lda_mllt.sh --cmd "$train_cmd" \
     4000 50000 data/train data/lang_nosp exp/tri1_ali exp/tri2
+  date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=12
 fi
 
 if [ $stage -le 12 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   utils/mkgraph.sh data/lang_nosp exp/tri2 exp/tri2/graph_nosp
   # for dset in dev test; do
   #   steps/decode.sh --nj $decode_nj --cmd "$decode_cmd"  --num-threads 4 \
@@ -224,17 +228,23 @@ if [ $stage -le 12 ]; then
   #   steps/lmrescore_const_arpa.sh  --cmd "$decode_cmd" data/lang_nosp data/lang_nosp_rescore \
   #      data/${dset} exp/tri2/decode_nosp_${dset} exp/tri2/decode_nosp_${dset}_rescore
   # done
+  date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=13
 fi
 
 if [ $stage -le 13 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
+  date
   steps/get_prons.sh --cmd "$train_cmd" data/train data/lang_nosp exp/tri2
+  date
   utils/dict_dir_add_pronprobs.sh --max-normalize true \
     data/local/dict_nosp exp/tri2/pron_counts_nowb.txt \
     exp/tri2/sil_counts_nowb.txt \
     exp/tri2/pron_bigram_counts_nowb.txt data/local/dict
+  date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=14
 fi
 
 if [ $stage -le 14 ]; then
@@ -255,6 +265,7 @@ if [ $stage -le 14 ]; then
   # done
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=15
 fi
 
 if [ $stage -le 15 ]; then
@@ -262,9 +273,11 @@ if [ $stage -le 15 ]; then
   date
   steps/align_si.sh --nj $nj --cmd "$train_cmd" \
     data/train data/lang exp/tri2 exp/tri2_ali
+  date
 
   steps/train_sat.sh --cmd "$train_cmd" \
     5000 100000 data/train data/lang exp/tri2_ali exp/tri3
+  date
 
   utils/mkgraph.sh data/lang exp/tri3 exp/tri3/graph
 
@@ -276,6 +289,7 @@ if [ $stage -le 15 ]; then
   # done
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=16
 fi
 
 if [ $stage -le 16 ]; then
@@ -287,7 +301,9 @@ if [ $stage -le 16 ]; then
   local/run_cleanup_segmentation_tamil.sh
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=17
 fi
+exit 1
 
 if [ $stage -le 17 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
