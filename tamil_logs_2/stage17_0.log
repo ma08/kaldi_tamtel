@@ -1,0 +1,202 @@
+nohup: ignoring input
+----------------------- Stage 17 begin---------------------------
+Fri Jun 24 21:46:08 UTC 2022
+local/chain/run_tdnn.sh: data_dir: data  exp_dir : exp
+local/chain/run_tdnn.sh data exp
+local/chain/run_tdnn.sh: running on data (tamil)
+local/nnet3/run_ivector_common_tamil.sh: data_dir: data  exp_dir : exp stage: 0
+aaaaaaaaaaaaaa 1
+aaaaaaaaaaaaaa 1
+local/nnet3/run_ivector_common_tamil.sh: preparing directory for low-resolution speed-perturbed data (for alignment)
+fix_data_dir.sh: kept all 151326 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned/.backup
+utils/data/perturb_data_dir_speed_3way.sh: making sure the utt2dur and the reco2dur files are present
+... in data/train_cleaned, because obtaining it after speed-perturbing
+... would be very slow, and you might need them.
+utils/data/get_utt2dur.sh: working out data/train_cleaned/utt2dur from data/train_cleaned/segments
+utils/data/get_utt2dur.sh: computed data/train_cleaned/utt2dur
+utils/data/get_reco2dur.sh: obtaining durations from recordings
+utils/data/get_reco2dur.sh: could not get recording lengths from sphere-file headers, using wav-to-duration
+utils/data/get_reco2dur.sh: computed data/train_cleaned/reco2dur
+utils/data/perturb_data_dir_speed.sh: generated speed-perturbed version of data in data/train_cleaned, in data/train_cleaned_sp_speed0.9
+fix_data_dir.sh: kept all 151326 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp_speed0.9/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp_speed0.9
+utils/data/perturb_data_dir_speed.sh: generated speed-perturbed version of data in data/train_cleaned, in data/train_cleaned_sp_speed1.1
+fix_data_dir.sh: kept all 151326 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp_speed1.1/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp_speed1.1
+utils/data/combine_data.sh data/train_cleaned_sp data/train_cleaned data/train_cleaned_sp_speed0.9 data/train_cleaned_sp_speed1.1
+utils/data/combine_data.sh: combined utt2uniq
+utils/data/combine_data.sh: combined segments
+utils/data/combine_data.sh: combined utt2spk
+utils/data/combine_data.sh [info]: not combining utt2lang as it does not exist
+utils/data/combine_data.sh: combined utt2dur
+utils/data/combine_data.sh [info]: **not combining utt2num_frames as it does not exist everywhere**
+utils/data/combine_data.sh: combined reco2dur
+utils/data/combine_data.sh [info]: **not combining feats.scp as it does not exist everywhere**
+utils/data/combine_data.sh: combined text
+utils/data/combine_data.sh [info]: **not combining cmvn.scp as it does not exist everywhere**
+utils/data/combine_data.sh [info]: not combining vad.scp as it does not exist
+utils/data/combine_data.sh: combined reco2file_and_channel
+utils/data/combine_data.sh: combined wav.scp
+utils/data/combine_data.sh [info]: not combining spk2gender as it does not exist
+fix_data_dir.sh: kept all 453978 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp/.backup
+utils/data/perturb_data_dir_speed_3way.sh: generated 3-way speed-perturbed version of data in data/train_cleaned, in data/train_cleaned_sp
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp
+utils/copy_data_dir.sh: copied data from data/train_cleaned_sp to data/train_cleaned_sp_hires
+fix_data_dir.sh: kept all 453978 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp_hires
+utils/copy_data_dir.sh: copied data from data/dev to data/dev_hires
+fix_data_dir.sh: kept all 14856 utterances.
+fix_data_dir.sh: old files are kept in data/dev_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/dev_hires
+utils/copy_data_dir.sh: copied data from data/test to data/test_hires
+fix_data_dir.sh: kept all 17572 utterances.
+fix_data_dir.sh: old files are kept in data/test_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/test_hires
+aaaaaaaaaaaaaa 1
+local/nnet3/run_ivector_common_tamil.sh: making MFCC features for low-resolution speed-perturbed data
+steps/make_mfcc.sh --nj 15 --cmd run.pl data/train_cleaned_sp
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp
+steps/make_mfcc.sh [info]: segments file exists: using that.
+steps/make_mfcc.sh: Succeeded creating MFCC features for train_cleaned_sp
+steps/compute_cmvn_stats.sh data/train_cleaned_sp
+Succeeded creating CMVN stats for train_cleaned_sp
+local/nnet3/run_ivector_common_tamil.sh: fixing input data-dir to remove nonexistent features, in case some 
+.. speed-perturbed segments were too short.
+fix_data_dir.sh: kept all 453978 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp/.backup
+aaaaaaaaaaaaaa 1
+local/nnet3/run_ivector_common_tamil.sh: aligning with the perturbed low-resolution data
+steps/align_fmllr.sh --nj 15 --cmd run.pl data/train_cleaned_sp data/lang exp/tri3_cleaned exp/tri3_cleaned_ali_train_cleaned_sp
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in data/train_cleaned_sp using exp/tri3_cleaned/final.alimdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri3_cleaned_ali_train_cleaned_sp
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 75.1829665177% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri3_cleaned_ali_train_cleaned_sp/log/analyze_alignments.log
+1 warnings in exp/tri3_cleaned_ali_train_cleaned_sp/log/analyze_alignments.log
+6126 warnings in exp/tri3_cleaned_ali_train_cleaned_sp/log/align_pass2.*.log
+159595 warnings in exp/tri3_cleaned_ali_train_cleaned_sp/log/fmllr.*.log
+12620 warnings in exp/tri3_cleaned_ali_train_cleaned_sp/log/align_pass1.*.log
+aaaaaaaaaaaaaa 1
+aaaaaaaaaaaaaa 1
+local/nnet3/run_ivector_common_tamil.sh: creating high-resolution MFCC features
+utils/data/perturb_data_dir_volume.sh: added volume perturbation to the data in data/train_cleaned_sp_hires
+steps/make_mfcc.sh --nj 15 --mfcc-config conf/mfcc_hires.conf --cmd run.pl data/train_cleaned_sp_hires
+utils/validate_data_dir.sh: Successfully validated data-directory data/train_cleaned_sp_hires
+steps/make_mfcc.sh [info]: segments file exists: using that.
+steps/make_mfcc.sh: Succeeded creating MFCC features for train_cleaned_sp_hires
+steps/compute_cmvn_stats.sh data/train_cleaned_sp_hires
+Succeeded creating CMVN stats for train_cleaned_sp_hires
+fix_data_dir.sh: kept all 453978 utterances.
+fix_data_dir.sh: old files are kept in data/train_cleaned_sp_hires/.backup
+steps/make_mfcc.sh --nj 15 --mfcc-config conf/mfcc_hires.conf --cmd run.pl data/dev_hires
+steps/make_mfcc.sh: moving data/dev_hires/feats.scp to data/dev_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/dev_hires
+steps/make_mfcc.sh [info]: segments file exists: using that.
+steps/make_mfcc.sh: Succeeded creating MFCC features for dev_hires
+steps/compute_cmvn_stats.sh data/dev_hires
+Succeeded creating CMVN stats for dev_hires
+fix_data_dir.sh: kept all 14856 utterances.
+fix_data_dir.sh: old files are kept in data/dev_hires/.backup
+steps/make_mfcc.sh --nj 15 --mfcc-config conf/mfcc_hires.conf --cmd run.pl data/test_hires
+steps/make_mfcc.sh: moving data/test_hires/feats.scp to data/test_hires/.backup
+utils/validate_data_dir.sh: Successfully validated data-directory data/test_hires
+steps/make_mfcc.sh [info]: segments file exists: using that.
+steps/make_mfcc.sh: Succeeded creating MFCC features for test_hires
+steps/compute_cmvn_stats.sh data/test_hires
+Succeeded creating CMVN stats for test_hires
+fix_data_dir.sh: kept all 17572 utterances.
+fix_data_dir.sh: old files are kept in data/test_hires/.backup
+aaaaaaaaaaaaaa 1
+local/nnet3/run_ivector_common_tamil.sh: computing a subset of data to train the diagonal UBM.
+utils/data/subset_data_dir.sh: reducing #utt from 453978 to 113494
+local/nnet3/run_ivector_common_tamil.sh: computing a PCA transform from the hires data.
+steps/online/nnet2/get_pca_transform.sh --cmd run.pl --splice-opts --left-context=3 --right-context=3 --max-utts 10000 --subsample 2 exp/nnet3_cleaned_1d/diag_ubm/train_cleaned_sp_hires_subset exp/nnet3_cleaned_1d/pca_transform
+Done estimating PCA transform in exp/nnet3_cleaned_1d/pca_transform
+local/nnet3/run_ivector_common_tamil.sh: training the diagonal UBM.
+steps/online/nnet2/train_diag_ubm.sh --cmd run.pl --nj 30 --num-frames 700000 --num-threads 8 exp/nnet3_cleaned_1d/diag_ubm/train_cleaned_sp_hires_subset 512 exp/nnet3_cleaned_1d/pca_transform exp/nnet3_cleaned_1d/diag_ubm
+steps/online/nnet2/train_diag_ubm.sh: Directory exp/nnet3_cleaned_1d/diag_ubm already exists. Backing up diagonal UBM in exp/nnet3_cleaned_1d/diag_ubm/backup.6Fr
+steps/online/nnet2/train_diag_ubm.sh: initializing model from E-M in memory, 
+steps/online/nnet2/train_diag_ubm.sh: starting from 256 Gaussians, reaching 512;
+steps/online/nnet2/train_diag_ubm.sh: for 20 iterations, using at most 700000 frames of data
+Getting Gaussian-selection info
+steps/online/nnet2/train_diag_ubm.sh: will train for 4 iterations, in parallel over
+steps/online/nnet2/train_diag_ubm.sh: 30 machines, parallelized with 'run.pl'
+steps/online/nnet2/train_diag_ubm.sh: Training pass 0
+steps/online/nnet2/train_diag_ubm.sh: Training pass 1
+steps/online/nnet2/train_diag_ubm.sh: Training pass 2
+steps/online/nnet2/train_diag_ubm.sh: Training pass 3
+aaaaaaaaaaaaaa 1
+local/nnet3/run_ivector_common_tamil.sh: training the iVector extractor
+steps/online/nnet2/train_ivector_extractor.sh --cmd run.pl --nj 15 --num-threads 4 --num-processes 2 --online-cmvn-iextractor true data/train_cleaned_sp_hires exp/nnet3_cleaned_1d/diag_ubm exp/nnet3_cleaned_1d/extractor
+steps/online/nnet2/train_ivector_extractor.sh: doing Gaussian selection and posterior computation
+Accumulating stats (pass 0)
+Summing accs (pass 0)
+Updating model (pass 0)
+Accumulating stats (pass 1)
+Summing accs (pass 1)
+Updating model (pass 1)
+Accumulating stats (pass 2)
+Summing accs (pass 2)
+Updating model (pass 2)
+Accumulating stats (pass 3)
+Summing accs (pass 3)
+Updating model (pass 3)
+Accumulating stats (pass 4)
+Summing accs (pass 4)
+Updating model (pass 4)
+Accumulating stats (pass 5)
+Summing accs (pass 5)
+Updating model (pass 5)
+Accumulating stats (pass 6)
+Summing accs (pass 6)
+Updating model (pass 6)
+Accumulating stats (pass 7)
+Summing accs (pass 7)
+Updating model (pass 7)
+Accumulating stats (pass 8)
+Summing accs (pass 8)
+Updating model (pass 8)
+Accumulating stats (pass 9)
+Summing accs (pass 9)
+Updating model (pass 9)
+aaaaaaaaaaaaaa 1
+utils/data/modify_speaker_info.sh: copied data from data/train_cleaned_sp_hires to exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires/train_cleaned_sp_hires_max2, number of speakers changed from 191592 to 320985
+utils/validate_data_dir.sh: Successfully validated data-directory exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires/train_cleaned_sp_hires_max2
+steps/online/nnet2/extract_ivectors_online.sh --cmd run.pl --nj 15 exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires/train_cleaned_sp_hires_max2 exp/nnet3_cleaned_1d/extractor exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires
+filter_scps.pl: warning: some input lines were output to multiple files [OK if splitting per utt] 
+filter_scps.pl: warning: some input lines were output to multiple files [OK if splitting per utt] 
+steps/online/nnet2/extract_ivectors_online.sh: extracting iVectors
+steps/online/nnet2/extract_ivectors_online.sh: combining iVectors across jobs
+steps/online/nnet2/extract_ivectors_online.sh: done extracting (online) iVectors to exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires using the extractor in exp/nnet3_cleaned_1d/extractor.
+steps/online/nnet2/extract_ivectors_online.sh --cmd run.pl --nj 15 data/dev_hires exp/nnet3_cleaned_1d/extractor exp/nnet3_cleaned_1d/ivectors_dev_hires
+steps/online/nnet2/extract_ivectors_online.sh: extracting iVectors
+steps/online/nnet2/extract_ivectors_online.sh: combining iVectors across jobs
+steps/online/nnet2/extract_ivectors_online.sh: done extracting (online) iVectors to exp/nnet3_cleaned_1d/ivectors_dev_hires using the extractor in exp/nnet3_cleaned_1d/extractor.
+steps/online/nnet2/extract_ivectors_online.sh --cmd run.pl --nj 15 data/test_hires exp/nnet3_cleaned_1d/extractor exp/nnet3_cleaned_1d/ivectors_test_hires
+steps/online/nnet2/extract_ivectors_online.sh: extracting iVectors
+steps/online/nnet2/extract_ivectors_online.sh: combining iVectors across jobs
+steps/online/nnet2/extract_ivectors_online.sh: done extracting (online) iVectors to exp/nnet3_cleaned_1d/ivectors_test_hires using the extractor in exp/nnet3_cleaned_1d/extractor.
+aaaaaaaaaaaaaa 1
+Sat Jun 25 06:02:08 UTC 2022
+2022-06-25 06:02:08,798 [steps/nnet3/chain/train.py:35 - <module> - INFO ] Starting chain model trainer (train.py)
+steps/nnet3/chain/train.py --stage -10 --cmd run.pl --feat.online-ivector-dir exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires --feat.cmvn-opts=--config=conf/online_cmvn.conf --chain.xent-regularize 0.1 --chain.leaky-hmm-coefficient 0.1 --chain.l2-regularize 0.0 --chain.apply-deriv-weights false --chain.lm-opts=--num-extra-lm-states=2000 --trainer.dropout-schedule 0,0@0.20,0.5@0.50,0 --trainer.add-option=--optimization.memory-compression-level=2 --egs.dir  --egs.opts --frames-overlap-per-eg 0 --constrained false --online-cmvn true --egs.chunk-width 150,110,100 --trainer.num-chunk-per-minibatch 64 --trainer.frames-per-iter 5000000 --trainer.num-epochs 6 --trainer.optimization.num-jobs-initial 3 --trainer.optimization.num-jobs-final 12 --trainer.optimization.initial-effective-lrate 0.00025 --trainer.optimization.final-effective-lrate 0.000025 --trainer.max-param-change 2.0 --cleanup.remove-egs true --feat-dir data/train_cleaned_sp_hires --tree-dir exp/chain_cleaned_1d/tree_bi --lat-dir exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats --use-gpu=wait --dir exp/chain_cleaned_1d/tdnn1d_sp
+['steps/nnet3/chain/train.py', '--stage', '-10', '--cmd', 'run.pl', '--feat.online-ivector-dir', 'exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires', '--feat.cmvn-opts=--config=conf/online_cmvn.conf', '--chain.xent-regularize', '0.1', '--chain.leaky-hmm-coefficient', '0.1', '--chain.l2-regularize', '0.0', '--chain.apply-deriv-weights', 'false', '--chain.lm-opts=--num-extra-lm-states=2000', '--trainer.dropout-schedule', '0,0@0.20,0.5@0.50,0', '--trainer.add-option=--optimization.memory-compression-level=2', '--egs.dir', '', '--egs.opts', '--frames-overlap-per-eg 0 --constrained false --online-cmvn true', '--egs.chunk-width', '150,110,100', '--trainer.num-chunk-per-minibatch', '64', '--trainer.frames-per-iter', '5000000', '--trainer.num-epochs', '6', '--trainer.optimization.num-jobs-initial', '3', '--trainer.optimization.num-jobs-final', '12', '--trainer.optimization.initial-effective-lrate', '0.00025', '--trainer.optimization.final-effective-lrate', '0.000025', '--trainer.max-param-change', '2.0', '--cleanup.remove-egs', 'true', '--feat-dir', 'data/train_cleaned_sp_hires', '--tree-dir', 'exp/chain_cleaned_1d/tree_bi', '--lat-dir', 'exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats', '--use-gpu=wait', '--dir', 'exp/chain_cleaned_1d/tdnn1d_sp']
+Traceback (most recent call last):
+  File "steps/nnet3/chain/train.py", line 665, in <module>
+    main()
+  File "steps/nnet3/chain/train.py", line 649, in main
+    [args, run_opts] = get_args()
+  File "steps/nnet3/chain/train.py", line 201, in get_args
+    [args, run_opts] = process_args(args)
+  File "steps/nnet3/chain/train.py", line 233, in process_args
+    "does not exist.".format(args.dir))
+Exception: Directory specified with --dir=exp/chain_cleaned_1d/tdnn1d_sp does not exist.
