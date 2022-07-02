@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=11
+stage=0
 if [ $stage -le 0 ]; then
   input_dataset=combined_transcription
   #input_dataset=mozillacv_tamil/transcription
