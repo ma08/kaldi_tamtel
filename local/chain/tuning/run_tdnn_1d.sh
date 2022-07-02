@@ -33,7 +33,7 @@ set -e -o pipefail
 
 # First the options that are passed through to run_ivector_common.sh
 # (some of which are also used in this script directly).
-stage=18
+stage=0
 
 nj=15
 decode_nj=15
@@ -79,6 +79,8 @@ If you want to use GPUs (and have them), go to src/, and configure and make on a
 where "nvcc" is installed.
 EOF
 fi
+
+stage=0
 
 if [[ "$data_dir" == "telugu_data" ]]; then
   echo "$0: running on telugu_data."
