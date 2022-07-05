@@ -53,7 +53,7 @@ train_lm=true
 
 home_folder=$HOME
 
-stage=17
+stage=0
 if [ $stage -le 0 ]; then
   input_dataset=telugu_combined_transcription
   #input_dataset=mozillacv_tamil/transcription
@@ -62,9 +62,11 @@ if [ $stage -le 0 ]; then
   #input_dataset=asriitm_tamil/transcription
   echo "----------------------- Stage $stage Load data from $input_dataset begin---------------------------";
   date
-  rm -rf db/telugu_data telugu_data
+  rm -rf db/telugu_data telugu_data db/telugu_exp telugu_exp
   mkdir -p db/telugu_data
+  mkdir -p db/telugu_exp
   ln -s $(pwd)/db/telugu_data telugu_data
+  ln -s $(pwd)/db/telugu_exp telugu_exp
   for set in test dev train; do
     rm -rf telugu_data/$set.orig
     cp -r db/$input_dataset/$set telugu_data/$set.orig
@@ -101,8 +103,8 @@ if [ $stage -le 2 ]; then
   local/prepare_dict_telugu.sh
   date
   echo "----------------------- Stage $stage end: prepare dict ---------------------------";
+  stage=3
 fi
-#stage=3
 
 if [ $stage -le 3 ]; then
   echo "----------------------- Stage $stage begin: prepare lang ---------------------------";
@@ -111,6 +113,7 @@ if [ $stage -le 3 ]; then
     "<unk>" telugu_data/local/lang_nosp telugu_data/lang_nosp
   date
   echo "----------------------- Stage $stage end: prepare lang ---------------------------";
+  stage=4
 fi
 
 
@@ -127,6 +130,7 @@ if [ $stage -le 4 ]; then
   fi
   date
   echo "----------------------- Stage $stage end: lang model ---------------------------";
+  stage=5
   # later on we'll change this script so you have the option to
 fi
 
@@ -140,6 +144,7 @@ if [ $stage -le 5 ]; then
   local/format_lms_telugu.sh
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=6
 fi
 
 # Feature extraction
@@ -157,6 +162,7 @@ if [ $stage -le 6 ]; then
   done
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=7
 fi
 
 # Now we have 452 hours of training data.
@@ -169,6 +175,7 @@ if [ $stage -le 7 ]; then
   utils/data/remove_dup_utts.sh 10 telugu_data/train_10kshort telugu_data/train_10kshort_nodup
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=8
 fi
 
 # Train
@@ -179,6 +186,7 @@ if [ $stage -le 8 ]; then
     telugu_data/train_10kshort_nodup telugu_data/lang_nosp telugu_exp/mono
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=9
 fi
 
 if [ $stage -le 9 ]; then
@@ -193,7 +201,9 @@ if [ $stage -le 9 ]; then
     2500 30000 telugu_data/train telugu_data/lang_nosp telugu_exp/mono_ali telugu_exp/tri1
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=10
 fi
+exit 1
 
 if [ $stage -le 10 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
@@ -210,6 +220,7 @@ if [ $stage -le 10 ]; then
   # done
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=11
 fi
 
 if [ $stage -le 11 ]; then
@@ -225,6 +236,7 @@ if [ $stage -le 11 ]; then
     4000 50000 telugu_data/train telugu_data/lang_nosp telugu_exp/tri1_ali telugu_exp/tri2
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=12
 fi
 
 if [ $stage -le 12 ]; then
@@ -239,6 +251,7 @@ if [ $stage -le 12 ]; then
   # done
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=13
 fi
 
 if [ $stage -le 13 ]; then
@@ -252,6 +265,7 @@ if [ $stage -le 13 ]; then
     telugu_exp/tri2/pron_bigram_counts_nowb.txt telugu_data/local/dict
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=14
 fi
 
 if [ $stage -le 14 ]; then
@@ -274,6 +288,7 @@ if [ $stage -le 14 ]; then
   # done
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=15
 fi
 
 if [ $stage -le 15 ]; then
@@ -297,6 +312,7 @@ if [ $stage -le 15 ]; then
   # done
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=16
 fi
 
 if [ $stage -le 16 ]; then
@@ -308,6 +324,7 @@ if [ $stage -le 16 ]; then
   local/run_cleanup_segmentation_telugu.sh
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=17
 fi
 
 if [ $stage -le 17 ]; then
@@ -318,8 +335,8 @@ if [ $stage -le 17 ]; then
   local/chain/run_tdnn.sh telugu_data telugu_exp
   date
   echo "----------------------- Stage $stage end---------------------------";
+  stage=17
 fi
-exit 1
 
 if [ $stage -le 18 ]; then
   echo "----------------------- Stage $stage begin---------------------------";
