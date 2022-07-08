@@ -42,6 +42,8 @@ dropout_schedule='0,0@0.20,0.5@0.50,0'
 
 data_dir=$1
 exp_dir=$2
+#data_dir=data
+#exp_dir=exp
 echo "$0: data_dir: $data_dir  exp_dir : $exp_dir"
 train_set=train_cleaned
 gmm=tri3_cleaned  # the gmm for the target data
