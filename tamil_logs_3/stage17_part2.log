@@ -1,0 +1,403 @@
+nohup: ignoring input
+----------------------- Stage 17 begin---------------------------
+Sun Jul  3 19:30:17 UTC 2022
+local/chain/run_tdnn.sh: data_dir: data  exp_dir : exp
+local/chain/run_tdnn.sh 
+local/chain/run_tdnn.sh: running on data (tamil)
+local/nnet3/run_ivector_common_tamil.sh: data_dir: data  exp_dir : exp
+Sun Jul  3 19:30:18 UTC 2022
+2022-07-03 19:30:18,904 [steps/nnet3/chain/train.py:35 - <module> - INFO ] Starting chain model trainer (train.py)
+2022-07-03 19:30:18,911 [steps/nnet3/chain/train.py:284 - train - INFO ] Arguments for the experiment
+{'alignment_subsampling_factor': 3,
+ 'apply_deriv_weights': False,
+ 'backstitch_training_interval': 1,
+ 'backstitch_training_scale': 0.0,
+ 'chain_opts': '',
+ 'chunk_left_context': 0,
+ 'chunk_left_context_initial': -1,
+ 'chunk_right_context': 0,
+ 'chunk_right_context_final': -1,
+ 'chunk_width': '150,110,100',
+ 'cleanup': True,
+ 'cmvn_opts': '--config=conf/online_cmvn.conf',
+ 'combine_sum_to_one_penalty': 0.0,
+ 'command': 'run.pl',
+ 'compute_per_dim_accuracy': False,
+ 'deriv_truncate_margin': None,
+ 'dir': 'exp/chain_cleaned_1d/tdnn1d_sp',
+ 'do_final_combination': True,
+ 'dropout_schedule': '0,0@0.20,0.5@0.50,0',
+ 'egs_command': None,
+ 'egs_dir': None,
+ 'egs_nj': 0,
+ 'egs_opts': '--frames-overlap-per-eg 0 --constrained false --online-cmvn true',
+ 'egs_stage': 0,
+ 'email': None,
+ 'exit_stage': None,
+ 'feat_dir': 'data/train_cleaned_sp_hires',
+ 'final_effective_lrate': 2.5e-05,
+ 'frame_subsampling_factor': 3,
+ 'frames_per_iter': 5000000,
+ 'initial_effective_lrate': 0.00025,
+ 'input_model': None,
+ 'l2_regularize': 0.0,
+ 'lat_dir': 'exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats',
+ 'leaky_hmm_coefficient': 0.1,
+ 'left_deriv_truncate': None,
+ 'left_tolerance': 5,
+ 'lm_opts': '--num-extra-lm-states=2000',
+ 'max_lda_jobs': 10,
+ 'max_models_combine': 20,
+ 'max_objective_evaluations': 30,
+ 'max_param_change': 2.0,
+ 'momentum': 0.0,
+ 'num_chunk_per_minibatch': '64',
+ 'num_epochs': 6.0,
+ 'num_jobs_final': 12,
+ 'num_jobs_initial': 3,
+ 'num_jobs_step': 1,
+ 'online_ivector_dir': 'exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires',
+ 'preserve_model_interval': 100,
+ 'presoftmax_prior_scale_power': -0.25,
+ 'proportional_shrink': 0.0,
+ 'rand_prune': 4.0,
+ 'remove_egs': True,
+ 'reporting_interval': 0.1,
+ 'right_tolerance': 5,
+ 'samples_per_iter': 400000,
+ 'shrink_saturation_threshold': 0.4,
+ 'shrink_value': 1.0,
+ 'shuffle_buffer_size': 5000,
+ 'srand': 0,
+ 'stage': -10,
+ 'train_opts': ['--optimization.memory-compression-level=2'],
+ 'tree_dir': 'exp/chain_cleaned_1d/tree_bi',
+ 'use_gpu': 'wait',
+ 'xent_regularize': 0.1}
+2022-07-03 19:30:21,206 [steps/nnet3/chain/train.py:341 - train - INFO ] Creating phone language-model
+2022-07-03 19:30:41,764 [steps/nnet3/chain/train.py:346 - train - INFO ] Creating denominator FST
+copy-transition-model exp/chain_cleaned_1d/tree_bi/final.mdl exp/chain_cleaned_1d/tdnn1d_sp/0.trans_mdl 
+LOG (copy-transition-model[5.5.1009~1-e4940]:main():copy-transition-model.cc:62) Copied transition model.
+2022-07-03 19:31:00,605 [steps/nnet3/chain/train.py:353 - train - INFO ] Initializing a basic network for estimating preconditioning matrix
+2022-07-03 19:31:00,951 [steps/nnet3/chain/train.py:382 - train - INFO ] Generating egs
+steps/nnet3/chain/get_egs.sh --frames-overlap-per-eg 0 --constrained false --online-cmvn true --cmd run.pl --cmvn-opts --config=conf/online_cmvn.conf --online-ivector-dir exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires --left-context 29 --right-context 29 --left-context-initial -1 --right-context-final -1 --left-tolerance 5 --right-tolerance 5 --frame-subsampling-factor 3 --alignment-subsampling-factor 3 --stage 0 --frames-per-iter 5000000 --frames-per-eg 150,110,100 --srand 0 data/train_cleaned_sp_hires exp/chain_cleaned_1d/tdnn1d_sp exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats exp/chain_cleaned_1d/tdnn1d_sp/egs
+steps/nnet3/chain/get_egs.sh: File data/train_cleaned_sp_hires/utt2uniq exists, so ensuring the hold-out set includes all perturbed versions of the same source utterance.
+steps/nnet3/chain/get_egs.sh: Holding out 300 utterances in validation set and 300 in training diagnostic set, out of total 453978.
+steps/nnet3/chain/get_egs.sh: creating egs.  To ensure they are not deleted later you can do:  touch exp/chain_cleaned_1d/tdnn1d_sp/egs/.nodelete
+steps/nnet3/chain/get_egs.sh: feature type is raw, with 'apply-cmvn-online'
+tree-info exp/chain_cleaned_1d/tdnn1d_sp/tree 
+feat-to-dim scp:exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires/ivector_online.scp - 
+steps/nnet3/chain/get_egs.sh: working out number of frames of training data
+steps/nnet3/chain/get_egs.sh: working out feature dim
+steps/nnet3/chain/get_egs.sh: creating 43 archives, each with 49684 egs, with
+steps/nnet3/chain/get_egs.sh:   150,110,100 labels per example, and (left,right) context = (29,29)
+steps/nnet3/chain/get_egs.sh: Getting validation and training subset examples in background.
+steps/nnet3/chain/get_egs.sh: Generating training examples on disk
+steps/nnet3/chain/get_egs.sh: Getting subsets of validation examples for diagnostics and combination.
+steps/nnet3/chain/get_egs.sh: recombining and shuffling order of archives on disk
+steps/nnet3/chain/get_egs.sh: Removing temporary archives, alignments and lattices
+steps/nnet3/chain/get_egs.sh: Finished preparing training examples
+2022-07-03 19:53:49,359 [steps/nnet3/chain/train.py:431 - train - INFO ] Copying the properties from exp/chain_cleaned_1d/tdnn1d_sp/egs to exp/chain_cleaned_1d/tdnn1d_sp
+2022-07-03 19:53:49,364 [steps/nnet3/chain/train.py:445 - train - INFO ] Computing the preconditioning matrix for input features
+2022-07-03 19:54:53,925 [steps/nnet3/chain/train.py:454 - train - INFO ] Preparing the initial acoustic model.
+2022-07-03 19:54:55,172 [steps/nnet3/chain/train.py:488 - train - INFO ] Training will run for 6.0 epochs = 103 iterations
+2022-07-03 19:54:55,173 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 0/102   Jobs: 3   Epoch: 0.00/6.0 (0.0% complete)   lr: 0.000750   
+2022-07-03 20:28:33,422 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 1/102   Jobs: 3   Epoch: 0.02/6.0 (0.4% complete)   lr: 0.000743   
+2022-07-03 20:52:59,361 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 2/102   Jobs: 3   Epoch: 0.05/6.0 (0.8% complete)   lr: 0.000737   
+2022-07-03 21:17:28,682 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 3/102   Jobs: 3   Epoch: 0.07/6.0 (1.2% complete)   lr: 0.000730   
+2022-07-03 21:41:52,794 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 4/102   Jobs: 3   Epoch: 0.09/6.0 (1.6% complete)   lr: 0.000724   
+2022-07-03 22:06:26,880 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 5/102   Jobs: 3   Epoch: 0.12/6.0 (1.9% complete)   lr: 0.000717   
+2022-07-03 22:31:00,558 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 6/102   Jobs: 4   Epoch: 0.14/6.0 (2.3% complete)   lr: 0.000948   
+2022-07-03 23:03:38,149 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 7/102   Jobs: 4   Epoch: 0.17/6.0 (2.8% complete)   lr: 0.000937   
+2022-07-03 23:36:27,132 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 8/102   Jobs: 4   Epoch: 0.20/6.0 (3.4% complete)   lr: 0.000926   
+2022-07-04 00:08:58,961 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 9/102   Jobs: 4   Epoch: 0.23/6.0 (3.9% complete)   lr: 0.000915   
+2022-07-04 00:41:39,674 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 10/102   Jobs: 4   Epoch: 0.26/6.0 (4.4% complete)   lr: 0.000904   
+2022-07-04 01:14:23,757 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 11/102   Jobs: 4   Epoch: 0.29/6.0 (4.9% complete)   lr: 0.000893   
+2022-07-04 01:46:58,899 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 12/102   Jobs: 4   Epoch: 0.33/6.0 (5.4% complete)   lr: 0.000883   
+2022-07-04 02:19:30,968 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 13/102   Jobs: 4   Epoch: 0.36/6.0 (5.9% complete)   lr: 0.000872   
+2022-07-04 02:52:03,609 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 14/102   Jobs: 4   Epoch: 0.39/6.0 (6.5% complete)   lr: 0.000862   
+2022-07-04 03:24:59,983 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 15/102   Jobs: 4   Epoch: 0.42/6.0 (7.0% complete)   lr: 0.000852   
+2022-07-04 03:57:42,545 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 16/102   Jobs: 4   Epoch: 0.45/6.0 (7.5% complete)   lr: 0.000842   
+2022-07-04 04:30:18,936 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 17/102   Jobs: 4   Epoch: 0.48/6.0 (8.0% complete)   lr: 0.000832   
+2022-07-04 05:03:02,269 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 18/102   Jobs: 5   Epoch: 0.51/6.0 (8.5% complete)   lr: 0.001027   
+2022-07-04 05:43:50,758 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 19/102   Jobs: 5   Epoch: 0.55/6.0 (9.2% complete)   lr: 0.001012   
+2022-07-04 06:24:51,099 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 20/102   Jobs: 5   Epoch: 0.59/6.0 (9.8% complete)   lr: 0.000997   
+2022-07-04 07:05:17,516 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 21/102   Jobs: 5   Epoch: 0.63/6.0 (10.5% complete)   lr: 0.000982   
+2022-07-04 07:46:00,937 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 22/102   Jobs: 5   Epoch: 0.67/6.0 (11.1% complete)   lr: 0.000968   
+2022-07-04 08:26:43,632 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 23/102   Jobs: 5   Epoch: 0.71/6.0 (11.8% complete)   lr: 0.000954   
+2022-07-04 09:07:29,827 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 24/102   Jobs: 5   Epoch: 0.74/6.0 (12.4% complete)   lr: 0.000939   
+2022-07-04 09:48:18,383 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 25/102   Jobs: 5   Epoch: 0.78/6.0 (13.0% complete)   lr: 0.000926   
+2022-07-04 10:29:14,728 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 26/102   Jobs: 5   Epoch: 0.82/6.0 (13.7% complete)   lr: 0.000912   
+2022-07-04 11:10:31,081 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 27/102   Jobs: 5   Epoch: 0.86/6.0 (14.3% complete)   lr: 0.000898   
+2022-07-04 11:51:22,014 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 28/102   Jobs: 5   Epoch: 0.90/6.0 (15.0% complete)   lr: 0.000885   
+2022-07-04 12:32:08,900 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 29/102   Jobs: 6   Epoch: 0.94/6.0 (15.6% complete)   lr: 0.001047   
+2022-07-04 13:21:03,905 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 30/102   Jobs: 6   Epoch: 0.98/6.0 (16.4% complete)   lr: 0.001028   
+2022-07-04 14:09:55,273 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 31/102   Jobs: 6   Epoch: 1.03/6.0 (17.2% complete)   lr: 0.001010   
+2022-07-04 14:58:58,576 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 32/102   Jobs: 6   Epoch: 1.08/6.0 (18.0% complete)   lr: 0.000992   
+2022-07-04 15:47:55,262 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 33/102   Jobs: 6   Epoch: 1.12/6.0 (18.7% complete)   lr: 0.000974   
+2022-07-04 16:36:47,617 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 34/102   Jobs: 6   Epoch: 1.17/6.0 (19.5% complete)   lr: 0.000957   
+2022-07-04 17:25:45,625 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 35/102   Jobs: 6   Epoch: 1.22/6.0 (20.3% complete)   lr: 0.000940   
+2022-07-04 18:15:21,603 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 36/102   Jobs: 6   Epoch: 1.26/6.0 (21.1% complete)   lr: 0.000924   
+2022-07-04 19:05:10,856 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 37/102   Jobs: 6   Epoch: 1.31/6.0 (21.8% complete)   lr: 0.000907   
+2022-07-04 19:54:52,122 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 38/102   Jobs: 6   Epoch: 1.36/6.0 (22.6% complete)   lr: 0.000891   
+2022-07-04 20:44:27,810 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 39/102   Jobs: 6   Epoch: 1.40/6.0 (23.4% complete)   lr: 0.000875   
+2022-07-04 21:34:14,768 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 40/102   Jobs: 6   Epoch: 1.45/6.0 (24.2% complete)   lr: 0.000860   
+2022-07-04 22:23:31,016 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 41/102   Jobs: 7   Epoch: 1.50/6.0 (24.9% complete)   lr: 0.000986   
+2022-07-04 23:21:30,330 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 42/102   Jobs: 7   Epoch: 1.55/6.0 (25.8% complete)   lr: 0.000965   
+2022-07-05 00:19:25,540 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 43/102   Jobs: 7   Epoch: 1.60/6.0 (26.7% complete)   lr: 0.000945   
+2022-07-05 01:17:32,774 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 44/102   Jobs: 7   Epoch: 1.66/6.0 (27.6% complete)   lr: 0.000926   
+2022-07-05 02:15:28,839 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 45/102   Jobs: 7   Epoch: 1.71/6.0 (28.6% complete)   lr: 0.000907   
+2022-07-05 03:13:30,058 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 46/102   Jobs: 7   Epoch: 1.77/6.0 (29.5% complete)   lr: 0.000888   
+2022-07-05 04:12:15,848 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 47/102   Jobs: 7   Epoch: 1.82/6.0 (30.4% complete)   lr: 0.000870   
+2022-07-05 05:12:16,664 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 48/102   Jobs: 7   Epoch: 1.88/6.0 (31.3% complete)   lr: 0.000852   
+2022-07-05 06:11:29,802 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 49/102   Jobs: 7   Epoch: 1.93/6.0 (32.2% complete)   lr: 0.000834   
+2022-07-05 07:09:35,732 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 50/102   Jobs: 7   Epoch: 1.98/6.0 (33.1% complete)   lr: 0.000817   
+2022-07-05 08:07:27,485 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 51/102   Jobs: 7   Epoch: 2.04/6.0 (34.0% complete)   lr: 0.000800   
+2022-07-05 09:05:19,816 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 52/102   Jobs: 8   Epoch: 2.09/6.0 (34.9% complete)   lr: 0.000896   
+2022-07-05 10:14:49,938 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 53/102   Jobs: 8   Epoch: 2.16/6.0 (35.9% complete)   lr: 0.000875   
+2022-07-05 11:31:58,505 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 54/102   Jobs: 8   Epoch: 2.22/6.0 (37.0% complete)   lr: 0.000854   
+2022-07-05 12:46:08,819 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 55/102   Jobs: 8   Epoch: 2.28/6.0 (38.0% complete)   lr: 0.000834   
+2022-07-05 13:52:29,234 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 56/102   Jobs: 8   Epoch: 2.34/6.0 (39.0% complete)   lr: 0.000814   
+2022-07-05 14:58:35,022 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 57/102   Jobs: 8   Epoch: 2.40/6.0 (40.1% complete)   lr: 0.000795   
+2022-07-05 16:05:10,927 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 58/102   Jobs: 8   Epoch: 2.47/6.0 (41.1% complete)   lr: 0.000777   
+2022-07-05 17:11:23,396 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 59/102   Jobs: 8   Epoch: 2.53/6.0 (42.1% complete)   lr: 0.000758   
+2022-07-05 18:17:37,599 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 60/102   Jobs: 8   Epoch: 2.59/6.0 (43.2% complete)   lr: 0.000740   
+2022-07-05 19:23:14,177 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 61/102   Jobs: 8   Epoch: 2.65/6.0 (44.2% complete)   lr: 0.000723   
+2022-07-05 20:29:11,832 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 62/102   Jobs: 8   Epoch: 2.71/6.0 (45.2% complete)   lr: 0.000706   
+2022-07-05 21:35:12,190 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 63/102   Jobs: 9   Epoch: 2.78/6.0 (46.3% complete)   lr: 0.000776   
+2022-07-05 22:49:36,945 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 64/102   Jobs: 9   Epoch: 2.84/6.0 (47.4% complete)   lr: 0.000755   
+2022-07-06 00:04:02,942 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 65/102   Jobs: 9   Epoch: 2.91/6.0 (48.6% complete)   lr: 0.000735   
+2022-07-06 01:18:41,696 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 66/102   Jobs: 9   Epoch: 2.98/6.0 (49.7% complete)   lr: 0.000716   
+2022-07-06 02:33:01,840 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 67/102   Jobs: 9   Epoch: 3.05/6.0 (50.9% complete)   lr: 0.000697   
+2022-07-06 03:47:31,822 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 68/102   Jobs: 9   Epoch: 3.12/6.0 (52.1% complete)   lr: 0.000678   
+2022-07-06 05:01:58,150 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 69/102   Jobs: 9   Epoch: 3.19/6.0 (53.2% complete)   lr: 0.000661   
+2022-07-06 06:16:17,303 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 70/102   Jobs: 9   Epoch: 3.26/6.0 (54.4% complete)   lr: 0.000643   
+2022-07-06 07:30:38,647 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 71/102   Jobs: 9   Epoch: 3.33/6.0 (55.6% complete)   lr: 0.000626   
+2022-07-06 08:44:58,869 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 72/102   Jobs: 9   Epoch: 3.40/6.0 (56.7% complete)   lr: 0.000610   
+2022-07-06 09:59:30,932 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 73/102   Jobs: 9   Epoch: 3.47/6.0 (57.9% complete)   lr: 0.000593   
+2022-07-06 11:13:51,237 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 74/102   Jobs: 9   Epoch: 3.54/6.0 (59.0% complete)   lr: 0.000578   
+2022-07-06 12:28:10,573 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 75/102   Jobs: 10   Epoch: 3.61/6.0 (60.2% complete)   lr: 0.000625   
+2022-07-06 13:50:57,643 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 76/102   Jobs: 10   Epoch: 3.69/6.0 (61.5% complete)   lr: 0.000607   
+2022-07-06 15:13:48,784 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 77/102   Jobs: 10   Epoch: 3.77/6.0 (62.8% complete)   lr: 0.000589   
+2022-07-06 16:36:33,064 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 78/102   Jobs: 10   Epoch: 3.84/6.0 (64.1% complete)   lr: 0.000572   
+2022-07-06 17:59:25,271 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 79/102   Jobs: 10   Epoch: 3.92/6.0 (65.4% complete)   lr: 0.000555   
+2022-07-06 19:22:08,600 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 80/102   Jobs: 10   Epoch: 4.00/6.0 (66.7% complete)   lr: 0.000539   
+2022-07-06 20:44:04,310 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 81/102   Jobs: 10   Epoch: 4.08/6.0 (68.0% complete)   lr: 0.000523   
+2022-07-06 22:06:56,684 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 82/102   Jobs: 10   Epoch: 4.16/6.0 (69.3% complete)   lr: 0.000507   
+2022-07-06 23:29:44,612 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 83/102   Jobs: 10   Epoch: 4.23/6.0 (70.5% complete)   lr: 0.000493   
+2022-07-07 00:52:34,293 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 84/102   Jobs: 10   Epoch: 4.31/6.0 (71.8% complete)   lr: 0.000478   
+2022-07-07 02:15:20,529 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 85/102   Jobs: 10   Epoch: 4.39/6.0 (73.1% complete)   lr: 0.000464   
+2022-07-07 03:38:04,862 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 86/102   Jobs: 11   Epoch: 4.47/6.0 (74.4% complete)   lr: 0.000496   
+2022-07-07 05:08:53,544 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 87/102   Jobs: 11   Epoch: 4.55/6.0 (75.8% complete)   lr: 0.000480   
+2022-07-07 06:39:46,388 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 88/102   Jobs: 11   Epoch: 4.64/6.0 (77.3% complete)   lr: 0.000464   
+2022-07-07 08:10:29,665 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 89/102   Jobs: 11   Epoch: 4.72/6.0 (78.7% complete)   lr: 0.000449   
+2022-07-07 09:41:18,941 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 90/102   Jobs: 11   Epoch: 4.81/6.0 (80.1% complete)   lr: 0.000435   
+2022-07-07 11:11:58,520 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 91/102   Jobs: 11   Epoch: 4.89/6.0 (81.5% complete)   lr: 0.000421   
+2022-07-07 12:42:52,444 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 92/102   Jobs: 11   Epoch: 4.98/6.0 (82.9% complete)   lr: 0.000407   
+2022-07-07 14:13:42,792 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 93/102   Jobs: 11   Epoch: 5.06/6.0 (84.4% complete)   lr: 0.000394   
+2022-07-07 15:44:29,102 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 94/102   Jobs: 11   Epoch: 5.15/6.0 (85.8% complete)   lr: 0.000381   
+2022-07-07 17:15:12,786 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 95/102   Jobs: 11   Epoch: 5.23/6.0 (87.2% complete)   lr: 0.000369   
+2022-07-07 18:46:04,422 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 96/102   Jobs: 11   Epoch: 5.32/6.0 (88.6% complete)   lr: 0.000357   
+2022-07-07 20:16:49,079 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 97/102   Jobs: 11   Epoch: 5.40/6.0 (90.1% complete)   lr: 0.000346   
+2022-07-07 21:48:13,644 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 98/102   Jobs: 12   Epoch: 5.49/6.0 (91.5% complete)   lr: 0.000365   
+2022-07-07 23:27:15,844 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 99/102   Jobs: 12   Epoch: 5.58/6.0 (93.0% complete)   lr: 0.000352   
+2022-07-08 01:06:39,331 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 100/102   Jobs: 12   Epoch: 5.67/6.0 (94.6% complete)   lr: 0.000340   
+2022-07-08 02:45:06,685 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 101/102   Jobs: 12   Epoch: 5.77/6.0 (96.1% complete)   lr: 0.000328   
+2022-07-08 04:24:31,165 [steps/nnet3/chain/train.py:535 - train - INFO ] Iter: 102/102   Jobs: 12   Epoch: 5.86/6.0 (97.7% complete)   lr: 0.000300   
+2022-07-08 06:03:02,646 [steps/nnet3/chain/train.py:592 - train - INFO ] Doing final combination to produce final.mdl
+2022-07-08 06:03:02,646 [steps/libs/nnet3/train/chain_objf/acoustic_model.py:571 - combine_models - INFO ] Combining {96, 97, 98, 99, 100, 101, 102, 103, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95} models.
+2022-07-08 06:05:00,496 [steps/nnet3/chain/train.py:621 - train - INFO ] Cleaning up the experiment directory exp/chain_cleaned_1d/tdnn1d_sp
+steps/nnet2/remove_egs.sh: Finished deleting examples in exp/chain_cleaned_1d/tdnn1d_sp/egs
+exp/chain_cleaned_1d/tdnn1d_sp: num-iters=103 nj=3..12 num-params=9.6M dim=40+100->3994 combine=-0.082->-0.081 (over 2) xent:train/valid[67,102]=(-0.979,-0.784/-1.03,-0.871) logprob:train/valid[67,102]=(-0.104,-0.083/-0.109,-0.094)
+steps/nnet3/chain/train.py --stage -10 --cmd run.pl --feat.online-ivector-dir exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires --feat.cmvn-opts=--config=conf/online_cmvn.conf --chain.xent-regularize 0.1 --chain.leaky-hmm-coefficient 0.1 --chain.l2-regularize 0.0 --chain.apply-deriv-weights false --chain.lm-opts=--num-extra-lm-states=2000 --trainer.dropout-schedule 0,0@0.20,0.5@0.50,0 --trainer.add-option=--optimization.memory-compression-level=2 --egs.dir  --egs.opts --frames-overlap-per-eg 0 --constrained false --online-cmvn true --egs.chunk-width 150,110,100 --trainer.num-chunk-per-minibatch 64 --trainer.frames-per-iter 5000000 --trainer.num-epochs 6 --trainer.optimization.num-jobs-initial 3 --trainer.optimization.num-jobs-final 12 --trainer.optimization.initial-effective-lrate 0.00025 --trainer.optimization.final-effective-lrate 0.000025 --trainer.max-param-change 2.0 --cleanup.remove-egs true --feat-dir data/train_cleaned_sp_hires --tree-dir exp/chain_cleaned_1d/tree_bi --lat-dir exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats --use-gpu=wait --dir exp/chain_cleaned_1d/tdnn1d_sp
+['steps/nnet3/chain/train.py', '--stage', '-10', '--cmd', 'run.pl', '--feat.online-ivector-dir', 'exp/nnet3_cleaned_1d/ivectors_train_cleaned_sp_hires', '--feat.cmvn-opts=--config=conf/online_cmvn.conf', '--chain.xent-regularize', '0.1', '--chain.leaky-hmm-coefficient', '0.1', '--chain.l2-regularize', '0.0', '--chain.apply-deriv-weights', 'false', '--chain.lm-opts=--num-extra-lm-states=2000', '--trainer.dropout-schedule', '0,0@0.20,0.5@0.50,0', '--trainer.add-option=--optimization.memory-compression-level=2', '--egs.dir', '', '--egs.opts', '--frames-overlap-per-eg 0 --constrained false --online-cmvn true', '--egs.chunk-width', '150,110,100', '--trainer.num-chunk-per-minibatch', '64', '--trainer.frames-per-iter', '5000000', '--trainer.num-epochs', '6', '--trainer.optimization.num-jobs-initial', '3', '--trainer.optimization.num-jobs-final', '12', '--trainer.optimization.initial-effective-lrate', '0.00025', '--trainer.optimization.final-effective-lrate', '0.000025', '--trainer.max-param-change', '2.0', '--cleanup.remove-egs', 'true', '--feat-dir', 'data/train_cleaned_sp_hires', '--tree-dir', 'exp/chain_cleaned_1d/tree_bi', '--lat-dir', 'exp/chain_cleaned_1d/tri3_cleaned_train_cleaned_sp_lats', '--use-gpu=wait', '--dir', 'exp/chain_cleaned_1d/tdnn1d_sp']
+Fri Jul  8 06:05:58 UTC 2022
+Fri Jul  8 06:05:58 UTC 2022
+tree-info exp/chain_cleaned_1d/tdnn1d_sp/tree 
+tree-info exp/chain_cleaned_1d/tdnn1d_sp/tree 
+fstcomposecontext --context-size=2 --central-position=1 --read-disambig-syms=data/lang/phones/disambig.int --write-disambig-syms=data/lang/tmp/disambig_ilabels_2_1.int data/lang/tmp/ilabels_2_1.6325 data/lang/tmp/LG.fst 
+fstisstochastic data/lang/tmp/CLG_2_1.fst 
+-0.137501 -0.155672
+[info]: CLG not stochastic.
+make-h-transducer --disambig-syms-out=exp/chain_cleaned_1d/tdnn1d_sp/graph/disambig_tid.int --transition-scale=1.0 data/lang/tmp/ilabels_2_1 exp/chain_cleaned_1d/tdnn1d_sp/tree exp/chain_cleaned_1d/tdnn1d_sp/final.mdl 
+fstrmsymbols exp/chain_cleaned_1d/tdnn1d_sp/graph/disambig_tid.int 
+fstdeterminizestar --use-log=true 
+fsttablecompose exp/chain_cleaned_1d/tdnn1d_sp/graph/Ha.fst data/lang/tmp/CLG_2_1.fst 
+fstminimizeencoded 
+fstrmepslocal 
+fstisstochastic exp/chain_cleaned_1d/tdnn1d_sp/graph/HCLGa.fst 
+-0.137619 -0.539162
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=1.0 --reorder=true exp/chain_cleaned_1d/tdnn1d_sp/final.mdl exp/chain_cleaned_1d/tdnn1d_sp/graph/HCLGa.fst 
+fstisstochastic exp/chain_cleaned_1d/tdnn1d_sp/graph/HCLG.fst 
+1.90465e-09 -0.305486
+[info]: final HCLG is not stochastic.
+Fri Jul  8 06:07:34 UTC 2022
+Fri Jul  8 06:07:34 UTC 2022
+Fri Jul  8 06:07:34 UTC 2022
+steps/nnet3/decode.sh --num-threads 4 --nj 15 --cmd run.pl --acwt 1.0 --post-decode-acwt 10.0 --online-ivector-dir exp/nnet3_cleaned_1d/ivectors_dev_hires --scoring-opts --min-lmwt 5  exp/chain_cleaned_1d/tdnn1d_sp/graph data/dev_hires exp/chain_cleaned_1d/tdnn1d_sp/decode_dev
+steps/nnet3/decode.sh --num-threads 4 --nj 15 --cmd run.pl --acwt 1.0 --post-decode-acwt 10.0 --online-ivector-dir exp/nnet3_cleaned_1d/ivectors_test_hires --scoring-opts --min-lmwt 5  exp/chain_cleaned_1d/tdnn1d_sp/graph data/test_hires exp/chain_cleaned_1d/tdnn1d_sp/decode_test
+steps/nnet3/decode.sh: feature type is raw (apply-cmvn-online)
+steps/nnet3/decode.sh: feature type is raw (apply-cmvn-online)
+steps/diagnostic/analyze_lats.sh --cmd run.pl --iter final exp/chain_cleaned_1d/tdnn1d_sp/graph exp/chain_cleaned_1d/tdnn1d_sp/decode_dev
+steps/diagnostic/analyze_lats.sh: see stats in exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,6,61) and mean=40.5
+steps/diagnostic/analyze_lats.sh: see stats in exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/log/analyze_lattice_depth_stats.log
+score best paths
+steps/diagnostic/analyze_lats.sh --cmd run.pl --iter final exp/chain_cleaned_1d/tdnn1d_sp/graph exp/chain_cleaned_1d/tdnn1d_sp/decode_test
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_10
+%WER 23.18 [ 25348 / 109336, 3595 ins, 3259 del, 18494 sub ]
+%SER 67.89 [ 10085 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_11
+%WER 23.61 [ 25819 / 109336, 3488 ins, 3623 del, 18708 sub ]
+%SER 68.62 [ 10194 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_12
+%WER 24.18 [ 26433 / 109336, 3381 ins, 4036 del, 19016 sub ]
+%SER 69.72 [ 10358 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_13
+%WER 24.84 [ 27157 / 109336, 3334 ins, 4518 del, 19305 sub ]
+%SER 70.72 [ 10506 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_14
+%WER 25.50 [ 27879 / 109336, 3271 ins, 4963 del, 19645 sub ]
+%SER 71.85 [ 10674 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_15
+%WER 26.25 [ 28697 / 109336, 3201 ins, 5391 del, 20105 sub ]
+%SER 73.10 [ 10860 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_16
+%WER 27.00 [ 29516 / 109336, 3163 ins, 5850 del, 20503 sub ]
+%SER 74.22 [ 11026 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_17
+%WER 27.68 [ 30268 / 109336, 3139 ins, 6190 del, 20939 sub ]
+%SER 75.13 [ 11161 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_5
+%WER 23.65 [ 25863 / 109336, 5216 ins, 1889 del, 18758 sub ]
+%SER 66.34 [ 9856 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_6
+%WER 23.00 [ 25143 / 109336, 4649 ins, 2080 del, 18414 sub ]
+%SER 66.20 [ 9834 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_7
+%WER 22.71 [ 24832 / 109336, 4253 ins, 2322 del, 18257 sub ]
+%SER 66.38 [ 9861 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_8
+%WER 22.70 [ 24823 / 109336, 3984 ins, 2601 del, 18238 sub ]
+%SER 66.70 [ 9909 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev/wer_9
+%WER 22.84 [ 24977 / 109336, 3759 ins, 2889 del, 18329 sub ]
+%SER 67.23 [ 9987 / 14856 ]
+score confidence and timing with sclite
+Decoding done.
+steps/lmrescore_const_arpa.sh --cmd run.pl data/lang data/lang_rescore data/dev_hires exp/chain_cleaned_1d/tdnn1d_sp/decode_dev exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore
+steps/diagnostic/analyze_lats.sh: see stats in exp/chain_cleaned_1d/tdnn1d_sp/decode_test/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,7,71) and mean=41.6
+steps/diagnostic/analyze_lats.sh: see stats in exp/chain_cleaned_1d/tdnn1d_sp/decode_test/log/analyze_lattice_depth_stats.log
+score best paths
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_10
+%WER 24.90 [ 31449 / 126320, 4750 ins, 3374 del, 23325 sub ]
+%SER 69.72 [ 12252 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_11
+%WER 25.36 [ 32041 / 126320, 4540 ins, 3772 del, 23729 sub ]
+%SER 70.64 [ 12412 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_12
+%WER 25.95 [ 32774 / 126320, 4426 ins, 4196 del, 24152 sub ]
+%SER 71.78 [ 12614 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_13
+%WER 26.63 [ 33636 / 126320, 4322 ins, 4711 del, 24603 sub ]
+%SER 72.81 [ 12794 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_14
+%WER 27.33 [ 34521 / 126320, 4216 ins, 5293 del, 25012 sub ]
+%SER 74.04 [ 13010 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_15
+%WER 28.05 [ 35439 / 126320, 4144 ins, 5855 del, 25440 sub ]
+%SER 75.13 [ 13202 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_16
+%WER 28.81 [ 36390 / 126320, 4081 ins, 6341 del, 25968 sub ]
+%SER 76.16 [ 13383 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_17
+%WER 29.53 [ 37301 / 126320, 4040 ins, 6789 del, 26472 sub ]
+%SER 77.22 [ 13569 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_5
+%WER 25.56 [ 32284 / 126320, 7073 ins, 2024 del, 23187 sub ]
+%SER 68.01 [ 11950 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_6
+%WER 24.76 [ 31279 / 126320, 6249 ins, 2187 del, 22843 sub ]
+%SER 67.51 [ 11863 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_7
+%WER 24.53 [ 30987 / 126320, 5715 ins, 2405 del, 22867 sub ]
+%SER 67.77 [ 11909 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_8
+%WER 24.47 [ 30909 / 126320, 5317 ins, 2687 del, 22905 sub ]
+%SER 68.08 [ 11963 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test/wer_9
+%WER 24.57 [ 31042 / 126320, 4966 ins, 3002 del, 23074 sub ]
+%SER 68.85 [ 12098 / 17572 ]
+score confidence and timing with sclite
+Decoding done.
+steps/lmrescore_const_arpa.sh --cmd run.pl data/lang data/lang_rescore data/test_hires exp/chain_cleaned_1d/tdnn1d_sp/decode_test exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_10
+%WER 21.78 [ 23811 / 109336, 3688 ins, 3032 del, 17091 sub ]
+%SER 64.20 [ 9537 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_11
+%WER 22.16 [ 24224 / 109336, 3571 ins, 3361 del, 17292 sub ]
+%SER 64.88 [ 9638 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_12
+%WER 22.59 [ 24703 / 109336, 3474 ins, 3723 del, 17506 sub ]
+%SER 65.76 [ 9769 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_13
+%WER 23.15 [ 25307 / 109336, 3413 ins, 4105 del, 17789 sub ]
+%SER 66.82 [ 9927 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_14
+%WER 23.69 [ 25901 / 109336, 3379 ins, 4498 del, 18024 sub ]
+%SER 67.73 [ 10062 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_15
+%WER 24.19 [ 26449 / 109336, 3319 ins, 4855 del, 18275 sub ]
+%SER 68.65 [ 10199 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_16
+%WER 24.72 [ 27031 / 109336, 3290 ins, 5177 del, 18564 sub ]
+%SER 69.56 [ 10334 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_17
+%WER 25.20 [ 27556 / 109336, 3258 ins, 5455 del, 18843 sub ]
+%SER 70.31 [ 10445 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_7
+%WER 21.39 [ 23386 / 109336, 4254 ins, 2234 del, 16898 sub ]
+%SER 62.77 [ 9325 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_8
+%WER 21.32 [ 23305 / 109336, 3993 ins, 2461 del, 16851 sub ]
+%SER 63.15 [ 9382 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_dev_rescore/wer_9
+%WER 21.49 [ 23492 / 109336, 3836 ins, 2747 del, 16909 sub ]
+%SER 63.58 [ 9446 / 14856 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_10
+%WER 23.27 [ 29397 / 126320, 4848 ins, 3056 del, 21493 sub ]
+%SER 65.83 [ 11568 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_11
+%WER 23.69 [ 29923 / 126320, 4723 ins, 3388 del, 21812 sub ]
+%SER 66.63 [ 11709 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_12
+%WER 24.14 [ 30493 / 126320, 4586 ins, 3771 del, 22136 sub ]
+%SER 67.43 [ 11848 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_13
+%WER 24.68 [ 31172 / 126320, 4494 ins, 4180 del, 22498 sub ]
+%SER 68.56 [ 12048 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_14
+%WER 25.17 [ 31796 / 126320, 4373 ins, 4623 del, 22800 sub ]
+%SER 69.46 [ 12206 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_15
+%WER 25.73 [ 32502 / 126320, 4314 ins, 5057 del, 23131 sub ]
+%SER 70.21 [ 12337 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_16
+%WER 26.25 [ 33153 / 126320, 4251 ins, 5448 del, 23454 sub ]
+%SER 70.95 [ 12468 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_17
+%WER 26.74 [ 33774 / 126320, 4210 ins, 5816 del, 23748 sub ]
+%SER 71.77 [ 12611 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_7
+%WER 22.97 [ 29014 / 126320, 5674 ins, 2297 del, 21043 sub ]
+%SER 64.23 [ 11287 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_8
+%WER 22.87 [ 28892 / 126320, 5288 ins, 2522 del, 21082 sub ]
+%SER 64.60 [ 11351 / 17572 ]
+exp/chain_cleaned_1d/tdnn1d_sp/decode_test_rescore/wer_9
+%WER 23.00 [ 29057 / 126320, 5029 ins, 2783 del, 21245 sub ]
+%SER 65.19 [ 11455 / 17572 ]
+Fri Jul  8 07:28:04 UTC 2022
+----------------------- Stage 17 end---------------------------
