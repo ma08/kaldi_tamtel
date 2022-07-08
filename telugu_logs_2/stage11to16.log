@@ -1,0 +1,697 @@
+nohup: ignoring input
+----------------------- Stage 11 begin---------------------------
+Tue Jul  5 09:40:04 UTC 2022
+steps/align_si.sh --nj 8 --cmd run.pl telugu_data/train telugu_data/lang_nosp telugu_exp/tri1 telugu_exp/tri1_ali
+steps/align_si.sh: feature type is delta
+steps/align_si.sh: aligning data in telugu_data/train using model from telugu_exp/tri1, putting alignments in telugu_exp/tri1_ali
+steps/diagnostic/analyze_alignments.sh --cmd run.pl telugu_data/lang_nosp telugu_exp/tri1_ali
+steps/diagnostic/analyze_alignments.sh: see stats in telugu_exp/tri1_ali/log/analyze_alignments.log
+steps/align_si.sh: done aligning data.
+Tue Jul  5 09:42:16 UTC 2022
+----------------------- Stage 11 mid align_si complete, train_lda starting---------------------------
+Tue Jul  5 09:42:16 UTC 2022
+steps/train_lda_mllt.sh --cmd run.pl 4000 50000 telugu_data/train telugu_data/lang_nosp telugu_exp/tri1_ali telugu_exp/tri2
+** split_data.sh: warning, #lines is (utt2spk,feats.scp) is (43952,43951); you can 
+**  use utils/fix_data_dir.sh telugu_data/train to fix this.
+steps/train_lda_mllt.sh: Accumulating LDA statistics.
+steps/train_lda_mllt.sh: Accumulating tree stats
+steps/train_lda_mllt.sh: Getting questions for tree clustering.
+steps/train_lda_mllt.sh: Building the tree
+steps/train_lda_mllt.sh: Initializing the model
+steps/train_lda_mllt.sh: Converting alignments from telugu_exp/tri1_ali to use current tree
+steps/train_lda_mllt.sh: Compiling graphs of transcripts
+Training pass 1
+Training pass 2
+steps/train_lda_mllt.sh: Estimating MLLT
+Training pass 3
+Training pass 4
+steps/train_lda_mllt.sh: Estimating MLLT
+Training pass 5
+Training pass 6
+steps/train_lda_mllt.sh: Estimating MLLT
+Training pass 7
+Training pass 8
+Training pass 9
+Training pass 10
+Aligning data
+Training pass 11
+Training pass 12
+steps/train_lda_mllt.sh: Estimating MLLT
+Training pass 13
+Training pass 14
+Training pass 15
+Training pass 16
+Training pass 17
+Training pass 18
+Training pass 19
+Training pass 20
+Aligning data
+Training pass 21
+Training pass 22
+Training pass 23
+Training pass 24
+Training pass 25
+Training pass 26
+Training pass 27
+Training pass 28
+Training pass 29
+Training pass 30
+Aligning data
+Training pass 31
+Training pass 32
+Training pass 33
+Training pass 34
+steps/diagnostic/analyze_alignments.sh --cmd run.pl telugu_data/lang_nosp telugu_exp/tri2
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 78.9886023618% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_alignments.sh: see stats in telugu_exp/tri2/log/analyze_alignments.log
+4778 warnings in telugu_exp/tri2/log/align.*.*.log
+10 warnings in telugu_exp/tri2/log/init_model.log
+1 warnings in telugu_exp/tri2/log/analyze_alignments.log
+1 warnings in telugu_exp/tri2/log/build_tree.log
+103 warnings in telugu_exp/tri2/log/update.*.log
+92 warnings in telugu_exp/tri2/log/lda_acc.*.log
+5028 warnings in telugu_exp/tri2/log/acc.*.*.log
+telugu_exp/tri2: nj=8 align prob=-47.58 over 40.00h [retry=2.9%, fail=0.4%] states=3288 gauss=50089 tree-impr=4.11 lda-sum=15.62 mllt:impr,logdet=1.18,1.88
+steps/train_lda_mllt.sh: Done training system with LDA+MLLT features in telugu_exp/tri2
+Tue Jul  5 10:00:03 UTC 2022
+----------------------- Stage 11 end---------------------------
+----------------------- Stage 12 begin---------------------------
+Tue Jul  5 10:00:03 UTC 2022
+tree-info telugu_exp/tri2/tree 
+tree-info telugu_exp/tri2/tree 
+make-h-transducer --disambig-syms-out=telugu_exp/tri2/graph_nosp/disambig_tid.int --transition-scale=1.0 telugu_data/lang_nosp/tmp/ilabels_3_1 telugu_exp/tri2/tree telugu_exp/tri2/final.mdl 
+fstrmsymbols telugu_exp/tri2/graph_nosp/disambig_tid.int 
+fstdeterminizestar --use-log=true 
+fstminimizeencoded 
+fsttablecompose telugu_exp/tri2/graph_nosp/Ha.fst telugu_data/lang_nosp/tmp/CLG_3_1.fst 
+fstrmepslocal 
+fstisstochastic telugu_exp/tri2/graph_nosp/HCLGa.fst 
+0.000487832 -0.0507523
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true telugu_exp/tri2/final.mdl telugu_exp/tri2/graph_nosp/HCLGa.fst 
+Tue Jul  5 10:03:41 UTC 2022
+----------------------- Stage 12 end---------------------------
+----------------------- Stage 13 begin---------------------------
+Tue Jul  5 10:03:41 UTC 2022
+steps/get_prons.sh --cmd run.pl telugu_data/train telugu_data/lang_nosp telugu_exp/tri2
+steps/get_prons.sh: telugu_exp/tri2/ali.1.gz exists, so starting from alignments.
+steps/get_prons.sh: done writing prons to telugu_exp/tri2/prons.*.gz, silence counts in 
+steps/get_prons.sh: telugu_exp/tri2/sil_counts_nowb.txt and pronunciation counts in 
+steps/get_prons.sh: telugu_exp/tri2/pron_counts.{int,txt}
+steps/get_prons.sh: ... and also in telugu_exp/tri2/pron_counts_nowb.txt
+Tue Jul  5 10:03:53 UTC 2022
+Checking telugu_data/local/dict_nosp/silence_phones.txt ...
+--> reading telugu_data/local/dict_nosp/silence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict_nosp/silence_phones.txt is OK
+
+Checking telugu_data/local/dict_nosp/optional_silence.txt ...
+--> reading telugu_data/local/dict_nosp/optional_silence.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict_nosp/optional_silence.txt is OK
+
+Checking telugu_data/local/dict_nosp/nonsilence_phones.txt ...
+--> reading telugu_data/local/dict_nosp/nonsilence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict_nosp/nonsilence_phones.txt is OK
+
+Checking disjoint: silence_phones.txt, nonsilence_phones.txt
+--> disjoint property is OK.
+
+Checking telugu_data/local/dict_nosp/lexicon.txt
+--> reading telugu_data/local/dict_nosp/lexicon.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict_nosp/lexicon.txt is OK
+
+Checking telugu_data/local/dict_nosp/lexiconp.txt
+--> reading telugu_data/local/dict_nosp/lexiconp.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict_nosp/lexiconp.txt is OK
+
+Checking lexicon pair telugu_data/local/dict_nosp/lexicon.txt and telugu_data/local/dict_nosp/lexiconp.txt
+--> lexicon pair telugu_data/local/dict_nosp/lexicon.txt and telugu_data/local/dict_nosp/lexiconp.txt match
+
+Checking telugu_data/local/dict_nosp/extra_questions.txt ...
+--> telugu_data/local/dict_nosp/extra_questions.txt is empty (this is OK)
+--> SUCCESS [validating dictionary directory telugu_data/local/dict_nosp]
+
+utils/dict_dir_add_pronprobs.sh: normalizing pronprobs so maximum is 1 for each word.
+utils/dict_dir_add_pronprobs.sh: produced dictionary directory with probabilities in telugu_data/local/dict/
+utils/dict_dir_add_pronprobs.sh: validating telugu_data/local/dict ..
+Checking telugu_data/local/dict/silence_phones.txt ...
+--> reading telugu_data/local/dict/silence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/silence_phones.txt is OK
+
+Checking telugu_data/local/dict/optional_silence.txt ...
+--> reading telugu_data/local/dict/optional_silence.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/optional_silence.txt is OK
+
+Checking telugu_data/local/dict/nonsilence_phones.txt ...
+--> reading telugu_data/local/dict/nonsilence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/nonsilence_phones.txt is OK
+
+Checking disjoint: silence_phones.txt, nonsilence_phones.txt
+--> disjoint property is OK.
+
+Checking telugu_data/local/dict/lexicon.txt
+--> reading telugu_data/local/dict/lexicon.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/lexicon.txt is OK
+
+Checking telugu_data/local/dict/lexiconp.txt
+--> reading telugu_data/local/dict/lexiconp.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/lexiconp.txt is OK
+
+Checking telugu_data/local/dict/lexiconp_silprob.txt
+--> reading telugu_data/local/dict/lexiconp_silprob.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/lexiconp_silprob.txt is OK
+
+Checking lexicon pair telugu_data/local/dict/lexicon.txt and telugu_data/local/dict/lexiconp.txt
+--> lexicon pair telugu_data/local/dict/lexicon.txt and telugu_data/local/dict/lexiconp.txt match
+
+Checking lexicon pair telugu_data/local/dict/lexiconp.txt and telugu_data/local/dict/lexiconp_silprob.txt
+--> lexicon pair telugu_data/local/dict/lexiconp.txt and telugu_data/local/dict/lexiconp_silprob.txt match
+
+Checking telugu_data/local/dict/extra_questions.txt ...
+--> telugu_data/local/dict/extra_questions.txt is empty (this is OK)
+--> SUCCESS [validating dictionary directory telugu_data/local/dict]
+
+Some low-probability prons include: 
+# sort -k2,2 -n telugu_data/local/dict/lexiconp.txt  | head -n 8
+<unk> 1 NSN
+అ 1 a
+అం 1 a q
+అంక 1 a q k a
+అంకంపల్లి 1 a q k a q p a l l i
+అంకంపాలెం 1 a q k a q p aa l e q
+అంకాపూర్ 1 a q k aa p uu r
+అంకారా 1 a q k aa r aa
+Tue Jul  5 10:04:00 UTC 2022
+----------------------- Stage 13 end---------------------------
+----------------------- Stage 14 begin---------------------------
+Tue Jul  5 10:04:00 UTC 2022
+utils/prepare_lang.sh telugu_data/local/dict <unk> telugu_data/local/lang telugu_data/lang
+Checking telugu_data/local/dict/silence_phones.txt ...
+--> reading telugu_data/local/dict/silence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/silence_phones.txt is OK
+
+Checking telugu_data/local/dict/optional_silence.txt ...
+--> reading telugu_data/local/dict/optional_silence.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/optional_silence.txt is OK
+
+Checking telugu_data/local/dict/nonsilence_phones.txt ...
+--> reading telugu_data/local/dict/nonsilence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/nonsilence_phones.txt is OK
+
+Checking disjoint: silence_phones.txt, nonsilence_phones.txt
+--> disjoint property is OK.
+
+Checking telugu_data/local/dict/lexicon.txt
+--> reading telugu_data/local/dict/lexicon.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/lexicon.txt is OK
+
+Checking telugu_data/local/dict/lexiconp.txt
+--> reading telugu_data/local/dict/lexiconp.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/lexiconp.txt is OK
+
+Checking telugu_data/local/dict/lexiconp_silprob.txt
+--> reading telugu_data/local/dict/lexiconp_silprob.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/local/dict/lexiconp_silprob.txt is OK
+
+Checking lexicon pair telugu_data/local/dict/lexicon.txt and telugu_data/local/dict/lexiconp.txt
+--> lexicon pair telugu_data/local/dict/lexicon.txt and telugu_data/local/dict/lexiconp.txt match
+
+Checking lexicon pair telugu_data/local/dict/lexiconp.txt and telugu_data/local/dict/lexiconp_silprob.txt
+--> lexicon pair telugu_data/local/dict/lexiconp.txt and telugu_data/local/dict/lexiconp_silprob.txt match
+
+Checking telugu_data/local/dict/extra_questions.txt ...
+--> telugu_data/local/dict/extra_questions.txt is empty (this is OK)
+--> SUCCESS [validating dictionary directory telugu_data/local/dict]
+
+fstaddselfloops telugu_data/lang/phones/wdisambig_phones.int telugu_data/lang/phones/wdisambig_words.int 
+prepare_lang.sh: validating output directory
+utils/validate_lang.pl telugu_data/lang
+Checking existence of separator file
+separator file telugu_data/lang/subword_separator.txt is empty or does not exist, deal in word case.
+Checking telugu_data/lang/phones.txt ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/lang/phones.txt is OK
+
+Checking words.txt: #0 ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> telugu_data/lang/words.txt is OK
+
+Checking disjoint: silence.txt, nonsilence.txt, disambig.txt ...
+--> silence.txt and nonsilence.txt are disjoint
+--> silence.txt and disambig.txt are disjoint
+--> disambig.txt and nonsilence.txt are disjoint
+--> disjoint property is OK
+
+Checking sumation: silence.txt, nonsilence.txt, disambig.txt ...
+--> found no unexplainable phones in phones.txt
+
+Checking telugu_data/lang/phones/context_indep.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 10 entry/entries in telugu_data/lang/phones/context_indep.txt
+--> telugu_data/lang/phones/context_indep.int corresponds to telugu_data/lang/phones/context_indep.txt
+--> telugu_data/lang/phones/context_indep.csl corresponds to telugu_data/lang/phones/context_indep.txt
+--> telugu_data/lang/phones/context_indep.{txt, int, csl} are OK
+
+Checking telugu_data/lang/phones/nonsilence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 204 entry/entries in telugu_data/lang/phones/nonsilence.txt
+--> telugu_data/lang/phones/nonsilence.int corresponds to telugu_data/lang/phones/nonsilence.txt
+--> telugu_data/lang/phones/nonsilence.csl corresponds to telugu_data/lang/phones/nonsilence.txt
+--> telugu_data/lang/phones/nonsilence.{txt, int, csl} are OK
+
+Checking telugu_data/lang/phones/silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 10 entry/entries in telugu_data/lang/phones/silence.txt
+--> telugu_data/lang/phones/silence.int corresponds to telugu_data/lang/phones/silence.txt
+--> telugu_data/lang/phones/silence.csl corresponds to telugu_data/lang/phones/silence.txt
+--> telugu_data/lang/phones/silence.{txt, int, csl} are OK
+
+Checking telugu_data/lang/phones/optional_silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in telugu_data/lang/phones/optional_silence.txt
+--> telugu_data/lang/phones/optional_silence.int corresponds to telugu_data/lang/phones/optional_silence.txt
+--> telugu_data/lang/phones/optional_silence.csl corresponds to telugu_data/lang/phones/optional_silence.txt
+--> telugu_data/lang/phones/optional_silence.{txt, int, csl} are OK
+
+Checking telugu_data/lang/phones/disambig.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 7 entry/entries in telugu_data/lang/phones/disambig.txt
+--> telugu_data/lang/phones/disambig.int corresponds to telugu_data/lang/phones/disambig.txt
+--> telugu_data/lang/phones/disambig.csl corresponds to telugu_data/lang/phones/disambig.txt
+--> telugu_data/lang/phones/disambig.{txt, int, csl} are OK
+
+Checking telugu_data/lang/phones/roots.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 53 entry/entries in telugu_data/lang/phones/roots.txt
+--> telugu_data/lang/phones/roots.int corresponds to telugu_data/lang/phones/roots.txt
+--> telugu_data/lang/phones/roots.{txt, int} are OK
+
+Checking telugu_data/lang/phones/sets.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 53 entry/entries in telugu_data/lang/phones/sets.txt
+--> telugu_data/lang/phones/sets.int corresponds to telugu_data/lang/phones/sets.txt
+--> telugu_data/lang/phones/sets.{txt, int} are OK
+
+Checking telugu_data/lang/phones/extra_questions.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 9 entry/entries in telugu_data/lang/phones/extra_questions.txt
+--> telugu_data/lang/phones/extra_questions.int corresponds to telugu_data/lang/phones/extra_questions.txt
+--> telugu_data/lang/phones/extra_questions.{txt, int} are OK
+
+Checking telugu_data/lang/phones/word_boundary.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 214 entry/entries in telugu_data/lang/phones/word_boundary.txt
+--> telugu_data/lang/phones/word_boundary.int corresponds to telugu_data/lang/phones/word_boundary.txt
+--> telugu_data/lang/phones/word_boundary.{txt, int} are OK
+
+Checking optional_silence.txt ...
+--> reading telugu_data/lang/phones/optional_silence.txt
+--> telugu_data/lang/phones/optional_silence.txt is OK
+
+Checking disambiguation symbols: #0 and #1
+--> telugu_data/lang/phones/disambig.txt has "#0" and "#1"
+--> telugu_data/lang/phones/disambig.txt is OK
+
+Checking topo ...
+
+Checking word_boundary.txt: silence.txt, nonsilence.txt, disambig.txt ...
+--> telugu_data/lang/phones/word_boundary.txt doesn't include disambiguation symbols
+--> telugu_data/lang/phones/word_boundary.txt is the union of nonsilence.txt and silence.txt
+--> telugu_data/lang/phones/word_boundary.txt is OK
+
+Checking word-level disambiguation symbols...
+--> telugu_data/lang/phones/wdisambig.txt exists (newer prepare_lang.sh)
+Checking word_boundary.int and disambig.int
+--> generating a 15 word/subword sequence
+--> resulting phone sequence from L.fst corresponds to the word sequence
+--> L.fst is OK
+--> generating a 77 word/subword sequence
+--> resulting phone sequence from L_disambig.fst corresponds to the word sequence
+--> L_disambig.fst is OK
+
+Checking telugu_data/lang/oov.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in telugu_data/lang/oov.txt
+--> telugu_data/lang/oov.int corresponds to telugu_data/lang/oov.txt
+--> telugu_data/lang/oov.{txt, int} are OK
+
+--> telugu_data/lang/L.fst is olabel sorted
+--> telugu_data/lang/L_disambig.fst is olabel sorted
+--> SUCCESS [validating lang directory telugu_data/lang]
+Tue Jul  5 10:04:15 UTC 2022
+Tue Jul  5 10:04:16 UTC 2022
+tree-info telugu_exp/tri2/tree 
+tree-info telugu_exp/tri2/tree 
+fsttablecompose telugu_data/lang/L_disambig.fst telugu_data/lang/G.fst 
+fstminimizeencoded 
+fstpushspecial 
+fstdeterminizestar --use-log=true 
+fstisstochastic telugu_data/lang/tmp/LG.fst 
+-0.0420901 -0.0430203
+[info]: LG not stochastic.
+fstcomposecontext --context-size=3 --central-position=1 --read-disambig-syms=telugu_data/lang/phones/disambig.int --write-disambig-syms=telugu_data/lang/tmp/disambig_ilabels_3_1.int telugu_data/lang/tmp/ilabels_3_1.9832 telugu_data/lang/tmp/LG.fst 
+fstisstochastic telugu_data/lang/tmp/CLG_3_1.fst 
+0 -0.0430203
+[info]: CLG not stochastic.
+make-h-transducer --disambig-syms-out=telugu_exp/tri2/graph/disambig_tid.int --transition-scale=1.0 telugu_data/lang/tmp/ilabels_3_1 telugu_exp/tri2/tree telugu_exp/tri2/final.mdl 
+fsttablecompose telugu_exp/tri2/graph/Ha.fst telugu_data/lang/tmp/CLG_3_1.fst 
+fstrmepslocal 
+fstrmsymbols telugu_exp/tri2/graph/disambig_tid.int 
+fstminimizeencoded 
+fstdeterminizestar --use-log=true 
+fstisstochastic telugu_exp/tri2/graph/HCLGa.fst 
+0.00048811 -0.139117
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true telugu_exp/tri2/final.mdl telugu_exp/tri2/graph/HCLGa.fst 
+Tue Jul  5 10:11:14 UTC 2022
+----------------------- Stage 14 end---------------------------
+----------------------- Stage 15 begin---------------------------
+Tue Jul  5 10:11:14 UTC 2022
+steps/align_si.sh --nj 8 --cmd run.pl telugu_data/train telugu_data/lang telugu_exp/tri2 telugu_exp/tri2_ali
+steps/align_si.sh: feature type is lda
+steps/align_si.sh: aligning data in telugu_data/train using model from telugu_exp/tri2, putting alignments in telugu_exp/tri2_ali
+steps/diagnostic/analyze_alignments.sh --cmd run.pl telugu_data/lang telugu_exp/tri2_ali
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 79.5363709033% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_alignments.sh: see stats in telugu_exp/tri2_ali/log/analyze_alignments.log
+steps/align_si.sh: done aligning data.
+Tue Jul  5 10:13:33 UTC 2022
+steps/train_sat.sh --cmd run.pl 5000 100000 telugu_data/train telugu_data/lang telugu_exp/tri2_ali telugu_exp/tri3
+steps/train_sat.sh: feature type is lda
+steps/train_sat.sh: obtaining initial fMLLR transforms since not present in telugu_exp/tri2_ali
+steps/train_sat.sh: Accumulating tree stats
+steps/train_sat.sh: Getting questions for tree clustering.
+steps/train_sat.sh: Building the tree
+steps/train_sat.sh: Initializing the model
+WARNING (gmm-init-model[5.5.1009~1-e4940]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 1 with no stats; corresponding phone list: 6 7 8 9 10 
+This is a bad warning.
+steps/train_sat.sh: Converting alignments from telugu_exp/tri2_ali to use current tree
+steps/train_sat.sh: Compiling graphs of transcripts
+Pass 1
+Pass 2
+Estimating fMLLR transforms
+Pass 3
+Pass 4
+Estimating fMLLR transforms
+Pass 5
+Pass 6
+Estimating fMLLR transforms
+Pass 7
+Pass 8
+Pass 9
+Pass 10
+Aligning data
+Pass 11
+Pass 12
+Estimating fMLLR transforms
+Pass 13
+Pass 14
+Pass 15
+Pass 16
+Pass 17
+Pass 18
+Pass 19
+Pass 20
+Aligning data
+Pass 21
+Pass 22
+Pass 23
+Pass 24
+Pass 25
+Pass 26
+Pass 27
+Pass 28
+Pass 29
+Pass 30
+Aligning data
+Pass 31
+Pass 32
+Pass 33
+Pass 34
+steps/diagnostic/analyze_alignments.sh --cmd run.pl telugu_data/lang telugu_exp/tri3
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 75.3723841725% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_alignments.sh: see stats in telugu_exp/tri3/log/analyze_alignments.log
+1 warnings in telugu_exp/tri3/log/analyze_alignments.log
+3 warnings in telugu_exp/tri3/log/est_alimdl.log
+1 warnings in telugu_exp/tri3/log/questions.log
+3845 warnings in telugu_exp/tri3/log/align.*.*.log
+6 warnings in telugu_exp/tri3/log/init_model.log
+176364 warnings in telugu_exp/tri3/log/fmllr.*.*.log
+1 warnings in telugu_exp/tri3/log/build_tree.log
+109 warnings in telugu_exp/tri3/log/update.*.log
+6339 warnings in telugu_exp/tri3/log/acc.*.*.log
+steps/train_sat.sh: Likelihood evolution:
+-50.8131 -50.5447 -50.4508 -50.1749 -49.4226 -48.5868 -47.9918 -47.546 -47.2159 -46.6871 -46.4313 -46.0261 -45.8252 -45.6874 -45.5616 -45.4486 -45.3466 -45.2524 -45.1646 -45.0032 -44.8878 -44.811 -44.7398 -44.6736 -44.6108 -44.55 -44.4917 -44.4354 -44.3805 -44.2933 -44.2255 -44.1949 -44.1752 -44.161 
+telugu_exp/tri3: nj=8 align prob=-46.38 over 39.98h [retry=2.0%, fail=0.4%] states=4032 gauss=100081 fmllr-impr=3.19 over 31.36h tree-impr=6.66
+steps/train_sat.sh: done training SAT system in telugu_exp/tri3
+Tue Jul  5 10:50:36 UTC 2022
+tree-info telugu_exp/tri3/tree 
+tree-info telugu_exp/tri3/tree 
+make-h-transducer --disambig-syms-out=telugu_exp/tri3/graph/disambig_tid.int --transition-scale=1.0 telugu_data/lang/tmp/ilabels_3_1 telugu_exp/tri3/tree telugu_exp/tri3/final.mdl 
+fstminimizeencoded 
+fsttablecompose telugu_exp/tri3/graph/Ha.fst telugu_data/lang/tmp/CLG_3_1.fst 
+fstdeterminizestar --use-log=true 
+fstrmsymbols telugu_exp/tri3/graph/disambig_tid.int 
+fstrmepslocal 
+fstisstochastic telugu_exp/tri3/graph/HCLGa.fst 
+0.000488052 -0.139117
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true telugu_exp/tri3/final.mdl telugu_exp/tri3/graph/HCLGa.fst 
+Tue Jul  5 10:55:15 UTC 2022
+----------------------- Stage 15 end---------------------------
+----------------------- Stage 16 begin---------------------------
+Tue Jul  5 10:55:15 UTC 2022
+Tue Jul  5 10:55:15 UTC 2022
+steps/cleanup/clean_and_segment_data.sh: Building biased-language-model decoding graphs...
+steps/cleanup/make_biased_lm_graphs.sh --nj 100 --cmd run.pl telugu_data/train telugu_data/lang telugu_exp/tri3_cleaned_work telugu_exp/tri3_cleaned_work/graphs
+sym2int.pl: replacing నిర్ణయిస్తారుtem0722001981175708 with 1
+** Replaced 1 instances of OOVs with 1
+steps/cleanup/make_biased_lm_graphs.sh: creating utterance-group-specific decoding graphs with biased LMs
+steps/cleanup/clean_and_segment_data.sh: Decoding with biased language models...
+steps/cleanup/decode_segmentation.sh --beam 15.0 --nj 100 --cmd run.pl --mem 4G --transform-dir telugu_exp/tri3 --skip-scoring true --allow-partial false telugu_exp/tri3_cleaned_work/graphs telugu_data/train telugu_exp/tri3_cleaned_work/lats
+** split_data.sh: warning, #lines is (utt2spk,feats.scp) is (43952,43951); you can 
+**  use utils/fix_data_dir.sh telugu_data/train to fix this.
+steps/cleanup/decode_segmentation.sh: expected 43951 graphs in telugu_exp/tri3_cleaned_work/graphs/HCLG.fsts.scp, got 43952
+steps/cleanup/decode_segmentation.sh: feature type is lda
+Using fMLLR transforms from telugu_exp/tri3
+steps/cleanup/decode_segmentation.sh: num-jobs for transforms mismatches, so copying them.
+copy-feats ark:- ark,scp:telugu_exp/tri3_cleaned_work/lats/trans.ark,telugu_exp/tri3_cleaned_work/lats/trans.scp 
+LOG (copy-feats[5.5.1009~1-e4940]:main():copy-feats.cc:143) Copied 40441 feature matrices.
+steps/diagnostic/analyze_lats.sh --cmd run.pl telugu_data/lang telugu_exp/tri3_cleaned_work/lats
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 74.8447134309% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_lats.sh: see stats in telugu_exp/tri3_cleaned_work/lats/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,1,1) and mean=1.1
+steps/diagnostic/analyze_lats.sh: see stats in telugu_exp/tri3_cleaned_work/lats/log/analyze_lattice_depth_stats.log
+steps/cleanup/clean_and_segment_data.sh: Doing oracle alignment of lattices...
+** split_data.sh: warning, #lines is (utt2spk,feats.scp) is (43952,43951); you can 
+**  use utils/fix_data_dir.sh telugu_data/train to fix this.
+lattice_oracle_align.sh: overall oracle %WER is: 1.65%
+steps/cleanup/lattice_oracle_align.sh: oracle ctm is in telugu_exp/tri3_cleaned_work/lattice_oracle/ctm
+align-text '--special-symbol=***' ark:telugu_exp/tri3_cleaned_work/lattice_oracle/text ark:telugu_exp/tri3_cleaned_work/lattice_oracle/oracle_hyp.txt ark,t:- 
+LOG (align-text[5.5.1009~1-e4940]:main():align-text.cc:135) Done 43951 sentences, failed for 0
+utils/scoring/wer_per_utt_details.pl: Note: handling as utf-8 text
+steps/cleanup/lattice_oracle_align.sh: human-readable alignments are in telugu_exp/tri3_cleaned_work/lattice_oracle/analysis/per_utt_details.txt
+steps/cleanup/lattice_oracle_align.sh: per-utterance details sorted from worst to best utts are in telugu_exp/tri3_cleaned_work/lattice_oracle/all_info.sorted.txt
+steps/cleanup/lattice_oracle_align.sh: format is: utt-id num-errs ref-length decoded-output (tab) reference
+utils/scoring/wer_per_spk_details.pl: Note: handling as utf-8 text
+utils/scoring/wer_per_spk_details.pl: Note: handling as utf-8 text
+steps/cleanup/lattice_oracle_align.sh: per-speaker details are in telugu_exp/tri3_cleaned_work/lattice_oracle/analysis/per_spk_details.txt
+utils/scoring/wer_ops_details.pl: Note: handling as utf-8 text
+steps/cleanup/lattice_oracle_align.sh: per-word statistics [corr,sub,ins,del] are in telugu_exp/tri3_cleaned_work/lattice_oracle/analysis/ops_details.txt
+steps/cleanup/lattice_oracle_align.sh: obtaining ctm edits
+steps/cleanup/lattice_oracle_align.sh: ctm with edits information appended is in telugu_exp/tri3_cleaned_work/lattice_oracle/ctm_edits
+steps/cleanup/clean_and_segment_data.sh: using default values of non-scored words...
+steps/cleanup/clean_and_segment_data.sh: modifying ctm-edits file to allow repetitions [for dysfluencies] and 
+   ... to fix reference mismatches involving non-scored words. 
+   ... See telugu_exp/tri3_cleaned_work/log/modify_ctm_edits.log for details and stats, including
+ a list of commonly-repeated words.
+steps/cleanup/clean_and_segment_data.sh: applying 'taint' markers to ctm-edits file to mark silences and
+  ... non-scored words that are next to errors.
+... Stats, including global cor/ins/del/sub stats, are in telugu_exp/tri3_cleaned_work/log/taint_ctm_edits.log.
+steps/cleanup/clean_and_segment_data.sh: creating segmentation from ctm-edits file.
+steps/cleanup/clean_and_segment_data.sh: contents of telugu_exp/tri3_cleaned_work/log/segment_ctm_edits.log are:
+# steps/cleanup/internal/segment_ctm_edits.py --oov-symbol-file=telugu_data/lang/oov.txt --ctm-edits-out=telugu_exp/tri3_cleaned_work/ctm_edits.segmented --word-stats-out=telugu_exp/tri3_cleaned_work/word_stats.txt telugu_exp/tri3_cleaned_work/non_scored_words.txt telugu_exp/tri3_cleaned_work/ctm_edits.tainted telugu_exp/tri3_cleaned_work/text telugu_exp/tri3_cleaned_work/segments 
+# Started at Tue Jul  5 11:32:30 UTC 2022
+#
+Number of utterances is 43951, of which 1.45% had no segments after all processing; total length of data in original utterances (in seconds) was 144781
+At stage  0 [segment cores], num-segments is 45693, total length 99.04% of original total 
+At stage  1 [add tainted lines], num-segments is 45693, total length 99.23% of original total [+0.19%]
+At stage  2 [split segments], num-segments is 45707, total length 99.23% of original total [+0.00%]
+At stage  3 [truncate boundaries], num-segments is 45707, total length 96.24% of original total [-3.00%]
+At stage  4 [relax boundary truncation], num-segments is 45707, total length 96.24% of original total [+0.00%]
+At stage  5 [unk-padding], num-segments is 45707, total length 96.34% of original total [+0.11%]
+At stage  6 [remove new segments under --min-new-segment-length, num-segments is 45165, total length 96.07% of original total [-0.28%]
+At stage  7 [remove segments under --min-segment-length, num-segments is 44731, total length 95.93% of original total [-0.13%]
+At stage  8 [truncate segment-starts for --max-junk-proportion, num-segments is 44731, total length 95.81% of original total [-0.12%]
+At stage  9 [truncate segment-ends for --max-junk-proportion, num-segments is 44731, total length 95.71% of original total [-0.10%]
+At stage 10 [remove segments without scored,non-OOV words], num-segments is 44731, total length 95.71% of original total [+0.00%]
+At stage 11 [remove segments with junk exceeding --max-junk-proportion], num-segments is 44464, total length 95.32% of original total [-0.39%]
+At stage 12 [merge overlapping or touching segments], num-segments is 44306, total length 95.31% of original total [-0.01%]
+segment_ctm_edits.py: please see the file telugu_exp/tri3_cleaned_work/word_stats.txt for word-level statistics saying how frequently each word was excluded for a segment; format is <word> <proportion-of-time-excluded> <total-count>.  Particularly problematic words appear near the top of the file.
+segment_ctm_edits.py: detailed utterance-level debug information is in telugu_exp/tri3_cleaned_work/ctm_edits.segmented
+# Accounting: time=10 threads=1
+# Ended (code 0) at Tue Jul  5 11:32:40 UTC 2022, elapsed time 10 seconds
+For word-level statistics on p(not-being-in-a-segment), with 'worst' words at the top,
+see telugu_exp/tri3_cleaned_work/word_stats.txt
+For detailed utterance-level debugging information, see telugu_exp/tri3_cleaned_work/ctm_edits.segmented
+steps/cleanup/clean_and_segment_data.sh: working out required segment padding to account for feature-generation edge effects.
+utils/data/get_utt2dur.sh: working out telugu_data/train/utt2dur from telugu_data/train/segments
+utils/data/get_utt2dur.sh: computed telugu_data/train/utt2dur
+steps/cleanup/clean_and_segment_data.sh: we'll pad segments with 0.020 seconds at segment ends to correct for feature-generation end effects
+steps/cleanup/clean_and_segment_data.sh: based on the segments and text file in telugu_exp/tri3_cleaned_work/segments and telugu_exp/tri3_cleaned_work/text, creating new data-dir in telugu_data/train_cleaned
+utils/data/subsegment_data_dir.sh: note: frame shift is 0.01 [affects feats.scp]
+utils/data/get_utt2num_frames.sh: telugu_data/train/utt2num_frames already present!
+utils/data/subsegment_data_dir.sh: subsegmented data from telugu_data/train to telugu_data/train_cleaned
+utils/fix_data_dir.sh: filtered telugu_data/train_cleaned/wav.scp from 43952 to 43315 lines based on filter /tmp/kaldi.S0Ac/recordings.
+utils/fix_data_dir.sh: filtered telugu_data/train_cleaned/reco2file_and_channel from 43952 to 43315 lines based on filter /tmp/kaldi.S0Ac/recordings.
+fix_data_dir.sh: kept all 44306 utterances.
+fix_data_dir.sh: old files are kept in telugu_data/train_cleaned/.backup
+steps/cleanup/clean_and_segment_data.sh: recomputing CMVN stats for the new data
+steps/compute_cmvn_stats.sh telugu_data/train_cleaned telugu_data/train_cleaned/log telugu_data/train_cleaned/data
+Succeeded creating CMVN stats for train_cleaned
+steps/cleanup/clean_and_segment_data.sh: cleaning up intermediate files
+steps/cleanup/clean_and_segment_data.sh: done.
+Tue Jul  5 11:32:50 UTC 2022
+Tue Jul  5 11:32:50 UTC 2022
+steps/align_fmllr.sh --nj 100 --cmd run.pl telugu_data/train_cleaned telugu_data/lang telugu_exp/tri3 telugu_exp/tri3_ali_cleaned
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in telugu_data/train_cleaned using telugu_exp/tri3/final.alimdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl telugu_data/lang telugu_exp/tri3_ali_cleaned
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 73.741502744% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_alignments.sh: see stats in telugu_exp/tri3_ali_cleaned/log/analyze_alignments.log
+607 warnings in telugu_exp/tri3_ali_cleaned/log/align_pass2.*.log
+34357 warnings in telugu_exp/tri3_ali_cleaned/log/fmllr.*.log
+1 warnings in telugu_exp/tri3_ali_cleaned/log/analyze_alignments.log
+648 warnings in telugu_exp/tri3_ali_cleaned/log/align_pass1.*.log
+Tue Jul  5 11:40:26 UTC 2022
+Tue Jul  5 11:40:26 UTC 2022
+steps/train_sat.sh --cmd run.pl 5000 100000 telugu_data/train_cleaned telugu_data/lang telugu_exp/tri3_ali_cleaned telugu_exp/tri3_cleaned
+steps/train_sat.sh: feature type is lda
+steps/train_sat.sh: Using transforms from telugu_exp/tri3_ali_cleaned
+steps/train_sat.sh: Accumulating tree stats
+steps/train_sat.sh: Getting questions for tree clustering.
+steps/train_sat.sh: Building the tree
+steps/train_sat.sh: Initializing the model
+steps/train_sat.sh: Converting alignments from telugu_exp/tri3_ali_cleaned to use current tree
+steps/train_sat.sh: Compiling graphs of transcripts
+Pass 1
+Pass 2
+Estimating fMLLR transforms
+Pass 3
+Pass 4
+Estimating fMLLR transforms
+Pass 5
+Pass 6
+Estimating fMLLR transforms
+Pass 7
+Pass 8
+Pass 9
+Pass 10
+Aligning data
+Pass 11
+Pass 12
+Estimating fMLLR transforms
+Pass 13
+Pass 14
+Pass 15
+Pass 16
+Pass 17
+Pass 18
+Pass 19
+Pass 20
+Aligning data
+Pass 21
+Pass 22
+Pass 23
+Pass 24
+Pass 25
+Pass 26
+Pass 27
+Pass 28
+Pass 29
+Pass 30
+Aligning data
+Pass 31
+Pass 32
+Pass 33
+Pass 34
+steps/diagnostic/analyze_alignments.sh --cmd run.pl telugu_data/lang telugu_exp/tri3_cleaned
+analyze_phone_length_stats.py: WARNING: optional-silence SIL is seen only 70.7549513335% of the time at utterance end.  This may not be optimal.
+steps/diagnostic/analyze_alignments.sh: see stats in telugu_exp/tri3_cleaned/log/analyze_alignments.log
+1 warnings in telugu_exp/tri3_cleaned/log/analyze_alignments.log
+1 warnings in telugu_exp/tri3_cleaned/log/build_tree.log
+137526 warnings in telugu_exp/tri3_cleaned/log/fmllr.*.*.log
+5 warnings in telugu_exp/tri3_cleaned/log/init_model.log
+74 warnings in telugu_exp/tri3_cleaned/log/update.*.log
+1018 warnings in telugu_exp/tri3_cleaned/log/acc.*.*.log
+3 warnings in telugu_exp/tri3_cleaned/log/est_alimdl.log
+1906 warnings in telugu_exp/tri3_cleaned/log/align.*.*.log
+steps/train_sat.sh: Likelihood evolution:
+-50.4556 -50.2138 -50.1782 -50.0244 -49.34 -48.473 -47.8754 -47.4479 -47.13 -46.6871 -46.4543 -46.079 -45.906 -45.7766 -45.6582 -45.5487 -45.447 -45.3517 -45.2625 -45.1126 -45.0046 -44.9302 -44.8617 -44.7969 -44.7348 -44.6745 -44.6158 -44.5588 -44.5035 -44.4189 -44.3529 -44.3228 -44.3036 -44.2898 
+telugu_exp/tri3_cleaned: nj=100 align prob=-46.67 over 38.30h [retry=0.8%, fail=0.1%] states=4072 gauss=100072 fmllr-impr=0.80 over 31.55h tree-impr=7.28
+steps/train_sat.sh: done training SAT system in telugu_exp/tri3_cleaned
+Tue Jul  5 12:16:57 UTC 2022
+Tue Jul  5 12:16:57 UTC 2022
+tree-info telugu_exp/tri3_cleaned/tree 
+tree-info telugu_exp/tri3_cleaned/tree 
+make-h-transducer --disambig-syms-out=telugu_exp/tri3_cleaned/graph/disambig_tid.int --transition-scale=1.0 telugu_data/lang/tmp/ilabels_3_1 telugu_exp/tri3_cleaned/tree telugu_exp/tri3_cleaned/final.mdl 
+fstrmepslocal 
+fsttablecompose telugu_exp/tri3_cleaned/graph/Ha.fst telugu_data/lang/tmp/CLG_3_1.fst 
+fstminimizeencoded 
+fstrmsymbols telugu_exp/tri3_cleaned/graph/disambig_tid.int 
+fstdeterminizestar --use-log=true 
+fstisstochastic telugu_exp/tri3_cleaned/graph/HCLGa.fst 
+0.000488052 -0.139117
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true telugu_exp/tri3_cleaned/final.mdl telugu_exp/tri3_cleaned/graph/HCLGa.fst 
+Tue Jul  5 12:21:40 UTC 2022
+Tue Jul  5 12:21:40 UTC 2022
+----------------------- Stage 16 end---------------------------
