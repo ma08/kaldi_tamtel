@@ -1,0 +1,127 @@
+# nnet3-chain-train --use-gpu=wait --apply-deriv-weights=False --l2-regularize=0.0 --leaky-hmm-coefficient=0.1 --xent-regularize=0.1 --print-interval=10 --momentum=0.0 --max-param-change=1.414213562373095 --backstitch-training-scale=0.0 --backstitch-training-interval=1 --l2-regularize-factor=0.3333333333333333 --optimization.memory-compression-level=2 --srand=0 "nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.0' - - |" telugu_exp/chain_cleaned_1d/tdnn1d_sp/den.fst "ark,bg:nnet3-chain-copy-egs                          --frame-shift=2                         ark:telugu_exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.2.ark ark:- |                         nnet3-chain-shuffle-egs --buffer-size=5000                         --srand=0 ark:- ark:- | nnet3-chain-merge-egs                         --minibatch-size=32 ark:- ark:- |" telugu_exp/chain_cleaned_1d/tdnn1d_sp/1.2.raw 
+# Started at Mon Jul 11 02:47:34 EDT 2022
+#
+nnet3-chain-train --use-gpu=wait --apply-deriv-weights=False --l2-regularize=0.0 --leaky-hmm-coefficient=0.1 --xent-regularize=0.1 --print-interval=10 --momentum=0.0 --max-param-change=1.414213562373095 --backstitch-training-scale=0.0 --backstitch-training-interval=1 --l2-regularize-factor=0.3333333333333333 --optimization.memory-compression-level=2 --srand=0 "nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.0' - - |" telugu_exp/chain_cleaned_1d/tdnn1d_sp/den.fst 'ark,bg:nnet3-chain-copy-egs                          --frame-shift=2                         ark:telugu_exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.2.ark ark:- |                         nnet3-chain-shuffle-egs --buffer-size=5000                         --srand=0 ark:- ark:- | nnet3-chain-merge-egs                         --minibatch-size=32 ark:- ark:- |' telugu_exp/chain_cleaned_1d/tdnn1d_sp/1.2.raw 
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuId():cu-device.cc:229) Waited 0 seconds before creating CUDA context
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuId():cu-device.cc:243) Not in compute-exclusive mode.  Suggestion: use 'nvidia-smi -c 3' to set compute exclusive mode
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:438) Selecting from 2 GPUs
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:453) cudaSetDevice(0): NVIDIA GeForce GTX 980 Ti	free:5804M, used:276M, total:6080M, free/total:0.95454
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:453) cudaSetDevice(1): NVIDIA GeForce GTX 980 Ti	free:5807M, used:276M, total:6084M, free/total:0.954584
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:501) Device: 1, mem_ratio: 0.954584
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuId():cu-device.cc:382) Trying to select device: 1
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:511) Success selecting device 1 free mem ratio: 0.954584
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:FinalizeActiveGpu():cu-device.cc:338) The active GPU is [1]: NVIDIA GeForce GTX 980 Ti	free:5541M, used:542M, total:6084M, free/total:0.910781 version 5.2
+nnet3-copy '--edits=set-dropout-proportion name=* proportion=0.0' - - 
+nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - 
+LOG (nnet3-am-copy[5.5.1035~1-3dd90]:main():nnet3-am-copy.cc:153) Copied neural net from telugu_exp/chain_cleaned_1d/tdnn1d_sp/0.mdl to raw format as -
+LOG (nnet3-copy[5.5.1035~1-3dd90]:ReadEditConfig():nnet-utils.cc:1413) Set dropout proportions for 13 components.
+LOG (nnet3-copy[5.5.1035~1-3dd90]:main():nnet3-copy.cc:123) Copied raw neural net from - to -
+nnet3-chain-shuffle-egs --buffer-size=5000 --srand=0 ark:- ark:- 
+nnet3-chain-copy-egs --frame-shift=2 ark:telugu_exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.2.ark ark:- 
+nnet3-chain-merge-egs --minibatch-size=32 ark:- ark:- 
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.80472
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.05632, multiplying update speed (currently 0.125) by 0.5; component is tdnnf2.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.05791, multiplying update speed (currently 0.125) by 0.5; component is tdnnf3.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.05885, multiplying update speed (currently 0.125) by 0.5; component is tdnnf6.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.05687, multiplying update speed (currently 0.125) by 0.5; component is tdnnf7.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.05517, multiplying update speed (currently 0.125) by 0.5; component is tdnnf8.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.05686, multiplying update speed (currently 0.125) by 0.5; component is tdnnf11.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.0573, multiplying update speed (currently 0.125) by 0.5; component is tdnnf12.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.25281, multiplying update speed (currently 0.125) by 0.5; component is prefinal-chain.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.8296
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.814459
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.05819, multiplying update speed (currently 0.125) by 0.5; component is tdnnf4.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.26054, multiplying update speed (currently 0.125) by 0.5; component is prefinal-xent.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.757239
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.819466
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.05775, multiplying update speed (currently 0.125) by 0.5; component is tdnnf9.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.06053, multiplying update speed (currently 0.125) by 0.5; component is tdnnf10.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.05983, multiplying update speed (currently 0.125) by 0.5; component is tdnnf13.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.774835
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.790163
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.12675, multiplying update speed (currently 0.125) by 0.5; component is tdnnf5.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.24107, multiplying update speed (currently 0.125) by 0.5; component is prefinal-l
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.856231
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.770439
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.07703, multiplying update speed (currently 0.125) by 0.5; component is tdnnf5.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.781374
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.15609, multiplying update speed (currently 0.125) by 0.5; component is prefinal-l
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.1633, multiplying update speed (currently 0.125) by 0.5; component is prefinal-chain.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.757101
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 0-9 is -7.92865 over 14560 frames.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 0-9 is -0.883165 over 14560 frames.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.859242
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.10219, multiplying update speed (currently 0.125) by 0.5; component is prefinal-l
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.809995
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.16926, multiplying update speed (currently 0.125) by 0.5; component is prefinal-xent.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.848922
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.02526, multiplying update speed (currently 0.125) by 0.5; component is tdnnf5.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.06675, multiplying update speed (currently 0.125) by 0.5; component is prefinal-l
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.80708
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.10695, multiplying update speed (currently 0.125) by 0.5; component is prefinal-chain.linear
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.11146, multiplying update speed (currently 0.125) by 0.5; component is prefinal-xent.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.775463
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.75206
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.02496, multiplying update speed (currently 0.125) by 0.5; component is prefinal-l
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.756361
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.773263
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.06994, multiplying update speed (currently 0.125) by 0.5; component is prefinal-chain.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.801952
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.772364
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 10-19 is -7.91712 over 13632 frames.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 10-19 is -0.883597 over 13632 frames.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.744865
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.02627, multiplying update speed (currently 0.125) by 0.5; component is prefinal-chain.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.705698
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.07331, multiplying update speed (currently 0.125) by 0.5; component is prefinal-xent.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.669271
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:ConstrainOrthonormalInternal():nnet-utils.cc:1060) Ratio is 1.02799, multiplying update speed (currently 0.125) by 0.5; component is prefinal-xent.linear
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.676307
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.710399
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.661128
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.705999
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.664166
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.666579
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.665955
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 20-29 is -7.86957 over 14144 frames.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 20-29 is -0.806785 over 14144 frames.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.708566
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.636001
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.65556
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:UpdateNnetWithMaxChange():nnet-utils.cc:2205) Per-component max-change active on 1 / 32 Updatable Components. (Smallest factor=0.865508 on tdnnf2.linear with max-change=0.75). Global max-change factor was 0.835924 with max-change=1.41421.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.643479
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.644197
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.683116
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.615647
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.609343
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.56822
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.634329
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 30-39 is -7.78056 over 14048 frames.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 30-39 is -0.788428 over 14048 frames.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.589453
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.506988
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.583893
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.519449
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.485088
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: -0.557477
+ASSERTION_FAILED (nnet3-chain-train[5.5.1035~1-3dd90]:ComputeWt1():natural-gradient-online.cc:501) Assertion failed: (beta_t1 > 0.0)
+
+[ Stack-Trace: ]
+/home/sourya/kaldi/src/lib/libkaldi-base.so(kaldi::MessageLogger::LogMessage() const+0xa71) [0x7fe34c8b1d77]
+/home/sourya/kaldi/src/lib/libkaldi-base.so(kaldi::KaldiAssertFailure_(char const*, char const*, int, char const*)+0x59) [0x7fe34c8b29f0]
+/home/sourya/kaldi/src/lib/libkaldi-nnet3.so(kaldi::nnet3::OnlineNaturalGradient::ComputeWt1(int, kaldi::VectorBase<float> const&, kaldi::VectorBase<float> const&, float, float, kaldi::MatrixBase<float> const&, kaldi::VectorBase<float> const&, kaldi::VectorBase<float> const&, kaldi::CuMatrixBase<float> const&, kaldi::CuMatrixBase<float>*, kaldi::CuMatrixBase<float>*) const+0x12f) [0x7fe34cb93df3]
+/home/sourya/kaldi/src/lib/libkaldi-nnet3.so(kaldi::nnet3::OnlineNaturalGradient::PreconditionDirectionsInternal(float, float, bool, kaldi::Vector<float> const&, kaldi::CuMatrixBase<float>*, kaldi::CuMatrixBase<float>*)+0xeb7) [0x7fe34cb96403]
+/home/sourya/kaldi/src/lib/libkaldi-nnet3.so(kaldi::nnet3::OnlineNaturalGradient::PreconditionDirections(kaldi::CuMatrixBase<float>*, float*)+0x1cd) [0x7fe34cb971f5]
+/home/sourya/kaldi/src/lib/libkaldi-nnet3.so(kaldi::nnet3::TdnnComponent::UpdateNaturalGradient(kaldi::nnet3::TdnnComponent::PrecomputedIndexes const&, kaldi::CuMatrixBase<float> const&, kaldi::CuMatrixBase<float> const&)+0x321) [0x7fe34cce2c85]
+/home/sourya/kaldi/src/lib/libkaldi-nnet3.so(kaldi::nnet3::TdnnComponent::Backprop(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, kaldi::nnet3::ComponentPrecomputedIndexes const*, kaldi::CuMatrixBase<float> const&, kaldi::CuMatrixBase<float> const&, kaldi::CuMatrixBase<float> const&, void*, kaldi::nnet3::Component*, kaldi::CuMatrixBase<float>*) const+0x2b6) [0x7fe34cce3144]
+/home/sourya/kaldi/src/lib/libkaldi-nnet3.so(kaldi::nnet3::NnetComputer::ExecuteCommand()+0x8b4) [0x7fe34cbe6354]
+/home/sourya/kaldi/src/lib/libkaldi-nnet3.so(kaldi::nnet3::NnetComputer::Run()+0x174) [0x7fe34cbe721a]
+/home/sourya/kaldi/src/lib/libkaldi-nnet3.so(kaldi::nnet3::NnetChainTrainer::TrainInternal(kaldi::nnet3::NnetChainExample const&, kaldi::nnet3::NnetComputation const&)+0x63) [0x7fe34cc3acd9]
+/home/sourya/kaldi/src/lib/libkaldi-nnet3.so(kaldi::nnet3::NnetChainTrainer::Train(kaldi::nnet3::NnetChainExample const&)+0xd5) [0x7fe34cc3b013]
+nnet3-chain-train(main+0x73c) [0x410fe2]
+/lib64/libc.so.6(+0x40440) [0x7fe31c240440]
+/lib64/libc.so.6(__libc_start_main+0x80) [0x7fe31c2404f0]
+nnet3-chain-train(_start+0x25) [0x4107c5]
+
+# Accounting: time=23 threads=1
+# Ended (code 134) at Mon Jul 11 02:47:57 EDT 2022, elapsed time 23 seconds
