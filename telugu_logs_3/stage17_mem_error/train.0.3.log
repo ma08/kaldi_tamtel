@@ -1,0 +1,40 @@
+# nnet3-chain-train --use-gpu=wait --apply-deriv-weights=False --l2-regularize=0.0 --leaky-hmm-coefficient=0.1 --xent-regularize=0.1 --print-interval=10 --momentum=0.0 --max-param-change=1.414213562373095 --backstitch-training-scale=0.0 --backstitch-training-interval=1 --l2-regularize-factor=0.3333333333333333 --optimization.memory-compression-level=2 --srand=0 "nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.0' - - |" telugu_exp/chain_cleaned_1d/tdnn1d_sp/den.fst "ark,bg:nnet3-chain-copy-egs                          --frame-shift=0                         ark:telugu_exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.3.ark ark:- |                         nnet3-chain-shuffle-egs --buffer-size=5000                         --srand=0 ark:- ark:- | nnet3-chain-merge-egs                         --minibatch-size=32 ark:- ark:- |" telugu_exp/chain_cleaned_1d/tdnn1d_sp/1.3.raw 
+# Started at Thu Jul 14 02:08:05 EDT 2022
+#
+nnet3-chain-train --use-gpu=wait --apply-deriv-weights=False --l2-regularize=0.0 --leaky-hmm-coefficient=0.1 --xent-regularize=0.1 --print-interval=10 --momentum=0.0 --max-param-change=1.414213562373095 --backstitch-training-scale=0.0 --backstitch-training-interval=1 --l2-regularize-factor=0.3333333333333333 --optimization.memory-compression-level=2 --srand=0 "nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.0' - - |" telugu_exp/chain_cleaned_1d/tdnn1d_sp/den.fst 'ark,bg:nnet3-chain-copy-egs                          --frame-shift=0                         ark:telugu_exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.3.ark ark:- |                         nnet3-chain-shuffle-egs --buffer-size=5000                         --srand=0 ark:- ark:- | nnet3-chain-merge-egs                         --minibatch-size=32 ark:- ark:- |' telugu_exp/chain_cleaned_1d/tdnn1d_sp/1.3.raw 
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuId():cu-device.cc:229) Waited 0 seconds before creating CUDA context
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuId():cu-device.cc:243) Not in compute-exclusive mode.  Suggestion: use 'nvidia-smi -c 3' to set compute exclusive mode
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:438) Selecting from 2 GPUs
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:453) cudaSetDevice(0): NVIDIA GeForce GTX 980 Ti	free:5809M, used:271M, total:6080M, free/total:0.955321
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:453) cudaSetDevice(1): NVIDIA GeForce GTX 980 Ti	free:5895M, used:188M, total:6084M, free/total:0.969007
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:501) Device: 1, mem_ratio: 0.969007
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuId():cu-device.cc:382) Trying to select device: 1
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:SelectGpuIdAuto():cu-device.cc:511) Success selecting device 1 free mem ratio: 0.969007
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:FinalizeActiveGpu():cu-device.cc:338) The active GPU is [1]: NVIDIA GeForce GTX 980 Ti	free:5294M, used:789M, total:6084M, free/total:0.870245 version 5.2
+nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - 
+nnet3-copy '--edits=set-dropout-proportion name=* proportion=0.0' - - 
+LOG (nnet3-am-copy[5.5.1035~1-3dd90]:main():nnet3-am-copy.cc:153) Copied neural net from telugu_exp/chain_cleaned_1d/tdnn1d_sp/0.mdl to raw format as -
+LOG (nnet3-copy[5.5.1035~1-3dd90]:ReadEditConfig():nnet-utils.cc:1413) Set dropout proportions for 13 components.
+LOG (nnet3-chain-train[5.5.1035~1-3dd90]:PrintMemoryUsage():cu-allocator.cc:340) Memory usage: 0/0 bytes currently allocated/total-held; 0/0 blocks currently allocated/free; largest free/allocated block sizes are 0/0; time taken total/cudaMalloc is 0/0.016196, synchronized the GPU 0 times out of 0 frees; device memory info: free:1314M, used:4769M, total:6084M, free/total:0.216077maximum allocated: 0current allocated: 0
+ERROR (nnet3-chain-train[5.5.1035~1-3dd90]:AllocateNewRegion():cu-allocator.cc:491) Failed to allocate a memory region of 2764046336 bytes.  Possibly this is due to sharing the GPU.  Try switching the GPUs to exclusive mode (nvidia-smi -c 3) and using the option --use-gpu=wait to scripts like steps/nnet3/chain/train.py.  Memory info: free:5270M, used:813M, total:6084M, free/total:0.8663 CUDA error: 'out of memory'
+
+[ Stack-Trace: ]
+nnet3-chain-train(kaldi::MessageLogger::LogMessage() const+0xa4f) [0x8ff071]
+nnet3-chain-train(kaldi::MessageLogger::LogAndThrow::operator=(kaldi::MessageLogger const&)+0x11) [0x59ed67]
+nnet3-chain-train(kaldi::CuMemoryAllocator::AllocateNewRegion(unsigned long)+0x42c) [0x812016]
+nnet3-chain-train(kaldi::CuMemoryAllocator::MallocPitch(unsigned long, unsigned long, unsigned long*)+0x48d) [0x8128e9]
+nnet3-chain-train(kaldi::CuMatrix<float>::Resize(int, int, kaldi::MatrixResizeType, kaldi::MatrixStrideType)+0x15c) [0x7d69fe]
+nnet3-chain-train(kaldi::CuMatrix<float>::Swap(kaldi::Matrix<float>*)+0x5e) [0x7d7cfa]
+nnet3-chain-train(kaldi::CuMatrix<float>::Read(std::istream&, bool)+0x4b) [0x7d7e79]
+nnet3-chain-train(kaldi::nnet3::FixedAffineComponent::Read(std::istream&, bool)+0x9f) [0x61418f]
+nnet3-chain-train(kaldi::nnet3::Component::ReadNew(std::istream&, bool)+0xd5) [0x600285]
+nnet3-chain-train(kaldi::nnet3::Nnet::Read(std::istream&, bool)+0xc6d) [0x5ce223]
+nnet3-chain-train(main+0x5bc) [0x59dc83]
+/lib64/libc.so.6(+0x40440) [0x7f3306c40440]
+/lib64/libc.so.6(__libc_start_main+0x80) [0x7f3306c404f0]
+nnet3-chain-train(_start+0x25) [0x59d605]
+
+WARNING (nnet3-chain-train[5.5.1035~1-3dd90]:Close():kaldi-io.cc:515) Pipe nnet3-am-copy --raw=true --learning-rate=0.00075 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/0.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.0' - - | had nonzero return status 36096
+kaldi::KaldiFatalError
+# Accounting: time=7 threads=1
+# Ended (code 255) at Thu Jul 14 02:08:12 EDT 2022, elapsed time 7 seconds
