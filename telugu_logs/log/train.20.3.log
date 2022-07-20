@@ -1,0 +1,774 @@
+# nnet3-chain-train --use-gpu=wait --verbose=1 --apply-deriv-weights=False --l2-regularize=0.0 --leaky-hmm-coefficient=0.1 --read-cache=telugu_exp/chain_cleaned_1d/tdnn1d_sp/cache.20 --xent-regularize=0.1 --print-interval=10 --momentum=0.0 --max-param-change=2.0 --backstitch-training-scale=0.0 --backstitch-training-interval=1 --l2-regularize-factor=0.08333333333333333 --optimization.memory-compression-level=2 --srand=20 "nnet3-am-copy --raw=true --learning-rate=0.00030000000000000003 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/20.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.12962962962962965' - - |" telugu_exp/chain_cleaned_1d/tdnn1d_sp/den.fst "ark,bg:nnet3-chain-copy-egs                          --frame-shift=0                         ark:telugu_exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.9.ark ark:- |                         nnet3-chain-shuffle-egs --buffer-size=5000                         --srand=20 ark:- ark:- | nnet3-chain-merge-egs                         --minibatch-size=64 ark:- ark:- |" telugu_exp/chain_cleaned_1d/tdnn1d_sp/21.3.raw 
+# Started at Wed Jun 15 15:23:20 UTC 2022
+#
+nnet3-chain-train --use-gpu=wait --verbose=1 --apply-deriv-weights=False --l2-regularize=0.0 --leaky-hmm-coefficient=0.1 --read-cache=telugu_exp/chain_cleaned_1d/tdnn1d_sp/cache.20 --xent-regularize=0.1 --print-interval=10 --momentum=0.0 --max-param-change=2.0 --backstitch-training-scale=0.0 --backstitch-training-interval=1 --l2-regularize-factor=0.08333333333333333 --optimization.memory-compression-level=2 --srand=20 "nnet3-am-copy --raw=true --learning-rate=0.00030000000000000003 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/20.mdl - |nnet3-copy --edits='set-dropout-proportion name=* proportion=0.12962962962962965' - - |" telugu_exp/chain_cleaned_1d/tdnn1d_sp/den.fst 'ark,bg:nnet3-chain-copy-egs                          --frame-shift=0                         ark:telugu_exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.9.ark ark:- |                         nnet3-chain-shuffle-egs --buffer-size=5000                         --srand=20 ark:- ark:- | nnet3-chain-merge-egs                         --minibatch-size=64 ark:- ark:- |' telugu_exp/chain_cleaned_1d/tdnn1d_sp/21.3.raw 
+WARNING (nnet3-chain-train[5.5.1009~1-e4940]:SelectGpuId():cu-device.cc:221) Will try again indefinitely every 5 seconds to get a GPU.
+WARNING (nnet3-chain-train[5.5.1009~1-e4940]:SelectGpuId():cu-device.cc:229) Waited 1030 seconds before creating CUDA context
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:SelectGpuId():cu-device.cc:238) CUDA setup operating under Compute Exclusive Mode.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:FinalizeActiveGpu():cu-device.cc:338) The active GPU is [0]: Tesla K80	free:11313M, used:127M, total:11441M, free/total:0.988856 version 3.7
+nnet3-copy '--edits=set-dropout-proportion name=* proportion=0.12962962962962965' - - 
+nnet3-am-copy --raw=true --learning-rate=0.00030000000000000003 --scale=1.0 telugu_exp/chain_cleaned_1d/tdnn1d_sp/20.mdl - 
+LOG (nnet3-am-copy[5.5.1009~1-e4940]:main():nnet3-am-copy.cc:153) Copied neural net from telugu_exp/chain_cleaned_1d/tdnn1d_sp/20.mdl to raw format as -
+LOG (nnet3-copy[5.5.1009~1-e4940]:ReadEditConfig():nnet-utils.cc:1413) Set dropout proportions for 13 components.
+LOG (nnet3-copy[5.5.1009~1-e4940]:main():nnet3-copy.cc:123) Copied raw neural net from - to -
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:NnetChainTrainer():nnet-chain-training.cc:51) Read computation cache from telugu_exp/chain_cleaned_1d/tdnn1d_sp/cache.20
+nnet3-chain-copy-egs --frame-shift=0 ark:telugu_exp/chain_cleaned_1d/tdnn1d_sp/egs/cegs.9.ark ark:- 
+nnet3-chain-shuffle-egs --buffer-size=5000 --srand=20 ark:- ark:- 
+nnet3-chain-merge-egs --minibatch-size=64 ark:- ark:- 
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42711
+VLOG[1] (nnet3-chain-train[5.5.1009~1-e4940]:ConsolidateMemory():nnet-utils.cc:1168) Consolidating memory; will print memory usage before and after consolidating:
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintMemoryUsage():cu-allocator.cc:340) Memory usage: 103304448/5931794432 bytes currently allocated/total-held; 771/20 blocks currently allocated/free; largest free/allocated block sizes are 6673408/4848544512; time taken total/cudaMalloc is 0.0122263/0.00824213, synchronized the GPU 0 times out of 1325 frees; device memory info: free:5656M, used:5784M, total:11441M, free/total:0.494417maximum allocated: 1664900608current allocated: 103304448
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintMemoryUsage():cu-allocator.cc:340) Memory usage: 103304448/5931794432 bytes currently allocated/total-held; 771/22 blocks currently allocated/free; largest free/allocated block sizes are 6673408/4848544512; time taken total/cudaMalloc is 0.0122476/0.00824213, synchronized the GPU 0 times out of 1348 frees; device memory info: free:5656M, used:5784M, total:11441M, free/total:0.494417maximum allocated: 1664900608current allocated: 103304448
+VLOG[1] (nnet3-chain-train[5.5.1009~1-e4940]:ConsolidateMemory():nnet-utils.cc:1168) Consolidating memory; will print memory usage before and after consolidating:
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintMemoryUsage():cu-allocator.cc:340) Memory usage: 103304448/5931794432 bytes currently allocated/total-held; 771/22 blocks currently allocated/free; largest free/allocated block sizes are 6673408/4848544512; time taken total/cudaMalloc is 0.0122476/0.00824213, synchronized the GPU 0 times out of 1348 frees; device memory info: free:5656M, used:5784M, total:11441M, free/total:0.494417maximum allocated: 1664900608current allocated: 103304448
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintMemoryUsage():cu-allocator.cc:340) Memory usage: 103304448/5931794432 bytes currently allocated/total-held; 771/13 blocks currently allocated/free; largest free/allocated block sizes are 6673408/5624362752; time taken total/cudaMalloc is 0.0123367/0.00824213, synchronized the GPU 0 times out of 1403 frees; device memory info: free:5656M, used:5784M, total:11441M, free/total:0.494417maximum allocated: 1664900608current allocated: 103304448
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35287
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4915
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33474
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.50381
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38751
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39215
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38984
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34329
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 9.68245 4.20998 3.4112 3.24175 3.22959 2.3367 2.6103 2.60742 2.67125 2.83593 4.0496 3.98022 3.90298 4.28502 4.33625 4.4468 4.82328 3.54916 3.55158 3.15846 2.51634 2.40369 1.97437 1.47496 1.63762 1.13394 1.09079 0.95268 1.46957 1.64844 1.51919 1.68822 1.69915 1.72024 1.61612 1.45027 1.23822 1.10086 0.893968 0.850391 1.06833 1.10523 1.13913 1.3638 1.6528 2.34167 5.50615 6.30059 7.10952 7.08022 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.49154
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37585
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 0-9 is -0.954256 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 0-9 is -0.0416812 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.50022
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36197
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36243
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.50037
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36111
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.51273 6.29902 4.0035 5.16427 4.31047 4.74225 3.94499 3.60508 3.63193 3.65869 3.46231 3.0639 2.64687 3.03382 3.66467 3.74678 4.11385 3.02987 3.07766 2.99606 2.92073 4.36659 4.63499 5.86343 4.31849 3.78023 3.58333 1.72779 1.82041 1.17961 1.86468 3.89985 5.29299 6.76749 6.79989 5.11831 3.34936 3.27339 3.03627 3.10089 4.73023 4.41124 2.27642 5.66535 5.48799 5.12572 4.00929 2.76459 4.38448 3.07271 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40125
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29349
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.91437 6.22869 5.04862 5.15394 4.75245 3.90701 3.8679 4.06857 3.98878 4.09594 3.02867 3.23264 2.44658 3.01352 3.2385 1.51526 1.21352 1.77733 2.05035 2.0559 3.253 3.60601 4.13439 4.11208 2.92127 2.68254 3.67294 3.80329 3.76826 3.64471 2.42146 2.39375 1.994 2.30888 2.45772 3.03713 3.93029 4.43127 4.85573 4.8745 4.53889 4.04521 3.4909 4.44853 7.03483 9.02041 7.98578 7.95945 10.6071 12.6562 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40714
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28244
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26791
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 10-19 is -0.946571 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 10-19 is -0.043687 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.45544
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24173
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.46634
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30438
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28117
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.47817
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34814
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26057
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.48452
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.46838
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 20-29 is -0.986606 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 20-29 is -0.0442496 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33548
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33276
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.48271
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32638
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42247
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35283
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29485
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43739
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42403
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33863
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 9.75966 6.05996 4.22503 3.24408 2.78062 2.62944 2.6653 2.84597 3.89128 4.13874 4.14454 3.68353 1.67469 1.64779 1.66584 1.47248 2.10353 2.04688 1.86427 1.94705 2.3048 2.52812 2.23981 2.49443 2.34401 2.91281 3.1145 1.29778 1.15239 0.84009 0.929896 1.30935 1.38449 0.790962 1.25662 2.40693 3.3205 3.34978 2.16157 3.43793 1.96342 1.90565 1.70398 1.61722 1.41656 1.75011 2.51975 2.92884 3.63021 5.94821 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 30-39 is -0.967776 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 30-39 is -0.0443047 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.48921
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.47166 8.20555 6.72454 4.70902 3.45994 2.06334 1.63348 1.52297 1.89841 1.79578 1.14835 0.480153 1.14659 1.64827 2.52967 2.90271 3.04987 3.32176 3.22355 3.39408 3.37284 2.44109 1.86077 2.10838 1.49479 0.799891 1.28826 1.47 1.78702 1.47784 1.94584 2.20128 2.61235 2.90178 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.50431
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40283
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34674
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.46667
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38629
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31847
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 9.53713 6.43235 4.13417 3.09589 2.39291 2.10909 1.44924 0.903795 0.466745 0.375276 0.100151 0.0482122 0.0154701 0.0159165 0.469479 0.463386 0.436671 0.265258 0.457032 0.66691 1.20284 1.15605 0.952548 0.627347 1.09678 1.7916 2.75057 2.62549 2.17847 3.72318 4.16768 4.03967 3.88291 1.9028 1.77929 1.68547 2.18284 2.27656 2.39697 2.38775 2.51658 2.99127 3.24285 3.29754 3.58015 3.14908 3.58622 5.15903 6.58574 8.91252 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.49887
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.45254
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 7.00345 5.52006 4.81307 3.81541 3.03729 2.39177 2.51671 1.80347 1.68261 1.39785 1.49816 1.4292 0.636343 1.06818 1.40864 2.84465 2.52251 2.60083 2.83351 2.2049 1.05451 1.39227 0.797152 0.580495 0.863979 1.14499 1.19713 1.25679 1.34202 0.825859 0.947974 2.04974 2.85555 5.36674 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37055
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 40-49 is -0.897756 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 40-49 is -0.039898 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38916
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36109
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.5121
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32481
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.50057
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.23727
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3693
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39315
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.6707 6.97486 6.20541 4.16977 3.85854 2.1154 1.41435 0.97764 0.407811 0.576982 3.0174 3.40025 3.8237 5.13199 5.39735 4.34901 5.62232 5.30554 3.3712 2.93499 2.40755 3.23004 2.81036 2.46474 3.8564 3.16708 3.26647 2.85973 3.18484 3.04036 3.26568 3.66595 4.59548 5.23665 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34892
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33303
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 50-59 is -0.967847 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 50-59 is -0.0419376 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42127
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31448
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.44563
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34419
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30696
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40071
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34892
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.47928
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 5.95086 5.18519 4.6548 4.63066 4.96347 5.13284 4.91511 4.62716 5.27791 5.27105 4.70329 4.18614 3.97526 3.76452 4.3977 5.2492 3.65444 3.20966 2.96914 2.89007 1.92183 2.8858 3.67971 4.59181 4.51536 2.03433 1.83548 0.959617 0.686175 0.45883 0.322515 1.13952 1.29621 3.67726 4.93676 6.00237 7.50905 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26705
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.245
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 60-69 is -1.01202 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 60-69 is -0.0452805 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42246
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28203
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29771
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28766
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 7.49654 7.9247 6.36439 5.48637 4.13069 2.9254 2.4279 1.00885 1.63273 1.74508 0.954333 0.853615 1.24437 1.31429 4.53009 5.27123 5.69604 4.84572 3.95088 3.33069 1.98829 1.66249 2.10222 1.07751 1.10536 1.19394 1.15797 1.15169 0.298193 0.49059 0.555761 0.379741 0.36118 0.292089 0.40174 1.45995 1.93923 2.73408 3.26274 3.83234 4.29572 6.41803 5.33224 5.4854 5.37307 4.57542 4.38149 5.1529 6.9402 7.47508 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.44819
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.5169
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35423
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25947
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39206
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30388
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 70-79 is -0.999654 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 70-79 is -0.044771 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35946
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 5.43747 4.08313 3.52329 1.68259 1.24006 1.23776 0.701249 2.67544 2.55002 1.36562 2.86417 2.61559 0.95769 0.570662 0.211831 0.30959 0.607489 0.737338 0.791295 0.865463 1.80783 2.3216 2.56761 3.0988 3.80225 2.88545 2.6323 3.37803 4.13906 3.81935 3.14995 3.37024 3.31121 2.7841 2.68927 3.25498 3.16166 0.173918 0.331472 0.323467 0.360308 0.320396 0.593501 5.4561 5.48711 6.28994 7.80757 7.38939 6.3542 7.20802 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31812
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.46189
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.48954
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33454
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26471
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.48416
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3472
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4559
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3002
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 80-89 is -0.970546 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 80-89 is -0.0460545 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36943
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33247
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4013
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.48031
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30687
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43247
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25432
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28946
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.22266
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.48708
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 90-99 is -1.03215 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 90-99 is -0.0468657 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29292
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.45091
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28354
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40082
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 6.737 5.72083 3.94742 4.21559 4.32926 4.76719 5.22434 5.49631 5.81148 4.24379 4.34305 4.68709 4.36414 4.08489 4.39213 5.66345 5.19368 4.49926 2.2203 2.77734 2.09267 1.57529 2.06341 3.15012 3.85185 4.54796 3.54444 3.50655 4.02597 3.90783 3.52932 3.68528 4.22279 6.21101 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26498
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26345
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.35641 6.5034 5.42466 4.55279 1.89675 1.3779 1.24653 1.16643 1.1528 2.94964 1.7508 1.18957 1.31761 1.33348 1.28404 0.960511 1.08071 1.11381 2.85948 3.8749 3.86111 4.1791 5.60844 5.17686 4.2498 3.29446 2.87593 3.98042 2.77426 2.63566 2.8487 3.63906 2.87312 2.8204 2.19417 2.0247 2.2754 3.47733 3.7227 3.61647 4.5125 4.66354 4.46924 4.85529 5.48776 5.98531 7.95459 8.91046 8.793 8.6978 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4225
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42065
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31569
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25611
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 100-109 is -1.01973 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 100-109 is -0.0438079 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42072
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38956
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.34897 6.01452 4.07556 4.12363 3.66145 4.17822 4.39716 3.24734 3.08398 2.98302 2.08124 1.10122 0.563728 0.56417 0.857591 0.708485 2.01797 2.27187 4.24439 3.71628 3.09562 3.44074 3.89276 3.37033 2.43965 2.2922 2.91456 2.14118 2.3912 1.20905 1.53681 2.17206 2.48167 2.38157 1.5901 1.0785 1.94776 2.06961 2.11308 2.47042 1.942 0.340634 0.558762 2.11334 1.73507 2.4726 3.519 4.55876 4.96819 6.12892 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30598
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.50185
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32955
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 7.2145 5.84087 4.44635 3.89016 4.22003 4.03155 2.80576 3.08087 2.93868 2.57027 2.46366 1.91722 2.14477 2.44355 2.83651 3.12394 2.91489 2.24859 3.53753 4.03144 3.984 3.96994 3.40751 3.29995 2.83401 3.80179 4.83354 5.07328 4.91715 4.53952 3.62895 3.67859 4.34718 4.51022 4.00753 2.85089 2.89512 2.67127 2.41367 2.75509 2.66103 2.23564 2.88799 3.73263 4.70549 5.73569 6.02151 6.18045 7.10554 8.68767 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.44117
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28009
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37468
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27309
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28968
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 110-119 is -1.00653 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 110-119 is -0.0469359 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34662
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 7.38899 5.41608 4.35671 3.17595 3.15051 4.36635 4.37803 5.28988 5.19072 3.90969 3.54789 4.41397 3.98746 2.8686 1.21208 1.47131 1.13197 1.04546 1.77704 2.91699 3.7166 3.62823 3.43853 2.42903 2.44992 2.74908 2.94742 2.09594 1.90398 2.07275 3.00726 3.60838 4.3488 5.16127 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28369
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38848
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25274
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 12.3783 8.9804 4.97253 4.44447 3.53208 2.68041 2.44494 4.69455 4.6795 4.42019 4.56311 4.01967 3.29771 4.42372 5.44526 5.55368 3.1982 4.55014 4.83811 3.45559 3.87524 3.68892 3.18845 2.13617 2.25976 2.61219 2.63175 2.7717 2.67751 2.70714 2.69967 2.22144 1.20918 1.0792 1.25155 1.08256 0.946031 1.77208 2.69673 2.72839 2.63446 2.17906 2.0524 1.98991 1.26908 1.27756 2.25092 2.91502 4.01352 5.32412 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31979
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32772
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3852
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25746
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31421
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42277
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 120-129 is -1.01903 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 120-129 is -0.0432267 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.49068
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3197
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32908
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42695
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27979
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24719
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37338
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41999
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33662
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25565
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 130-139 is -0.99347 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 130-139 is -0.0412646 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3265
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41918
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28241
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43104
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37869
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30249
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29731
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3247
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38733
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36239
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 140-149 is -1.05348 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 140-149 is -0.0475193 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37688
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25647
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.44182
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 5.25724 3.73617 3.90609 2.53303 2.52461 2.08788 1.74414 1.01928 0.425981 1.91577 1.91658 2.32624 2.28243 3.15258 2.93891 2.8215 2.54406 2.87703 3.05653 3.31094 4.85223 5.47005 3.95972 2.51284 1.54127 2.93726 3.28226 4.4909 4.45229 3.71732 3.54383 2.7059 4.39173 3.98686 4.05066 4.13565 5.28003 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36828
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30016
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30743
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35699
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41861
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3389
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43591
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 150-159 is -1.01976 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 150-159 is -0.0417946 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32496
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39406
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37958
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33046
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43532
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29592
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38833
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.308
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32331
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39795
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 160-169 is -1.02134 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 160-169 is -0.0445923 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33658
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39464
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26735
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40147
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32895
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31198
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 7.07322 7.49314 8.05021 7.49428 7.11118 6.3323 5.89374 4.09141 4.07203 3.95741 2.13812 2.58976 2.51471 3.06913 2.30799 1.47357 1.88297 2.01304 2.37388 2.29812 1.9417 0.791327 0.641263 0.90455 2.5601 3.53666 2.79443 5.13825 4.37789 3.1005 1.93871 4.94833 3.54497 3.29003 1.91487 1.9081 3.02004 1.5298 1.63494 2.03044 2.13053 2.67621 3.05338 3.16827 2.65986 3.65715 4.4045 3.9161 4.4589 5.18277 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3265
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41809
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4574
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32187
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 170-179 is -0.999947 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 170-179 is -0.0457308 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2985
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40894
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29822
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36766
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.47825
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36721
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40021
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32782
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30816
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41753
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 180-189 is -0.991905 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 180-189 is -0.0448095 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33534
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 10.7421 7.68993 6.02171 4.61366 3.9738 3.75233 3.91169 3.17469 3.18501 3.10725 2.69729 2.00166 1.95699 2.19071 2.278 2.30974 2.23372 1.90479 1.72361 1.87364 2.9049 3.15992 3.1427 2.99096 2.60626 0.560051 0.625699 0.601683 0.623069 0.759855 0.991063 1.17078 1.24792 1.34253 1.90388 1.79481 1.73222 1.89494 2.31758 2.80406 2.6324 2.21062 1.70176 1.71621 1.32919 1.52207 1.99321 4.14852 6.18059 10.277 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4215
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 10.6013 8.55269 6.78994 4.74377 4.8454 5.02392 3.23044 3.59405 2.97304 3.32999 3.24555 4.03212 4.12442 3.91126 4.5648 4.44109 4.88863 4.0118 3.93142 3.93744 3.79672 3.75117 3.53976 2.75887 2.90288 3.14325 3.34801 4.61429 6.35497 6.98741 6.97926 7.43641 5.91176 5.52819 5.40621 6.41948 5.05317 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41447
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.47003
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40462
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33988
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 12.308 7.91773 4.29252 2.53138 2.70321 2.79092 3.21983 4.48336 4.69672 4.65117 4.7205 4.46574 2.11521 1.56432 0.938762 0.969457 1.1246 0.809789 0.717653 0.364901 0.219411 1.84766 2.26383 2.33193 2.44837 2.84564 3.32539 3.76257 3.85703 2.73336 4.16983 3.51758 2.39512 2.37688 2.12464 2.13686 2.04619 1.76393 1.82859 2.0201 2.63303 2.87524 2.82521 2.6289 2.57162 2.67513 3.1442 4.79174 5.84307 5.95274 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39707
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.88201 9.38717 8.14533 5.88786 6.38439 6.7064 4.93002 4.99342 5.16267 4.14067 4.63976 5.50539 6.17134 6.12189 6.29073 5.9149 3.98938 2.89845 2.31849 1.29054 0.950487 1.11142 0.983294 0.922169 1.02394 1.40404 1.83875 1.99933 2.17637 2.40708 3.4667 3.60228 4.12766 4.80084 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30624
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 14.2063 11.6625 9.36651 7.69456 7.60861 7.83711 6.99496 7.09843 6.22515 4.3332 4.14781 3.54001 2.9414 2.96417 3.31763 3.77853 4.21139 4.29322 4.21526 3.44672 3.5242 4.85246 4.51049 4.24126 5.85663 5.74198 6.70508 7.02135 6.49831 5.49862 3.52345 4.44493 4.29811 3.37811 1.76331 3.10416 3.27266 3.71342 3.57334 4.77606 5.13575 5.17205 4.64306 4.73674 5.37755 5.77596 4.40125 4.68701 5.30416 6.20389 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41054
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34301
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 190-199 is -0.989099 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 190-199 is -0.04205 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28253
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42099
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34356
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41798
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29972
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41212
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2409
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28844
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.46178
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.359
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 200-209 is -1.02076 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 200-209 is -0.0448449 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38114
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.46574
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3977
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.44222
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35522
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32192
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43878
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39161
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29424
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 7.1277 4.42601 3.91178 3.49999 2.32539 2.83317 2.804 2.69231 2.37431 1.52584 0.978022 1.54504 1.8041 1.73021 2.42282 3.73626 4.78905 6.72352 6.95264 4.52361 3.33341 1.85399 1.8587 1.97352 2.09858 2.49139 2.54665 2.60585 3.05184 4.13961 4.7462 4.66265 5.53802 4.46179 2.96891 2.85303 2.75404 3.23245 3.61782 4.84366 6.72039 5.73434 7.58736 5.99859 3.49787 2.09569 2.31608 2.9163 4.48058 6.89269 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32613
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 210-219 is -0.995138 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 210-219 is -0.0411081 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39425
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30423
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34674
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.45376
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.46383
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34885
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35019
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40246
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3177
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3367
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 220-229 is -0.998634 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 220-229 is -0.0426076 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43069
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35168
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24991
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29695
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30419
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.44066
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33681
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40413
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.264
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37552
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 230-239 is -1.03238 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 230-239 is -0.0489233 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29906
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32189
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33478
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3371
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35238
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33054
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32959
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38467
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3035
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34001
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 240-249 is -1.00704 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 240-249 is -0.0457412 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34838
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.353
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24787
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24892
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28728
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36597
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27385
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25155
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40223
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32028
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 250-259 is -1.05892 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 250-259 is -0.0448574 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30299
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28454
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28943
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.2087 6.16798 3.832 2.85362 2.3664 0.763035 0.582127 0.461425 0.35725 0.271939 0.09771 0.0605756 0.0449785 0.302037 0.410025 0.481884 0.463959 0.41426 0.0963198 0.0702832 0.0471827 0.0350697 1.15976 1.19502 2.32428 2.72352 3.49529 3.62002 2.18673 1.19716 1.2994 1.58867 0.287109 0.957588 1.06806 1.41618 1.55734 1.65193 2.72504 4.52756 3.99105 3.41178 3.1643 3.57813 3.28713 3.62062 4.15013 4.06083 3.72291 4.46082 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39828
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36457
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38568
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29434
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40158
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29482
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34394
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 260-269 is -0.964417 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 260-269 is -0.0416406 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2969
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35433
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35722
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2949
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28515
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31102
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27004
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35854
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30054
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40388
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 270-279 is -1.02189 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 270-279 is -0.0474001 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34718
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2555
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28991
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40314
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.23072
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 11.2303 9.0528 6.85968 5.67436 4.50445 4.48854 2.60819 3.79536 4.84095 5.45894 5.43514 4.54186 5.64968 7.9742 8.45121 7.07547 6.92542 6.99566 6.51059 4.875 4.6681 4.79674 4.1399 5.50476 5.86189 4.7886 3.72229 4.35414 3.94053 3.24953 2.58303 2.0896 2.13112 3.30462 3.66625 3.71231 3.54263 3.46959 3.39543 3.12827 3.82343 3.66543 3.35538 3.73228 6.2795 6.69156 6.74264 6.39511 6.44632 7.28934 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40147
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24559
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3703
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31911
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24358
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 280-289 is -1.05095 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 280-289 is -0.0470206 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.387
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 7.87052 6.57354 5.74848 3.68953 1.84019 2.95958 4.08991 4.234 3.34738 2.01946 2.38088 3.41624 2.52585 2.26545 2.17939 2.79458 3.64023 4.06496 2.80285 1.62897 0.454814 0.499395 0.595827 0.65913 0.715955 0.771526 0.627799 0.635835 0.653072 0.618244 1.19101 3.33333 3.89251 4.84536 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27253
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43274
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29312
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.345
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33045
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41771
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34532
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.45073
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34196
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 290-299 is -0.962127 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 290-299 is -0.0421773 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.47713
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34752
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.35576 7.20283 7.42524 6.53568 5.26978 2.52523 2.96861 3.16031 2.62157 2.51659 1.03028 1.88705 2.38965 2.59097 2.24764 3.0518 3.05206 2.25074 2.15031 2.06274 1.94759 1.67377 1.25821 1.26855 3.58144 3.56919 2.93362 2.31019 2.08435 2.01152 2.00758 2.96685 2.80795 3.10137 2.76182 2.24258 0.993083 1.05834 1.26398 1.47448 1.37562 1.03652 1.08263 1.35291 1.50329 2.63339 1.61376 3.51216 5.68549 4.46614 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33152
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42858
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31677
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40769
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24861
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28552
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40293
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25174
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 300-309 is -1.00259 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 300-309 is -0.0415878 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30502
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.44171
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4134
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3629
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29304
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33412
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.45501
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34357
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39921
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30649
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 310-319 is -1.00127 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 310-319 is -0.0422302 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3544
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40792
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3143
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33834
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.50124
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36827
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42376
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31504
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31688
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39175
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 320-329 is -1.0014 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 320-329 is -0.043158 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32825
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.22794
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43879
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27046
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.44523
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31888
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29061
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.46047
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38814
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30823
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 330-339 is -0.989193 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 330-339 is -0.045316 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28565
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4285
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3157
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24892
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36672
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 6.96885 5.04959 2.95687 2.69589 2.97869 2.69492 2.68483 2.91005 4.81415 3.57978 3.52181 3.71179 3.14007 2.84911 2.83124 2.77607 3.41374 3.12491 2.67438 5.78349 5.71085 6.06679 6.34737 6.62257 6.40239 5.42134 5.42185 4.67366 3.57287 3.13045 3.02117 1.98377 1.77343 2.32755 3.17148 4.46119 7.49712 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39794
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34038
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31905
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 12.0716 10.5716 5.7398 6.73539 6.92729 7.75556 8.19721 8.66478 7.87134 7.60641 7.30103 7.28859 6.77951 5.95297 5.87555 5.21087 4.69189 3.46451 3.0961 2.67793 2.43306 2.35757 2.6126 3.77839 4.96406 5.30565 5.47933 5.52633 5.90353 5.20089 4.41804 3.57479 3.0079 2.61677 2.5698 1.74882 1.81134 1.74056 1.81301 1.79533 2.62981 3.30316 3.41662 3.17805 2.4011 1.52965 2.13537 3.08641 6.16878 10.451 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3272
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34711
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 340-349 is -1.04423 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 340-349 is -0.0455651 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40103
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4097
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.355
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27626
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40792
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33761
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28031
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4429
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41148
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 6.40952 5.36625 5.07022 4.85923 4.7484 5.11241 4.39226 6.5974 7.21818 7.37387 6.18983 6.54151 6.20074 5.24738 3.86778 3.60117 3.8421 3.78047 4.07397 3.75792 3.41202 2.77071 3.21077 2.65858 2.67681 2.53906 2.1556 0.992364 0.89204 1.19292 2.34923 2.85302 3.06982 2.78682 3.5319 3.84679 3.9777 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26048
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 350-359 is -0.995774 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 350-359 is -0.0442146 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24629
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.51394
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30515
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32786
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38359
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30503
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41145
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3022
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34739
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4591
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 360-369 is -1.06644 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 360-369 is -0.047852 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.46978
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30602
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3215
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.45566
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30417
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30184
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 7.92699 7.44015 6.18702 5.18903 4.37249 3.99489 3.24841 3.41265 3.46484 2.376 1.75356 1.63762 1.85853 2.46521 3.26761 3.11351 3.40919 2.53639 3.60781 3.71288 4.96657 4.43115 3.94905 1.60842 2.42563 3.41314 3.38528 3.76015 3.98546 3.242 3.645 3.55093 3.46928 4.37942 4.36294 4.28744 3.75719 2.9265 1.9911 2.22319 2.32967 2.55615 2.20493 1.6911 1.33245 1.48042 2.03934 2.73065 4.28937 5.10144 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.22782
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29358
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29125
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38006
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 370-379 is -1.03147 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 370-379 is -0.0488168 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.1957
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30066
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.26686 7.59482 6.91214 8.3728 6.64113 6.62391 4.53436 3.24444 2.96556 2.70407 2.60746 2.42201 2.02446 2.07883 1.51856 1.79303 2.4146 3.40991 3.61406 3.31041 3.10266 2.6013 2.27537 1.70581 1.67361 2.39375 2.30309 1.21555 1.21345 1.82545 1.92951 1.86184 3.37356 3.62724 4.37818 4.6403 4.14781 3.9812 4.90761 4.08723 3.86743 3.59922 3.85352 3.10734 2.8354 2.94125 2.73835 2.14465 2.93201 4.91384 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29503
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2117
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26546
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37228
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29647
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 12.3153 11.4497 10.5762 9.68326 8.97675 7.49902 6.65952 4.88961 4.04547 3.47239 3.29768 3.97896 4.00479 4.51687 3.3797 3.38313 4.32378 4.80379 5.67606 5.48363 5.14607 4.94598 6.08584 7.15988 7.46378 5.29714 3.55861 2.99787 1.00584 0.533284 0.474594 0.753404 0.42491 1.37246 1.80487 3.76204 1.9263 3.23508 3.65318 3.42397 3.48901 2.82032 2.10636 3.53466 3.5608 5.23272 5.56758 6.77891 7.80274 9.82961 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4035
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31394
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29793
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 380-389 is -1.02449 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 380-389 is -0.0503806 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4033
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 6.41525 4.37999 3.01028 2.97425 3.17086 3.37706 3.41994 3.24918 1.36925 1.67397 2.81151 3.25898 3.05128 3.2967 2.57585 4.07089 4.04495 4.83104 4.54283 3.90489 4.12238 2.77628 1.68772 2.71367 2.94264 3.05835 3.43512 5.15056 5.22568 7.01109 8.24073 6.66851 6.49999 5.59138 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25705
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.23502
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38453
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2795
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.18772
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35636
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.22656
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36864
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28779
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 10.4082 6.40197 5.02304 4.29267 3.68709 4.20369 4.36569 3.28303 3.68783 5.04507 4.00068 2.72803 0.807434 0.634325 1.86607 1.79157 2.4706 3.09581 1.60739 1.24495 1.2722 1.21789 1.57568 2.28652 4.07996 5.29279 5.83013 6.80593 5.84794 4.547 3.68193 2.21291 3.37044 3.83238 4.34383 4.71549 5.23803 5.3674 5.47482 3.03269 2.5198 2.76819 3.29498 3.09378 4.06486 5.75339 6.06876 6.01943 6.39461 11.2069 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 390-399 is -1.03799 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 390-399 is -0.0474742 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31021
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40219
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 4.41274 3.14688 1.47115 0.687107 0.659757 0.750977 1.25361 1.03146 0.934902 0.470372 0.9501 2.33762 2.76543 1.87997 2.42059 1.64251 1.4061 1.29637 1.53576 1.70192 1.84292 1.49114 1.50908 0.929488 0.957435 1.72862 1.29061 1.41125 1.53095 0.852667 0.954795 1.04952 1.31499 2.15472 3.55782 4.36571 4.67037 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32802
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.41417
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32654
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28934
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31968
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40882
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30805
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 13.0975 9.83515 5.79956 4.33488 3.99316 2.01059 1.05698 1.66943 1.49903 1.37359 0.862953 0.707325 0.912976 0.192139 0.225546 0.293466 0.297894 0.84873 1.13649 1.92418 2.39003 3.29884 5.68859 6.35088 5.23384 2.47692 2.42215 3.39099 4.00475 5.54859 6.82182 4.61103 5.02321 5.78498 5.48352 5.08706 2.89949 1.77573 1.07424 2.47254 2.85431 3.40594 3.41562 3.83212 4.57806 4.94453 4.08135 3.32088 4.42968 5.68805 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.43429
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 400-409 is -0.977851 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 400-409 is -0.042768 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3118
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38535
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29893
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36221
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29681
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 15.4312 16.475 14.1919 9.43531 10.2626 7.9505 7.21524 5.88019 3.5983 2.76827 3.34844 3.31657 3.10512 3.68534 3.57552 3.6749 4.02995 4.20295 4.02167 4.94776 4.13927 4.51778 5.05866 4.16135 3.88943 4.04756 4.15058 4.24 4.94395 5.47476 5.77971 5.87565 4.61099 4.65729 4.00785 3.39318 3.14388 2.74897 2.95024 3.57574 4.0562 4.29065 3.90044 4.25724 3.94564 4.4833 5.33521 5.21847 5.06693 6.15276 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42739
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29051
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34552
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29914
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.45375
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 410-419 is -1.03617 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 410-419 is -0.046598 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27092
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27972
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 9.46007 7.66505 5.84435 5.88993 4.5832 3.89917 5.88048 3.89728 4.27465 4.39565 4.36602 3.13052 1.60423 1.34773 1.35062 1.39347 1.48652 1.66818 1.82212 2.76003 2.38333 1.80238 2.03869 2.2244 2.12572 2.10297 2.13331 2.95514 4.07786 4.47191 4.38104 4.19441 3.74118 3.7712 4.18998 4.22465 3.69155 3.28604 3.85232 4.30012 4.21909 4.68301 4.43169 4.2032 4.66619 5.33925 5.85397 5.84979 7.3728 10.5873 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.39355
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29537
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34869
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26781
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38567
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.21843
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26902
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.4176
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 420-429 is -1.06739 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 420-429 is -0.0487809 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33592
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25042
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27965
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38536
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26972
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36212
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28644
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31689
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40559
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 4.0244 3.77449 5.89073 6.14013 5.21319 4.66877 4.52519 3.08943 1.84932 1.61809 1.65652 1.60155 1.69393 1.41431 2.64885 2.73583 2.27513 1.91103 1.75352 1.68946 0.0543029 0.0772576 0.0894428 0.188464 0.208881 0.15631 0.533951 0.617744 0.761385 1.63796 1.77354 1.74759 3.99575 4.68794 ]
+
+LOG (nnet3-chain-copy-egs[5.5.1009~1-e4940]:main():nnet3-chain-copy-egs.cc:395) Read 33413 neural-network training examples, wrote 33413
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27349
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 430-439 is -0.985225 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 430-439 is -0.0441278 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26102
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3225
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37089
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.23006
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36341
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28707
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29894
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30625
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.40863
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.23649
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 440-449 is -0.993426 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 440-449 is -0.0455461 over 28096 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3307
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.20628
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25736
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.33986
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28851
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.22588
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37888
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35346
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29095
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.17662
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 450-459 is -1.04815 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 450-459 is -0.0468671 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31828
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31455
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24262
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.38642
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26531
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30573
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32571
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24093
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 9.84101 6.9605 7.13582 6.63996 6.64158 4.06218 4.05057 4.02751 4.00127 3.04603 3.03983 3.30266 2.81509 3.59239 2.60446 3.47895 3.38234 3.6254 3.71303 3.60654 3.41579 3.66614 3.02123 3.77436 3.3977 3.52527 3.67438 4.45825 7.29691 8.20068 8.17031 7.19755 5.48213 4.96137 4.25584 3.6755 2.31031 2.75948 3.82018 3.42348 2.54529 4.02433 3.63438 3.13349 2.58203 3.19773 3.47559 4.03857 4.6194 6.17985 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2373
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.35006
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 460-469 is -1.04834 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 460-469 is -0.0499838 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2098
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.37137
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.21181
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29392
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26815
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34083
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3186
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 5.3971 4.46291 3.09183 4.77981 4.48049 3.02404 3.40932 2.84533 4.32655 4.2231 4.95963 4.68438 4.97271 5.61385 6.05174 6.04578 6.45739 6.26785 6.21049 5.32032 4.39948 4.14132 3.73134 3.27417 2.20325 2.0148 1.85534 1.94657 2.13759 1.65671 1.54967 1.17177 1.24242 1.80493 2.39081 2.99429 5.18478 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29764
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24219
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26056
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 470-479 is -1.01997 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 470-479 is -0.0481391 over 28288 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.20927
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.23056
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 8.05055 6.486 6.37977 6.06539 5.82612 8.10523 7.11208 7.64524 7.70484 7.50369 6.56159 3.30031 1.74715 0.911334 1.75499 0.508483 0.408207 0.192799 0.225484 0.266003 0.287677 0.443397 0.507244 0.607564 0.714963 0.665054 0.57621 0.852072 1.24114 1.52357 1.6081 1.21585 2.005 2.21812 2.93558 5.32408 6.46819 4.98344 3.71697 3.56552 3.57323 3.78831 4.59304 5.02187 3.94441 5.02708 5.07452 5.6428 6.77829 7.68064 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36982
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30428
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24804
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27593
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 9.04873 6.80916 6.08103 5.15235 2.94708 2.29127 2.57858 3.11205 3.75714 5.23988 4.37941 5.96044 7.92191 7.59682 6.47642 5.81724 6.02438 5.64277 5.59548 5.67043 5.74587 4.15345 3.93903 1.90689 0.956989 0.924183 0.961348 2.29441 2.33276 2.56607 2.12669 1.95931 1.44483 2.13763 1.9798 1.95565 2.3726 2.77578 1.93091 2.11629 2.18672 2.71513 2.82033 3.48498 4.71489 4.48388 4.78402 5.80495 7.11379 8.48875 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.22266
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34942
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36998
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31973
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 480-489 is -1.08127 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 480-489 is -0.0488242 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24166
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34782
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28199
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32972
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.2982
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25078
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3865
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.23645
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 13.8387 10.8368 10.1774 8.12901 6.3492 4.88745 4.93879 4.49547 3.83598 3.32147 1.70206 1.5598 3.51618 3.34929 3.1693 1.77857 1.94346 2.29036 2.68281 4.03944 4.42458 5.98247 6.28531 6.42145 3.78446 2.36638 2.68273 1.32931 1.57621 2.88104 3.42994 2.75873 2.05178 1.73914 1.93937 1.57541 2.03289 2.29969 2.85108 2.43544 2.42275 2.72042 2.56897 2.10623 2.46309 2.57826 2.5256 3.06595 4.2155 5.39472 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27756
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.44143
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 490-499 is -1.00851 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 490-499 is -0.0476671 over 29120 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.25464
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36147
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28895
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.29794
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3889
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.31318
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.34331
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27956
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.3605
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.32352
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:199) Derivs per frame are  [ 10.5507 6.68272 4.9943 5.5109 5.44517 5.34665 2.80657 1.8615 1.31006 2.73231 2.62357 2.78537 2.81135 2.87101 2.86418 2.83366 2.62452 2.02934 1.3327 1.36922 1.54308 1.3229 1.30179 1.38161 1.41975 1.36292 1.13187 0.610142 0.232079 0.143897 0.0962611 0.108626 0.123505 0.111193 0.438083 1.11463 1.39088 2.35159 3.12876 4.21516 4.24331 4.06362 4.10029 3.64203 4.29872 5.25072 6.71311 6.41347 5.04947 7.05275 ]
+
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output-xent' for minibatches 500-509 is -1.0027 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintStatsForThisPhase():nnet-training.cc:278) Average objective function for 'output' for minibatches 500-509 is -0.0462478 over 27264 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.30156
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.45998
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.24294
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.42723
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.26201
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28385
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.36173
+LOG (nnet3-chain-shuffle-egs[5.5.1009~1-e4940]:main():nnet3-chain-shuffle-egs.cc:104) Shuffled order of 33413 neural-network training examples using a buffer (partial randomization)
+LOG (nnet3-chain-merge-egs[5.5.1009~1-e4940]:PrintSpecificStats():nnet-example-utils.cc:1159) Merged specific eg types as follows [format: <eg-size1>={<mb-size1>-><num-minibatches1>,<mbsize2>-><num-minibatches2>.../d=<num-discarded>},<egs-size2>={...},... (note,egs-size == number of input frames including context).
+LOG (nnet3-chain-merge-egs[5.5.1009~1-e4940]:PrintSpecificStats():nnet-example-utils.cc:1189) 160={64->129,d=51},169={64->77,d=59},208={64->314,d=23}
+LOG (nnet3-chain-merge-egs[5.5.1009~1-e4940]:PrintAggregateStats():nnet-example-utils.cc:1155) Processed 33413 egs of avg. size 190.2 into 520 minibatches, discarding 0.398% of egs.  Avg minibatch size was 64, #distinct types of egs/minibatches was 3/3
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.28354
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:ComputeChainObjfAndDerivE2e():chain-training.cc:162) Numerator objf: 2.27071
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintTotalStats():nnet-training.cc:317) Overall average objective function for 'output' is -0.0450257 over 1.46784e+06 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintTotalStats():nnet-training.cc:324) [this line is to be parsed by a script:] log-prob-per-frame=-0.0450257
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintTotalStats():nnet-training.cc:317) Overall average objective function for 'output-xent' is -1.00832 over 1.46784e+06 frames.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintTotalStats():nnet-training.cc:324) [this line is to be parsed by a script:] log-prob-per-frame=-1.00832
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:~CachingOptimizingCompiler():nnet-optimize.cc:710) 0.0312 seconds taken in nnet3 compilation total (breakdown: 0 compilation, 0 optimization, 0 shortcut expansion, 0 checking, 0 computing indexes, 0.0312 misc.) + 0.319 I/O.
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintProfile():cu-device.cc:563) -----
+[cudevice profile]
+Sum	5.73488s
+CuMatrix::Resize	5.76534s
+CopyFromMat	6.15812s
+AddDiagMatMat	7.80121s
+CuMatrix::SetZero	7.97247s
+AddMat	8.2089s
+AddRowSumMat	12.2674s
+AddVecToRows	12.3422s
+TraceMatMat	12.5715s
+CopyToVec	13.2643s
+AddMatVec	13.4442s
+CuMatrixBase::CopyFromMat(from other CuMatrixBase)	16.346s
+AlphaGeneralFrame	27.1601s
+BetaDashGeneralFrame	34.9357s
+AddMatMat	107.875s
+Total GPU time:	350.354s (may involve some double-counting)
+-----
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:PrintMemoryUsage():cu-allocator.cc:340) Memory usage: 39162624/5931794432 bytes currently allocated/total-held; 131/4 blocks currently allocated/free; largest free/allocated block sizes are 3891200/5665788928; time taken total/cudaMalloc is 0.619429/0.00824213, synchronized the GPU 0 times out of 254481 frees; device memory info: free:5656M, used:5784M, total:11441M, free/total:0.494417maximum allocated: 1677543424current allocated: 39162624
+LOG (nnet3-chain-train[5.5.1009~1-e4940]:main():nnet3-chain-train.cc:101) Wrote raw model to telugu_exp/chain_cleaned_1d/tdnn1d_sp/21.3.raw
+# Accounting: time=1374 threads=1
+# Ended (code 0) at Wed Jun 15 15:46:14 UTC 2022, elapsed time 1374 seconds
