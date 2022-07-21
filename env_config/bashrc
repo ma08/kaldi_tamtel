@@ -49,11 +49,16 @@ TRAIN_DIR=/home/sourya/kaldi/egs/tamil_telugu_proj/s5_r3/telugu_exp/chain_cleane
 
 function watch_train
 {
-watch -n 10 "grep 'Overall' $TRAIN_DIR/compute_prob_train.*.log | grep -v xent"
+watch -c -n 10 "grep --color=always  'Overall log-probability for .* is .* per frame' $TRAIN_DIR/compute_prob_train.*.log | grep -v xent | sort -V | tail -n 10 "
 }
 
-function grep_isfinite_error
+function watch_valid
 {
-watch -n 10 "grep 'ISFINITE' $TRAIN_DIR/train.*.log"
+watch  -c -n 10 "grep --color=always  'Overall log-probability for .* is .* per frame' $TRAIN_DIR/compute_prob_valid.*.log | grep -v xent | sort -V | tail -n 10"
+}
+
+function watch_isfinite_error
+{
+watch -c  -n 10 "grep --color=always  'ISFINITE' $TRAIN_DIR/train.*.log"
 }
 
