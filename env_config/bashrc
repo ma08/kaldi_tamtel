@@ -1,0 +1,59 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+
+unset rc
+
+function cd_proj
+{
+cd /home/sourya/kaldi/egs/tamil_telugu_proj/s5_r3
+}
+
+export PROJ_DIR=/home/sourya/kaldi/egs/tamil_telugu_proj/s5_r3
+
+
+function cd_train
+{
+cd /home/sourya/kaldi/egs/tamil_telugu_proj/s5_r3/telugu_exp/chain_cleaned_1d/tdnn1d_sp/log
+}
+
+function kill_train
+{
+killall nnet3-chain-train
+killall nnet3-chain*
+}
+
+TRAIN_DIR=/home/sourya/kaldi/egs/tamil_telugu_proj/s5_r3/telugu_exp/chain_cleaned_1d/tdnn1d_sp/log
+
+function watch_train
+{
+watch -n 10 "grep 'Overall' $TRAIN_DIR/compute_prob_train.*.log | grep -v xent"
+}
+
+function grep_isfinite_error
+{
+watch -n 10 "grep 'ISFINITE' $TRAIN_DIR/train.*.log"
+}
+
