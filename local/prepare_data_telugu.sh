@@ -57,7 +57,7 @@ for set in dev test train; do
   # Create empty 'glm' file
   echo ';; empty.glm
   [FAKE]     =>  %HESITATION     / [ ] __ [ ] ;; hesitation token
-  ' > data/$set.orig/glm
+  ' > $dir/glm
 
   # The training set seems to not have enough silence padding in the segmentations,
   # especially at the beginning of segments.  Extend the times.
