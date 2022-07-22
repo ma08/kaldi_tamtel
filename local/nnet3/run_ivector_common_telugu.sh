@@ -53,6 +53,7 @@ if [ $stage -le 1 ]; then
     $data_dir/${train_set} $data_dir/${train_set}_sp
 
   for datadir in ${train_set}_sp dev test; do
+    utils/fix_data_dir.sh $data_dir/${datadir}
     utils/copy_data_dir.sh $data_dir/$datadir $data_dir/${datadir}_hires
   done
 fi
